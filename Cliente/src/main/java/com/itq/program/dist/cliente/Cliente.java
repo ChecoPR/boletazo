@@ -20,7 +20,7 @@ public class Cliente {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int opc = 0;
-		System.out.println("Busqueda por: \n1.Nombre\2.Lugar\3.Fecha\n4.Hora\n5.Precio por boleto\n6.Zona");
+		System.out.println("busqueda por: \n1.Nombre\2.Lugar\3.Fecha\n4.Hora\n5.Precio por boleto\n6.Zona");
 		switch(opc)
 		{
 			
