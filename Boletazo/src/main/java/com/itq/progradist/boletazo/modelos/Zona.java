@@ -13,6 +13,7 @@ public class Zona {
 		super();
 		this.idLugar = idLugar;
 		this.idZona = idZona;
+		this.precio = precio;
 	}
 	
 	public int getIdLugar() {

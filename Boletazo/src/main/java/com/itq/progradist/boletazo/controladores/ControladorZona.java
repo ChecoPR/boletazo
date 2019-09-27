@@ -23,21 +23,21 @@ public class ControladorZona {
 	private static final Logger logger = LogManager.getLogger(ControladorEvento.class);
 	
 	/**
-	 * Conexión a la base de datos
+	 * Conexiï¿½n a la base de datos
 	 */
 	private Connection conexion;
 	
 	/**
-	 * datos de la petición
+	 * datos de la peticiï¿½n
 	 */
 	private JSONObject dataRequest;
 	
 	/**
-	 * Inicializar un controlador con una conexión a la base de datos y
-	 * datos de petición
+	 * Inicializar un controlador con una conexiï¿½n a la base de datos y
+	 * datos de peticiï¿½n
 	 * 
-	 * @param conexion Conexión a la base de datos
-	 * @param dataRequest Parámetros de la petición
+	 * @param conexion Conexiï¿½n a la base de datos
+	 * @param dataRequest Parï¿½metros de la peticiï¿½n
 	 */
 	public ControladorZona(Connection conexion, JSONObject dataRequest) {
 		super();
@@ -46,15 +46,15 @@ public class ControladorZona {
 	}
 	
 	/**
-	 * Devuelve datos consultados de la base de datos según
-	 * el método que indiquen los parámetros
+	 * Devuelve datos consultados de la base de datos segï¿½n
+	 * el mï¿½todo que indiquen los parï¿½metros
 	 * 
-	 * @param params Parámetros de la petición, debe contener el método de la petición
+	 * @param params Parï¿½metros de la peticiï¿½n, debe contener el mï¿½todo de la peticiï¿½n
 	 * @return respuesta Respuesta obtenida de la base de datos
 	 * @throws MetodoParamNotFoundException 
 	 */
 	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
-		logger.info("Procesando acción");
+		logger.info("Procesando acciï¿½n");
 		JSONObject respuesta = new JSONObject();
 		if(!params.has("metodo")) {
 			throw new MetodoParamNotFoundException();
@@ -70,7 +70,7 @@ public class ControladorZona {
 				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
 			}
 		} catch (IllegalArgumentException e) {
-			logger.error("Error procesando la acción" + e.getMessage());
+			logger.error("Error procesando la acciï¿½n" + e.getMessage());
 		} catch (JSONException e) {
 			logger.error("Error en el JSON" + e.getMessage());
 			e.printStackTrace();
@@ -83,10 +83,10 @@ public class ControladorZona {
 	}
 	
 	/**
-	 * Obtiene eventos de la base de datos según los parámetros dados
+	 * Obtiene eventos de la base de datos segï¿½n los parï¿½metros dados
 	 * 
-	 * @param params Parametros de búsqueda de los eventos
-	 * @return respuesta Eventos que coicidieron con los parámetros
+	 * @param params Parametros de bï¿½squeda de los eventos
+	 * @return respuesta Eventos que coicidieron con los parï¿½metros
 	 * @throws NoIdEventoException
 	 */
 	private JSONArray getZonasDeEvento(JSONObject params) throws NoIdEventoException {
@@ -125,22 +125,21 @@ public class ControladorZona {
 	 * @throws NoIdEventoException
 	 */
 	private String getZonasDeEventoSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT Zona.idLugar, Zona.idZona, Zona.precio FROM Zona, Lugar, Eventos"
-				+ " WHERE Zona.idLugar = Lugar.idLugar"
-				+ " AND Lugar.idEvento = Eventos.idEvento";
+		String sql = "SELECT zona.idLugar, zona.idZona, zona.precio FROM zona, lugar, eventos"
+				+ " WHERE zona.idLugar = lugar.idLugar"
+				+ " AND lugar.idEvento = eventos.idEvento";
 		
 		if (params.has("id_evento")) {
-			sql += " AND Eventos.idEvento = " + params.getInt("id_evento");
+			sql += " AND eventos.idEvento = " + params.getInt("id_evento");
 		} else {
-			throw new NoIdEventoException("Falta el id de evento en la petición");
+			throw new NoIdEventoException("Falta el id de evento en la peticiï¿½n");
 		}
-		
 		return sql;
 	}
 	
 	/**
-	 * Exception para cuando la petición para
-	 * obtener zonas de un evento no tiene el parámetro id_evento
+	 * Exception para cuando la peticiï¿½n para
+	 * obtener zonas de un evento no tiene el parï¿½metro id_evento
 	 * @author arman
 	 *
 	 */

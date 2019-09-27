@@ -19,16 +19,17 @@ import com.itq.program.dist.cliente.Cliente.Excepcion;
 public class PruebaZonas {
 
 	private static Logger Logger = LogManager.getLogger(Cliente.class);
-	static final String HOST = "192.168.1.1";								
+	static final String HOST = "localhost";								
 	static final int PORT = 5000;
 	static private ArrayList<String> filtros_disp = new ArrayList<String>(); //Filtros disponibles a seleccionar
 	
 	/**
-	 * Devuelve una conexión a la base de datos
+	 * Devuelve una conexiï¿½n a la base de datos
 	 * 
-	 * @return conexión Conexión a la base de datos
+	 * @return conexiï¿½n Conexiï¿½n a la base de datos
 	 * @throws Excepcion 
 	 */
+	
 	public static void main(String[] args) throws Excepcion {
 		// TODO Auto-generated method stub
 

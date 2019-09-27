@@ -25,7 +25,7 @@ public class Peticion extends Thread {
 	private static final Logger logger = LogManager.getLogger(Peticion.class);
 	
 	/**
-	 * datos de la petición
+	 * datos de la peticiï¿½n
 	 */
 	private JSONObject dataRequest;
 	
@@ -35,7 +35,7 @@ public class Peticion extends Thread {
 	private OutputStream socketOutput;
 	
 	/**
-	 * Inicializa una petición con los datos de petición y 
+	 * Inicializa una peticiï¿½n con los datos de peticiï¿½n y 
 	 * el flujo de salida del socket
 	 * 
 	 * @param dataRequest
@@ -47,7 +47,7 @@ public class Peticion extends Thread {
 	}
 	
 	/**
-	 * Corre el proceso de la petición
+	 * Corre el proceso de la peticiï¿½n
 	 */
 	@Override
 	public void run() {
@@ -67,18 +67,18 @@ public class Peticion extends Thread {
 			logger.error("Error al imprimir el resultado: " + e.getMessage());
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			logger.error("Error en la ejecución del hilo: " + e.getMessage());
+			logger.error("Error en la ejecuciï¿½n del hilo: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Devuelve una conexión a la base de datos
+	 * Devuelve una conexiï¿½n a la base de datos
 	 * 
-	 * @return conexión Conexión a la base de datos
+	 * @return conexiï¿½n Conexiï¿½n a la base de datos
 	 */
 	private Connection getConnection() {
-		String HOST = "192.168.1.2";
+		String HOST = "localhost";
 		String PORT = "3306";
 		String DATABASE = "boletazo";
 		String USER = "boletazo";
@@ -99,12 +99,12 @@ public class Peticion extends Thread {
 	}
 	
 	/**
-	 * Elegir la acción a realizar según los parametros recibidos
+	 * Elegir la acciï¿½n a realizar segï¿½n los parametros recibidos
 	 * 
-	 * @param params Datos de la petición
+	 * @param params Datos de la peticiï¿½n
 	 */
 	private String procesarRequest(JSONObject params) {
-		logger.info("Procesando petición");
+		logger.info("Procesando peticiï¿½n");
 		Connection conexion = getConnection();
 		JSONObject respuesta = new JSONObject();
 		try {
@@ -134,7 +134,7 @@ public class Peticion extends Thread {
 				throw new IllegalArgumentException("Unexpected value: " + params.get("recurso"));
 			}
 		} catch(IllegalArgumentException e) {
-			logger.error("Error al procesar la petición: " + e.getMessage());
+			logger.error("Error al procesar la peticiï¿½n: " + e.getMessage());
 		} catch (MetodoParamNotFoundException e) {
 			logger.error(e.getMessage());
 			respuesta.put("message", e.getMessage());
@@ -149,15 +149,15 @@ public class Peticion extends Thread {
 	}
 	
 	/**
-	 * Cierra la conexión a la base de datos
+	 * Cierra la conexiï¿½n a la base de datos
 	 * 
-	 * @param conexion Conexión a la base de datos
+	 * @param conexion Conexiï¿½n a la base de datos
 	 */
 	private void cerrarConexion(Connection conexion) {
 		try {
-			logger.info("Cerrando conexión a la base de datos");
+			logger.info("Cerrando conexiï¿½n a la base de datos");
 			conexion.close();
-			logger.info("Conexión a la base de datos cerrada");
+			logger.info("Conexiï¿½n a la base de datos cerrada");
 		} catch (SQLException e) {
 			logger.error("Error al cerrar la base de datos: " + e.getMessage());
 			e.printStackTrace();

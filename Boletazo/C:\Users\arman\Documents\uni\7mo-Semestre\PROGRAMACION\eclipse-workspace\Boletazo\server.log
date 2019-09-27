@@ -1,0 +1,126 @@
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":1,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 ERROR controladores.ControladorEvento - Error al consultar la base de datos: Unknown column 'Lugar.idEvento' in 'where clause'
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":1,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 ERROR controladores.ControladorEvento - Error al consultar la base de datos: Unknown column 'Lugar.idEvento' in 'where clause'
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 ERROR controladores.ControladorEvento - Error al consultar la base de datos: Table 'boletazo.Zona' doesn't exist
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 INFO  controladores.ControladorEvento - Datos obtenidos de la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-2 INFO  boletazo.Peticion - Procesando petici�n
+Thread-2 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-2 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-2 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-2 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-2 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-2 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-2 INFO  controladores.ControladorEvento - Datos obtenidos de la base de datos
+Thread-2 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-2 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-2 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-2 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 INFO  controladores.ControladorEvento - Datos obtenidos de la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 ERROR controladores.ControladorEvento - Error al consultar la base de datos: Before start of result set
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
+main INFO  boletazo.BoletazoServer - Servidor iniciado existosamente en el puerto [5000]
+main INFO  boletazo.BoletazoServer - Inicia while...
+main DEBUG boletazo.BoletazoServer - Datos recibidos:[{"recurso":"evento/zonas","id_evento":3,"metodo":"get"}]
+main INFO  boletazo.BoletazoServer - Inicia while...
+Thread-1 INFO  boletazo.Peticion - Procesando petici�n
+Thread-1 INFO  boletazo.Peticion - Conectado exitosamente a la base de datos
+Thread-1 INFO  boletazo.Peticion - Obteniendo zonas del evento
+Thread-1 INFO  controladores.ControladorEvento - Procesando acci�n
+Thread-1 INFO  controladores.ControladorEvento - Obteniendo eventos
+Thread-1 INFO  controladores.ControladorEvento - Iniciando consulta en la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Ejecutando consulta
+Thread-1 INFO  controladores.ControladorEvento - Datos obtenidos de la base de datos
+Thread-1 INFO  controladores.ControladorEvento - Eventos obtenidos
+Thread-1 INFO  boletazo.Peticion - Zonas del evento obtenidas
+Thread-1 INFO  boletazo.Peticion - Cerrando conexi�n a la base de datos
+Thread-1 INFO  boletazo.Peticion - Conexi�n a la base de datos cerrada
