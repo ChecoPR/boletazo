@@ -7,8 +7,9 @@ public class Zona {
 	 */
 	private int idLugar;
 	private int idZona;
+	private double precio;
 	
-	public Zona(int idLugar, int idZona) {
+	public Zona(int idLugar, int idZona, double precio) {
 		super();
 		this.idLugar = idLugar;
 		this.idZona = idZona;
@@ -25,6 +26,14 @@ public class Zona {
 	}
 	public void setIdZona(int idZona) {
 		this.idZona = idZona;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 	
 	

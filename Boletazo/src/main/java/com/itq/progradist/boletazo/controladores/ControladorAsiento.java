@@ -1,22 +1,21 @@
 package com.itq.progradist.boletazo.controladores;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
-import com.itq.progradist.boletazo.modelos.Asiento;
-import com.itq.progradist.boletazo.modelos.Evento;
-import com.itq.progradist.boletazo.modelos.Zona;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-public class ControladorEvento {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
+import com.itq.progradist.boletazo.modelos.Asiento;
+
+public class ControladorAsiento {
 	
 	/**
 	 * logger del servidor, escribe en server.log
@@ -40,45 +39,47 @@ public class ControladorEvento {
 	 * @param conexion Conexión a la base de datos
 	 * @param dataRequest Parámetros de la petición
 	 */
-	public ControladorEvento(Connection conexion, JSONObject dataRequest) {
+	public ControladorAsiento(Connection conexion, JSONObject dataRequest) {
 		super();
 		this.conexion = conexion;
 		this.dataRequest = dataRequest;
 	}
-
+	
 	/**
 	 * Devuelve datos consultados de la base de datos según
 	 * el método que indiquen los parámetros
 	 * 
 	 * @param params Parámetros de la petición, debe contener el método de la petición
 	 * @return respuesta Respuesta obtenida de la base de datos
+	 * @throws MetodoParamNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) {
+	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
+		if(!params.has("metodo")) {
+			throw new MetodoParamNotFoundException();
+		}
 		try {
 			switch (params.getString("metodo")) {
 			case "get":
 				logger.info("Obteniendo eventos");
-				respuesta.put("data", this.getEventos(params));
+				respuesta.put("data", this.getAsientosDeZonaYEvento(params));
 				logger.info("Eventos obtenidos");
-				return respuesta;
+				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acción" + e.getMessage());
+		} catch (JSONException e) {
+			logger.error("Error en el JSON" + e.getMessage());
+			e.printStackTrace();
+		} catch (NoIdEventoException e) {
+			logger.error(e.getMessage());
+			respuesta.put("message", e.getMessage());
+			e.printStackTrace();
 		}
-		return null;
-	}
-	
-	/**
-	 * Obtener un evento por su ID
-	 * @param idEvento
-	 * @return
-	 */
-	private Evento getEvento(int idEvento) {
-		return null;
+		return respuesta;
 	}
 	
 	/**
@@ -86,26 +87,25 @@ public class ControladorEvento {
 	 * 
 	 * @param params Parametros de búsqueda de los eventos
 	 * @return respuesta Eventos que coicidieron con los parámetros
+	 * @throws NoIdEventoException
 	 */
-	private JSONArray getEventos(JSONObject params) {
+	private JSONArray getAsientosDeZonaYEvento(JSONObject params) throws NoIdEventoException {
 		logger.info("Iniciando consulta en la base de datos");
 		Statement stmt = null;
-		String sql = getEventosSqlQuery(params);
+		String sql = this.getAsientosDeEventoYZonaSqlQuery(params);
 		JSONArray respuesta = new JSONArray();
 		try {
 			stmt = this.conexion.createStatement();
 			logger.info("Ejecutando consulta");
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-		         Evento evento = new Evento(
-		        		 rs.getInt("idEvento"), 
-		        		 rs.getInt("idLugar"), 
-		        		 rs.getString("nombre"),
-		        		 rs.getString("fecha"),
-		        		 rs.getString("hora")
+		         Asiento asiento = new Asiento(
+		        		 rs.getBoolean("estado"), 
+		        		 rs.getInt("idAsiento"),
+		        		 rs.getInt("idZona")
 	        		 );
 		         Gson gson = new Gson();
-		         respuesta.put(gson.toJson(evento));
+		         respuesta.put(gson.toJson(asiento));
 			}
 			logger.info("Datos obtenidos de la base de datos");
 			return respuesta;
@@ -116,42 +116,48 @@ public class ControladorEvento {
 		
 		return null;
 	}
-	
+
 	/**
-	 * Devuelve la consulta SQL de los eventos que
-	 * cumplan con lo parámetros seleccionados
+	 * Devuelve la consulta SQL para obtener zonas de evento
 	 * 
-	 * @param params Parámteros de la consulta
-	 * @return sql Consulta a la base de datos
+	 * @param params
+	 * @return sql
+	 * @throws NoIdEventoException
 	 */
-	private String getEventosSqlQuery(JSONObject params) {
-		
-		String sql = "SELECT Eventos.* FROM Zona, Lugar, Eventos"
-				+ " WHERE Zona.idLugar = Lugar.idLugar"
+	private String getAsientosDeEventoYZonaSqlQuery(JSONObject params) throws NoIdEventoException {
+		String sql = "SELECT Asientos.* FROM Asientos, Zona, Lugar, Eventos"
+				+ " WHERE Asientos.idZona = Zona.idZona"
+				+ " AND Zona.idLugar = Lugar.idLugar"
 				+ " AND Lugar.idEvento = Eventos.idEvento";
 		
-		if (params.has("nombre")) {
-			sql += " AND Eventos.nombre LIKE '%" + params.getString("nombre") + "%'";
-		}
-		if (params.has("lugar")) {
-			sql += " AND Lugar.nombre LIKE '%" + params.getString("lugar") + "%'";
-		}
-		if (params.has("estado")) {
-			sql += " AND Lugar.estado LIKE '%" + params.getString("estado") + "%'";
-		}
-		if (params.has("fecha")) {
-			sql += " AND Eventos.fecha LIKE '%" + params.getString("fecha") + "%'";
-		}
-		if (params.has("hora")) {
-			sql += " AND Eventos.hora LIKE '%" + params.getString("hora") + "%'";
-		}
-		if (params.has("precio")) {
-			sql += " AND Zona.precio LIKE '%" + params.getDouble("precio") + "%'";
+		if (params.has("id_evento")) {
+			sql += " AND Eventos.idEvento = " + params.getInt("id_evento");
+		} else {
+			throw new NoIdEventoException("Falta el id de evento en la petición");
 		}
 		
-		sql += " GROUP BY Eventos.idEvento";
-		
+		if (params.has("id_zona")) {
+			sql += " AND Zona.idZona = " + params.getInt("id_zona");
+		} else {
+			throw new NoIdEventoException("Falta el id de zona en la petición");
+		}
 		return sql;
 	}
 	
+	/**
+	 * Exception para cuando la petición para
+	 * obtener zonas de un evento no tiene el parámetro id_evento
+	 * @author arman
+	 *
+	 */
+	private class NoIdEventoException extends Exception {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public NoIdEventoException(String msg) {
+			super(msg);
+		}
+	}
 }

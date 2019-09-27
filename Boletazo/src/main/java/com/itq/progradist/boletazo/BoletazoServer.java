@@ -46,12 +46,7 @@ public class BoletazoServer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JSONObject json = new JSONObject();
-		json.put("method", "eventos");
-		json.put("action", "get");
-		json.toString();
 		new BoletazoServer().initSocket();
-
 	}
 	
 	/**
@@ -83,20 +78,12 @@ public class BoletazoServer {
 					
 					logger.debug("Datos recibidos:[" + input + "]");
 					
-					JSONObject dataRequest = decodeString(input);
+					Peticion peticion = new Peticion(
+							decodeString(input), 
+							socket.getOutputStream()
+						);
 					
-					String respuesta = procesarRequest(dataRequest);
-					
-					OutputStream outputStream = socket.getOutputStream();
-					
-					DataOutputStream flowOut = new DataOutputStream(outputStream);
-					
-					flowOut.writeUTF("Respuesta " + respuesta);
-					
-					System.out.println("Respuesta enviada");
-					
-					Thread.sleep(1000);
-					
+					peticion.start();
 				}
 				
 				serverSocket.close();
@@ -112,30 +99,6 @@ public class BoletazoServer {
 		}
 	}
 	
-	private Connection getConnection() {
-		String HOST = "192.168.1.2";
-		String PORT = "3306";
-		String DATABASE = "boletazo";
-		String USER = "boletazo";
-		String PASSWORD = "password";
-		String CONNECTION_PARAMS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		Connection conexion;
-		try {
-			conexion = DriverManager.getConnection(
-					"jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + CONNECTION_PARAMS,
-					USER,
-					PASSWORD
-			);
-			logger.info("Conectado exitosamente a la base de datos");
-//			conexion.close();
-			return conexion;
-		} catch (SQLException e) {
-			logger.error("Error al conectar con la base de datos: " + e.getMessage());
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	/**
 	 * Convert string to JSONObject
 	 * @param message
@@ -143,29 +106,4 @@ public class BoletazoServer {
 	private JSONObject decodeString(String message) {
 		return new JSONObject(message);
 	}
-	
-	/**
-	 * Elegir la acción a realizar según los parametros recibidos
-	 * @param params
-	 */
-	private String procesarRequest(JSONObject params) {
-		logger.info("Procesando petición");
-		Connection conexion = getConnection();
-		try {
-			switch (params.getString("recurso")) {
-			case "eventos":
-				logger.info("Obteniendo eventos");
-				JSONObject respuesta = new ControladorEvento(conexion, params).procesarAccion(params);
-				logger.info("Eventos obtenidos");
-				return respuesta.toString();
-
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get("recurso"));
-			}
-		} catch(IllegalArgumentException e) {
-			logger.info("Error al procesar la petición: " + e.getMessage());
-		}
-		return null;
-	}
-
 }

@@ -7,12 +7,16 @@ public class Evento {
 	private int idEvento;
 	private int idLugar;
 	private String nombre;
+	private String fecha;
+	private String hora;
 	
-	public Evento(int idEvento, int idLugar, String nombre) {
+	public Evento(int idEvento, int idLugar, String nombre, String fecha, String hora) {
 		super();
 		this.idEvento = idEvento;
 		this.idLugar = idLugar;
 		this.nombre = nombre;
+		this.fecha = fecha;
+		this.hora = hora;
 	}
 
 	public int getIdEvento() {
@@ -37,6 +41,22 @@ public class Evento {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	
 }
