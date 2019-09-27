@@ -1,6 +1,5 @@
 package com.itq.program.dist.cliente;
 
-import java.awt.List;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,15 +7,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cliente {
-	
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+
+import com.itq.program.dist.cliente.PruebaZonas.Excepcion;
+
+public class PruebaAsientos {
 	private static Logger Logger = LogManager.getLogger(Cliente.class);
 	static final String HOST = "192.168.1.1";								
 	static final int PORT = 5000;
@@ -32,92 +32,27 @@ public class Cliente {
 		// TODO Auto-generated method stub
 
 		Scanner rd = new Scanner(System.in);
-		int opc = 0;
-		String filtro; //Filtro selecionado al momento
-		boolean fin = false;
-		double prec = 0;
 		JSONObject json = new JSONObject();
-		llenarLista();
-		json.put("recurso", "eventos");
-		json.put("metodo", "get");
 		
 		try
 		{
-			Logger.info("Se inicia la seleccion de filtros...");
-			while(fin == false && !filtros_disp.isEmpty())
-			{
-				mostrarOpcion();
-				System.out.print("Seleccion: ");
-				opc = rd.nextInt() - 1;
-				filtro = filtros_disp.get(opc); 
-				
-				if ( filtro == "Nombre")
-				{	
-					System.out.print("Nombre: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("nombre", filtro);
-				}
-				else if(filtro == "Lugar")
-				{
-					System.out.print("Lugar: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("lugar", filtro);
-				}
-				else if(filtro == "Fecha")
-				{
-					System.out.println("Formato dd/mm/aa");
-					System.out.print("Fecha: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("fecha", filtro);
-				}
-				else if(filtro == "Hora")
-				{
-					System.out.println("Formato hh:mm");
-					System.out.print("Horario: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("hora", filtro);
-				}
-				else if(filtro == "Precio")
-				{
-					System.out.print("Precio: ");
-					prec = rd.nextDouble();
-					filtros_disp.remove(opc);
-					json.put("precio", prec);
-				}
-				else if(filtro == "Zona")
-				{
-					System.out.print("Zona: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("zona", filtro);
-				}
-				else if(filtro == "Estado")
-				{
-					System.out.print("Estado: ");
-					filtro = leer();
-					filtros_disp.remove(opc);
-					json.put("estado", filtro);
-				}
-				
-				System.out.print("Desea agregar otro filtro?\n1.Si\n2.No\nSeleccion: ");
-				int sel = rd.nextInt(); 
-				if( sel == 1)
-					fin = false;
-				else if(sel == 2)
-					fin = true;
-				else	
-					throw new Excepcion(1);
-			}
-			
-			String jason = json.toString();
-			System.out.println(jason);
 			
 			Logger.info("Inicia la ejecucion del cliente");
 			Socket clientSocket = new Socket(HOST, PORT);
+			
+			System.out.print("Ingrese id de evento: ");
+			int id = rd.nextInt();
+			
+			System.out.print("Ingrese id de zona: ");
+			int id_zona = rd.nextInt();
+			
+			json = new JSONObject();
+			json.put("recurso", "evento/zonas/asientos");
+			json.put("metodo", "get");
+			json.put("id_evento", id);
+			json.put("id_zona", id_zona);
+			String jason = json.toString();
+			System.out.print(jason);
 			
 			OutputStream outStream = clientSocket.getOutputStream();
 			DataOutputStream flowOut = new DataOutputStream(outStream);
@@ -128,19 +63,7 @@ public class Cliente {
 			String input = dataIn.readUTF().toString();
 			
 			Logger.info("Respuesta del server: ["+ input +"]");
-			System.out.print("Ingrese id de evento: ");
-			int id = rd.nextInt();
 			
-			json = new JSONObject();
-			json.put("recurso", "evento/zonas");
-			json.put("metodo", "get");
-			json.put("id_evento", id);
-			jason = json.toString();
-			flowOut.writeUTF(jason);
-			String recibo = dataIn.readUTF().toString();
-			Logger.info("Respuesta del server: ["+ recibo +"]");
-			
-			//Logger.info("Respuesta del server: ["+ input +"]");
 			clientSocket.close();
 		}catch(UnknownHostException e)
 		{
@@ -150,13 +73,13 @@ public class Cliente {
 		{
 			Logger.error("Ocurrio un error al intentar conectarse al host: ["+ HOST +"] y puerta : [" + PORT +"]");
 			e.printStackTrace();
-		}catch(Excepcion ex)
+		}/*catch(Excepcion ex)
 		{
 			System.out.println(ex.getMessage());
 		}catch(IndexOutOfBoundsException e) {
 			Logger.error("El filtro seleccionado no existe...");
 			e.printStackTrace();
-		}
+		}*/
 		rd.close();
 	}
 	
