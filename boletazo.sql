@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2019 a las 00:28:00
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 29-09-2019 a las 02:57:48
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.2.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `apartados` (
   `idApartado` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idEvento` int(11) NOT NULL
+  `idEvento` int(11) NOT NULL,
+  `reservado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -63,10 +64,18 @@ INSERT INTO `asientos` (`idAsiento`, `estado`, `idZona`) VALUES
 
 CREATE TABLE `boletos` (
   `idBoleto` int(11) NOT NULL,
-  `idApartado` int(11) NOT NULL,
+  `idApartado` int(11) DEFAULT NULL,
   `idZona` int(11) NOT NULL,
-  `idAsiento` int(11) NOT NULL
+  `idAsiento` int(11) NOT NULL,
+  `idComprador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `boletos`
+--
+
+INSERT INTO `boletos` (`idBoleto`, `idApartado`, `idZona`, `idAsiento`, `idComprador`) VALUES
+(1, NULL, 3, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -241,7 +250,7 @@ ALTER TABLE `asientos`
 -- AUTO_INCREMENT de la tabla `boletos`
 --
 ALTER TABLE `boletos`
-  MODIFY `idBoleto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBoleto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
