@@ -125,12 +125,12 @@ public class ControladorZona {
 	 * @throws NoIdEventoException
 	 */
 	private String getZonasDeEventoSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT zona.idLugar, zona.idZona, zona.precio FROM zona, lugar, eventos"
-				+ " WHERE zona.idLugar = lugar.idLugar"
-				+ " AND lugar.idEvento = eventos.idEvento";
+		String sql = "SELECT Lugar.idLugar, EventosZonas.idZona, EventosZonas.precio FROM EventosZonas, Lugar, Eventos"
+				+ " WHERE EventosZonas.idEvento = Eventos.idEvento"
+				+ " AND Lugar.idLugar = Eventos.idLugar";
 		
 		if (params.has("id_evento")) {
-			sql += " AND eventos.idEvento = " + params.getInt("id_evento");
+			sql += " AND EventosZonas.idEvento = " + params.getInt("id_evento");
 		} else {
 			throw new NoIdEventoException("Falta el id de evento en la petici�n");
 		}

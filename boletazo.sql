@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2019 a las 00:37:49
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 01-10-2019 a las 03:45:49
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.2.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -57,16 +57,18 @@ CREATE TABLE `eventos` (
   `idEvento` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `lugar` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  `fecha` date NOT NULL,
+  `idLugar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`) VALUES
-(1, 'Daft Punk', 'Estadio Azteca', '22:00:00'),
-(2, 'José José', 'Estadio La Corregidora', '17:00:00');
+INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `fecha`, `idLugar`) VALUES
+(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', NULL),
+(2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,7 @@ CREATE TABLE `eventoszonas` (
 CREATE TABLE `lugar` (
   `idLugar` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `idEvento` int(11) NOT NULL
+  `estado` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -165,7 +167,8 @@ ALTER TABLE `asientos`
 -- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  ADD PRIMARY KEY (`idEvento`);
+  ADD PRIMARY KEY (`idEvento`),
+  ADD KEY `fk_eventos_lugar` (`idLugar`);
 
 --
 -- Indices de la tabla `eventosasientos`
@@ -187,8 +190,7 @@ ALTER TABLE `eventoszonas`
 -- Indices de la tabla `lugar`
 --
 ALTER TABLE `lugar`
-  ADD PRIMARY KEY (`idLugar`),
-  ADD KEY `idEvento` (`idEvento`);
+  ADD PRIMARY KEY (`idLugar`);
 
 --
 -- Indices de la tabla `metodospago`
@@ -256,6 +258,12 @@ ALTER TABLE `asientos`
   ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
 
 --
+-- Filtros para la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `fk_eventos_lugar` FOREIGN KEY (`idLugar`) REFERENCES `lugar` (`idLugar`);
+
+--
 -- Filtros para la tabla `eventosasientos`
 --
 ALTER TABLE `eventosasientos`
@@ -270,12 +278,6 @@ ALTER TABLE `eventosasientos`
 ALTER TABLE `eventoszonas`
   ADD CONSTRAINT `eventoszonas_ibfk_1` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`),
   ADD CONSTRAINT `eventoszonas_ibfk_2` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`);
-
---
--- Filtros para la tabla `lugar`
---
-ALTER TABLE `lugar`
-  ADD CONSTRAINT `lugar_ibfk_1` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`);
 
 --
 -- Filtros para la tabla `metodospago`

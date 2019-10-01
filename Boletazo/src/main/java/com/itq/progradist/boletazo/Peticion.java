@@ -25,7 +25,7 @@ public class Peticion extends Thread {
 	private static final Logger logger = LogManager.getLogger(Peticion.class);
 	
 	/**
-	 * datos de la peticiï¿½n
+	 * datos de la petición
 	 */
 	private JSONObject dataRequest;
 	
@@ -35,7 +35,7 @@ public class Peticion extends Thread {
 	private OutputStream socketOutput;
 	
 	/**
-	 * Inicializa una peticiï¿½n con los datos de peticiï¿½n y 
+	 * Inicializa una petición con los datos de petición y 
 	 * el flujo de salida del socket
 	 * 
 	 * @param dataRequest
@@ -47,7 +47,7 @@ public class Peticion extends Thread {
 	}
 	
 	/**
-	 * Corre el proceso de la peticiï¿½n
+	 * Corre el proceso de la petición
 	 */
 	@Override
 	public void run() {

@@ -8,12 +8,14 @@ public class Asiento {
 	private boolean estado;
 	private int idAsiento;
 	private int idZona;
+	private int idApartado;
 	
-	public Asiento(boolean estado, int idAsiento, int idZona) {
+	public Asiento(boolean estado, int idAsiento, int idZona, int idApartado) {
 		super();
 		this.estado = estado;
 		this.idAsiento = idAsiento;
 		this.idZona = idZona;
+		this.idApartado = idApartado;
 	}
 	
 	public boolean isEstado() {
@@ -34,6 +36,15 @@ public class Asiento {
 	public void setIdZona(int idZona) {
 		this.idZona = idZona;
 	}
+
+	public int getIdApartado() {
+		return idApartado;
+	}
+
+	public void setIdApartado(int idApartado) {
+		this.idApartado = idApartado;
+	}
+	
 	
 	
 	
