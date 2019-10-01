@@ -102,7 +102,8 @@ public class ControladorAsiento {
 		         Asiento asiento = new Asiento(
 		        		 rs.getBoolean("estado"), 
 		        		 rs.getInt("idAsiento"),
-		        		 rs.getInt("idZona")
+		        		 rs.getInt("idZona"),
+		        		 rs.getInt("idApartado")
 	        		 );
 		         Gson gson = new Gson();
 		         respuesta.put(gson.toJson(asiento));
@@ -125,19 +126,16 @@ public class ControladorAsiento {
 	 * @throws NoIdEventoException
 	 */
 	private String getAsientosDeEventoYZonaSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT Asientos.* FROM Asientos, Zona, Lugar, Eventos"
-				+ " WHERE Asientos.idZona = Zona.idZona"
-				+ " AND Zona.idLugar = Lugar.idLugar"
-				+ " AND Lugar.idEvento = Eventos.idEvento";
+		String sql = "SELECT EventosAsientos.* FROM EventosAsientos";
 		
 		if (params.has("id_evento")) {
-			sql += " AND Eventos.idEvento = " + params.getInt("id_evento");
+			sql += " AND EventosAsientos.idEvento = " + params.getInt("id_evento");
 		} else {
 			throw new NoIdEventoException("Falta el id de evento en la petición");
 		}
 		
 		if (params.has("id_zona")) {
-			sql += " AND Zona.idZona = " + params.getInt("id_zona");
+			sql += " AND EventosAsientos.idZona = " + params.getInt("id_zona");
 		} else {
 			throw new NoIdEventoException("Falta el id de zona en la petición");
 		}

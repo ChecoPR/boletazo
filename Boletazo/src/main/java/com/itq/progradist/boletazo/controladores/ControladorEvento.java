@@ -126,9 +126,9 @@ public class ControladorEvento {
 	 */
 	private String getEventosSqlQuery(JSONObject params) {
 		
-		String sql = "SELECT Eventos.* FROM Zona, Lugar, Eventos"
-				+ " WHERE Zona.idLugar = Lugar.idLugar"
-				+ " AND Lugar.idEvento = Eventos.idEvento";
+		String sql = "SELECT Eventos.* FROM EventosZonas, Lugar, Eventos"
+				+ " WHERE EventosZona.idEvento = Eventos.idEvento"
+				+ " AND Lugar.idLugar = Eventos.idLugar";
 		
 		if (params.has("nombre")) {
 			sql += " AND Eventos.nombre LIKE '%" + params.getString("nombre") + "%'";
@@ -146,7 +146,7 @@ public class ControladorEvento {
 			sql += " AND Eventos.hora LIKE '%" + params.getString("hora") + "%'";
 		}
 		if (params.has("precio")) {
-			sql += " AND Zona.precio LIKE '%" + params.getDouble("precio") + "%'";
+			sql += " AND EventosZonas.precio LIKE '%" + params.getDouble("precio") + "%'";
 		}
 		
 		sql += " GROUP BY Eventos.idEvento";
