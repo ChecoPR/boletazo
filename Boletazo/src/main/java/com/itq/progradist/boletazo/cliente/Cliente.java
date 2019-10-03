@@ -1,4 +1,4 @@
-package com.itq.progradist.boletazo;
+package com.itq.progradist.boletazo.cliente;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,9 +10,10 @@ import java.net.UnknownHostException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
-public class Cliente {
-
+public class Cliente extends Thread {
+	
 	private static final Logger logger = LogManager.getLogger(Cliente.class);
 	
 	/*
@@ -24,12 +25,15 @@ public class Cliente {
 	 * Defines remote host
 	 */
 	static final int PORT = 5000;
-
-	/*
-	 * Client socket main method. Requests a connection, sends a message and receives an answer
-	 */
-	public static void main(String[] args) {
-		
+	
+	private String json;
+	
+	public Cliente(String json) {
+		this.json = json;
+	}
+	
+	@Override
+	public void run() {
 		try {
 			
 			logger.info("Inicia la ejecución del cliente.");
@@ -40,15 +44,7 @@ public class Cliente {
 			
 			DataOutputStream flowOut = new DataOutputStream(outputStream);
 			
-			flowOut.writeUTF("{\"recurso\":\"apartado\","
-					+ "\"metodo\":\"post\","
-					+ "\"evento_id\":1, "
-					+ "\"usuario_id\":1, "
-					+ "\"zona_id\":1,"
-					+ "\"num_boletos\":["
-						+ "{\"asiento_id\":1}"
-						+ "]"
-					+ "}");
+			flowOut.writeUTF(this.json);
 			
 			InputStream inputStream = clientSocket.getInputStream();
 			
@@ -69,7 +65,5 @@ public class Cliente {
 			logger.error("Ocurrió un error al establecer el canal de datos: [" + HOST + "] y puerto: [" + PORT + "]");
 			
 		}
-
 	}
-
 }

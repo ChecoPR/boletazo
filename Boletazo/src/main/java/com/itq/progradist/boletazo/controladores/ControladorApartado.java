@@ -32,6 +32,8 @@ public class ControladorApartado {
 	 * datos recibidos de la petición
 	 */
 	private JSONObject dataRequest;
+
+	private JSONArray apartados;
 	
 	/**
 	 * Inicializar un controlador con una conexión a la base de datos y
@@ -60,14 +62,19 @@ public class ControladorApartado {
 			switch (params.getString("metodo")) {
 			case "post":
 				logger.info("Guardando apartado");
-				respuesta = this.guardarApartado(params);
+				Thread.sleep(1000);
+				respuesta = this.procesoApartado(params);
 				logger.info("Apartado guardado");
 				return respuesta;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
 			}
 		} catch (IllegalArgumentException e) {
-			logger.error("Error procesando la acción" + e.getMessage());
+			logger.error("Error procesando la acción:" + e.getMessage());
+			return new JSONObject().put("message", e.getMessage());
+		} catch (InterruptedException e) {
+			logger.error("Error en el sleep: " + e.getMessage());
+			e.printStackTrace();
 			return new JSONObject().put("message", e.getMessage());
 		}
 	}
@@ -82,101 +89,117 @@ public class ControladorApartado {
 //	}
 	
 	/**
-	 * 
+	 * Realiza el proceso para guardar un apartado
 	 * 
 	 * @param params Parametros de la peticion para guardar el apartado
 	 * @return respuesta Datos del apartado recien guardado. Si no se guardo solo contiene el mensaje de error
 	 */
-	private JSONObject guardarApartado(JSONObject params) {
-		logger.info("Iniciando consulta en la base de datos");
-		
-		try {
-			JSONObject respuesta = new JSONObject();
+	private JSONObject procesoApartado(JSONObject params) {
+		synchronized (ControladorApartado.class) {
+			logger.info("Iniciando consulta en la base de datos");
 			
-			checkNumBoletos(params);
-			
-			Statement stmt = this.conexion.createStatement();
-			
-			logger.info("Comprobando disponibilidad de los boletos");
-			
-			comprobarDispBoletos(params);
-			
-			logger.info("Comprobación de dispobilidad exitosa");
-			
-			logger.info("Guardando informacion del apartado");
-			String sql = getGuardarApartadoSqlQuery(params);
-			stmt.executeUpdate(sql);
-			ResultSet rs = stmt.executeQuery(getApartadoSqlQuery(params));
-			JSONArray apartados = new JSONArray();
-			while (rs.next()) {
-				Apartado apartado = new Apartado(
-		        		 rs.getInt("idApartado"),
-		        		 rs.getInt("idUsuario"), 
-		        		 rs.getInt("idEvento"),
-		        		 rs.getDouble("pagado"),
-		        		 rs.getString("tiempo")
-	        		 );
-		         Gson gson = new Gson();
-		         JSONObject apartadoJson = new JSONObject(gson.toJson(apartado));
-		         apartados.put(apartadoJson);
-			}
-			logger.info("Informacion del apartado guardada");
-			
-			logger.info("Actualizando informacion de los asientos apartados");
-			
-			JSONArray boletos = params.getJSONArray("num_boletos");
-			for (int i = 0; i < boletos.length(); i++) {
-				JSONObject boleto = boletos.getJSONObject(i);
-				int idApartado = apartados.getInt(apartados.length() - 1);
+			try {
+				JSONObject respuesta = new JSONObject();
 				
-				sql = getGuardarApartadoAsientosSqlQuery(boleto, idApartado);
-				stmt.executeUpdate(sql);
+				checkNumBoletos(params);
+				
+				Statement stmt = this.conexion.createStatement();
+				
+				logger.info("Comprobando disponibilidad de los boletos");
+				
+				comprobarDispBoletos(params);
+				
+				logger.info("Comprobación de dispobilidad exitosa");
+				
+				logger.info("Guardando informacion del apartado");
+				guardarApartados(params);
+				logger.info("Informacion del apartado guardada");
+				
+				logger.info("Actualizando informacion de los asientos apartados");
+				
+				JSONArray boletos = params.getJSONArray("num_boletos");
+				String sql;
+				for (int i = 0; i < boletos.length(); i++) {
+					JSONObject boleto = boletos.getJSONObject(i);
+					int idApartado = apartados.getJSONObject(apartados.length() - 1).getInt("idApartado");
+					
+					sql = getGuardarApartadoAsientosSqlQuery(boleto, idApartado);
+					stmt.executeUpdate(sql);
+				}
+				
+				logger.info("Informacion de los asientos apartados realizada");
+				
+				respuesta.put("respuesta", "Registrado");
+				respuesta.put("evento_id", params.getInt("evento_id"));
+				respuesta.put("num_boletos", params.getJSONArray("num_boletos").length());
+				respuesta.put("zona_id", params.getInt("zona_id"));
+				respuesta.put("apartados", apartados);
+				
+				return respuesta;
+				
+			} catch (FaltanParametrosException e) {
+				
+				logger.error(e.getMessage());
+				e.printStackTrace();
+				return new JSONObject().put("message", e.getMessage());
+				
+			} catch (SQLException e) {
+				
+				logger.error("Error al consultar la base de datos: " + e.getMessage());
+				e.printStackTrace();
+				return new JSONObject().put("message", e.getMessage());
+				
+			} catch (BoletosExcedidosException e) {
+				
+				logger.error(e.getMessage());
+				e.printStackTrace();
+				return new JSONObject().put("message", e.getMessage());
+				
+			} catch (JSONException e) {
+				
+				logger.error(e.getMessage());
+				e.printStackTrace();
+				return new JSONObject().put("message", e.getMessage());
+				
+			} catch (AsientoOcupadoException e) {
+				
+				logger.error(e.getMessage());
+				e.printStackTrace();
+				return new JSONObject().put("message", e.getMessage());
+				
 			}
-			
-			logger.info("Informacion de los asientos apartados realizada");
-			
-			respuesta.put("respuesta", "Registrado");
-			respuesta.put("evento_id", params.getInt("evento_id"));
-			respuesta.put("num_boletos", params.getJSONArray("num_boletos").length());
-			respuesta.put("zona_id", params.getInt("zona_id"));
-			respuesta.put("apartados", apartados);
-			
-			return respuesta;
-			
-		} catch (FaltanParametrosException e) {
-			
-			logger.error(e.getMessage());
-			e.printStackTrace();
-			return new JSONObject().put("message", e.getMessage());
-			
-		} catch (SQLException e) {
-			
-			logger.error("Error al consultar la base de datos: " + e.getMessage());
-			e.printStackTrace();
-			return new JSONObject().put("message", e.getMessage());
-			
-		} catch (BoletosExcedidosException e) {
-			
-			logger.error(e.getMessage());
-			e.printStackTrace();
-			return new JSONObject().put("message", e.getMessage());
-			
-		} catch (JSONException e) {
-			
-			logger.error(e.getMessage());
-			e.printStackTrace();
-			return new JSONObject().put("message", e.getMessage());
-			
-		} catch (AsientoOcupadoException e) {
-			
-			logger.error(e.getMessage());
-			e.printStackTrace();
-			return new JSONObject().put("message", e.getMessage());
-			
 		}
-
 	}
 	
+	/**
+	 * Guardar el apartado en la base de datos una vez que se ha
+	 * comprobado su validez
+	 * 
+	 * @param params Parametros de la peticion
+	 * 
+	 * @throws FaltanParametrosException
+	 * @throws SQLException
+	 */
+	private synchronized void guardarApartados(JSONObject params) throws FaltanParametrosException, SQLException {
+		this.apartados = new JSONArray();
+		String sql = getGuardarApartadoSqlQuery(params);
+		Statement stmt = this.conexion.createStatement();
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery(getApartadoSqlQuery(params));
+		while (rs.next()) {
+			Apartado apartado = new Apartado(
+	        		 rs.getInt("idApartado"),
+	        		 rs.getInt("idUsuario"), 
+	        		 rs.getInt("idEvento"),
+	        		 rs.getDouble("pagado"),
+	        		 rs.getString("tiempo")
+        		 );
+	         Gson gson = new Gson();
+	         JSONObject apartadoJson = new JSONObject(gson.toJson(apartado));
+	         apartados.put(apartadoJson);
+		}
+	}
+
 	/**
 	 * Realiza el proceso para checar si los boletos
 	 * estan disponible. Si alguno no esta disponible para apartar
@@ -214,14 +237,14 @@ public class ControladorApartado {
 	 */
 	private boolean checarEstaDisponible(JSONObject boleto) throws SQLException, JSONException, AsientoOcupadoException {
 		String sql = "SELECT * FROM eventosasientos "
-				+ " WHERE idApartado = NULL "
+				+ " WHERE idApartado IS NULL "
 				+ " AND idAsiento = " + boleto.getInt("asiento_id");
 		Statement stmt = this.conexion.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		if(rs.next()) {
+		if(rs.first()) {
 			return true;
 		}
-		throw new AsientoOcupadoException("El asiento con id " + boleto.getInt("asiento_id") + " está ocupado");
+		throw new AsientoOcupadoException("El asiento con id " + boleto.getInt("asiento_id") + " está ocupado");		
 	}
 
 	/**
@@ -289,8 +312,8 @@ public class ControladorApartado {
 		}
 		String sql = "SELECT * FROM Apartados WHERE idEvento = "
 				+ params.getInt("evento_id") + " AND idUsuario = "
-				+ params.getInt("usuario_id") + ""
-				+ "ORDER BY tiempo DESC"
+				+ params.getInt("usuario_id") + " "
+				+ "ORDER BY tiempo DESC "
 				+ "LIMIT 0,1";
 		return sql;
 	}
