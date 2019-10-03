@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.itq.program.dist.cliente.PruebaAsientos.Excepcion;
@@ -44,16 +45,30 @@ public class PruebaApartado {
 			System.out.print("Ingrese id de evento: ");
 			int id = rd.nextInt();
 			
+			System.out.print("Ingrese id de usuario: ");
+			int id_usuario = rd.nextInt();
+			
 			System.out.print("Ingrese id de zona: ");
 			int id_zona = rd.nextInt();
 			
 			System.out.print("Cantidad de boletos: ");
-			int boletos = rd.nextInt();
+			JSONArray boletos = new JSONArray ();
+			int estado = 1;
+			while(estado == 1) {
+				System.out.print("Ingrese asiento_id: ");
+				int as = rd.nextInt();
+				JSONObject boleto = new JSONObject();
+				boleto.put("asiento_id", as);
+				boletos.put(boleto);
+				System.out.print("Desea ingresar otro asiento_id? \n0.No\n1.Si\n Seleccion: ");
+				estado = rd.nextInt();
+			}
 			
 			json = new JSONObject();
 			json.put("recurso", "apartado");
 			json.put("metodo", "post");
 			json.put("id_evento", id);
+			json.put("usuario_id", id_usuario);
 			json.put("num_boletos", boletos);
 			json.put("id_zona", id_zona);
 			String jason = json.toString();
