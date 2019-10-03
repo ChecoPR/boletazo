@@ -4,8 +4,9 @@
 --
 -- Servidor: 127.0.0.1
 -- Tiempo de generación: 03-10-2019 a las 15:19:15
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.2.15
+-- Tiempo de generación: 01-10-2019 a las 04:43:04
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -74,17 +75,28 @@ CREATE TABLE `eventos` (
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `lugar` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `hora` time NOT NULL,
-  `fecha` date NOT NULL,
-  `idLugar` int(11) DEFAULT NULL
+  `idLugar` int(11) NOT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
+<<<<<<< HEAD
+INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `idLugar`, `fecha`) VALUES
+(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', 0, '0000-00-00'),
+(2, 'José José', 'Estadio La Corregidora', '17:00:00', 0, '0000-00-00');
+=======
 INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `fecha`, `idLugar`) VALUES
+<<<<<<< HEAD
 (1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', 1),
 (2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', 1);
+=======
+(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', NULL),
+(2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', NULL);
+>>>>>>> ac7e3a2f5de08a786c38b8226933bf64df35739b
+>>>>>>> 6ecb699636250789073947128e32d4236ab17f0a
 
 -- --------------------------------------------------------
 
@@ -134,7 +146,11 @@ INSERT INTO `eventoszonas` (`idEvento`, `idZona`, `precio`) VALUES
 CREATE TABLE `lugar` (
   `idLugar` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+<<<<<<< HEAD
+  `estado` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+=======
   `estado` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+>>>>>>> ac7e3a2f5de08a786c38b8226933bf64df35739b
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -219,7 +235,11 @@ ALTER TABLE `asientos`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEvento`),
+<<<<<<< HEAD
+  ADD KEY `idLugar` (`idLugar`);
+=======
   ADD KEY `fk_eventos_lugar` (`idLugar`);
+>>>>>>> ac7e3a2f5de08a786c38b8226933bf64df35739b
 
 --
 -- Indices de la tabla `eventosasientos`
@@ -312,7 +332,11 @@ ALTER TABLE `asientos`
 -- Filtros para la tabla `eventos`
 --
 ALTER TABLE `eventos`
+<<<<<<< HEAD
+  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`idLugar`) REFERENCES `lugar` (`idLugar`);
+=======
   ADD CONSTRAINT `fk_eventos_lugar` FOREIGN KEY (`idLugar`) REFERENCES `lugar` (`idLugar`);
+>>>>>>> ac7e3a2f5de08a786c38b8226933bf64df35739b
 
 --
 -- Filtros para la tabla `eventosasientos`
