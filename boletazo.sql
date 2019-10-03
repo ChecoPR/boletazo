@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2019 a las 03:45:49
+-- Tiempo de generación: 03-10-2019 a las 15:19:15
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.2.15
 
@@ -32,9 +32,18 @@ CREATE TABLE `apartados` (
   `idApartado` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idEvento` int(11) NOT NULL,
-  `pagado` double NOT NULL,
-  `tiempo` datetime NOT NULL
+  `pagado` double NOT NULL DEFAULT '0',
+  `tiempo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `apartados`
+--
+
+INSERT INTO `apartados` (`idApartado`, `idUsuario`, `idEvento`, `pagado`, `tiempo`) VALUES
+(2, 1, 1, 0, '2019-10-02 11:32:37'),
+(5, 1, 1, 0, '2019-10-02 11:45:58'),
+(6, 1, 1, 0, '2019-10-02 11:46:23');
 
 -- --------------------------------------------------------
 
@@ -46,6 +55,13 @@ CREATE TABLE `asientos` (
   `idAsiento` int(11) NOT NULL,
   `idZona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `asientos`
+--
+
+INSERT INTO `asientos` (`idAsiento`, `idZona`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -67,8 +83,8 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `fecha`, `idLugar`) VALUES
-(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', NULL),
-(2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', NULL);
+(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', 1),
+(2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', 1);
 
 -- --------------------------------------------------------
 
@@ -79,9 +95,16 @@ INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `fecha`, `idLugar`
 CREATE TABLE `eventosasientos` (
   `idEvento` int(11) NOT NULL,
   `idAsiento` int(11) NOT NULL,
-  `idApartado` int(11) NOT NULL,
+  `idApartado` int(11) DEFAULT NULL,
   `idZona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `eventosasientos`
+--
+
+INSERT INTO `eventosasientos` (`idEvento`, `idAsiento`, `idApartado`, `idZona`) VALUES
+(2, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +118,13 @@ CREATE TABLE `eventoszonas` (
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `eventoszonas`
+--
+
+INSERT INTO `eventoszonas` (`idEvento`, `idZona`, `precio`) VALUES
+(2, 1, 1000);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +136,13 @@ CREATE TABLE `lugar` (
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `estado` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `lugar`
+--
+
+INSERT INTO `lugar` (`idLugar`, `nombre`, `estado`) VALUES
+(1, 'Estadio Corregidora', 'Querétaro');
 
 -- --------------------------------------------------------
 
@@ -133,6 +170,13 @@ CREATE TABLE `usuarios` (
   `telefono` varchar(12) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `nombre`, `direccion`, `telefono`) VALUES
+(1, 'Armando', 'Candiles', '4427126321');
+
 -- --------------------------------------------------------
 
 --
@@ -143,6 +187,13 @@ CREATE TABLE `zona` (
   `idZona` int(11) NOT NULL,
   `idLugar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `zona`
+--
+
+INSERT INTO `zona` (`idZona`, `idLugar`) VALUES
+(1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -220,13 +271,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT de la tabla `apartados`
 --
 ALTER TABLE `apartados`
-  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  MODIFY `idAsiento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -238,7 +289,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `zona`
 --
 ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

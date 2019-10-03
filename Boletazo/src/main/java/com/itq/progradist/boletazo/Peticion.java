@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
+import com.itq.progradist.boletazo.controladores.ControladorApartado;
 import com.itq.progradist.boletazo.controladores.ControladorAsiento;
 import com.itq.progradist.boletazo.controladores.ControladorEvento;
 import com.itq.progradist.boletazo.controladores.ControladorZona;
@@ -81,7 +82,7 @@ public class Peticion extends Thread {
 		String HOST = "localhost";
 		String PORT = "3306";
 		String DATABASE = "boletazo";
-		String USER = "boletazo";
+		String USER = "root";
 		String PASSWORD = "password";
 		String CONNECTION_PARAMS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		Connection conexion;
@@ -128,6 +129,12 @@ public class Peticion extends Thread {
 				logger.info("Obteniendo asientos de la zona y del evento");
 				respuesta = new ControladorAsiento(conexion, params).procesarAccion(params);
 				logger.info("Zonas del evento obtenidas");
+				break;
+			
+			case "apartado":
+				logger.info("Realizando apartado");
+				respuesta = new ControladorApartado(conexion, params).procesarAccion(params);
+				logger.info("Apartado realizado");
 				break;
 				
 			default:
