@@ -79,10 +79,10 @@ public class Peticion extends Thread {
 	 * @return conexi�n Conexi�n a la base de datos
 	 */
 	private Connection getConnection() {
-		String HOST = "localhost";
+		String HOST = "192.168.1.2";
 		String PORT = "3306";
 		String DATABASE = "boletazo";
-		String USER = "root";
+		String USER = "boletazo";
 		String PASSWORD = "password";
 		String CONNECTION_PARAMS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		Connection conexion;
