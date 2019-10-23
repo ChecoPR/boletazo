@@ -9,13 +9,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.itq.progradist.boletazo.ParamNames.Metodo;
+import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Apartado;
-import com.itq.progradist.boletazo.modelos.Boleto;
-import com.itq.progradist.boletazo.modelos.Evento;
-import com.itq.progradist.boletazo.modelos.Zona;
 
-import java.util.ArrayList;
+import static com.itq.progradist.boletazo.ParamNames.*;
 
+/**
+ * Realiza los procesos que tienen que ver con el tipo de recurso "apartado".
+ * Se inicia con una conexion a la base de datos y los datos de la peticion.
+ * 
+ * @author Equipo 5
+ *
+ */
 public class ControladorApartado {
 	
 	/**
@@ -53,28 +59,29 @@ public class ControladorApartado {
 	 * el método que indiquen los parámetros
 	 * 
 	 * @param params Parámetros de la petición, debe contener el método de la petición
+	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
+	 * 
+	 * @throws MetodoParamNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) {
+	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
+		if(!params.has(Metodo.KEY_NAME)) {
+			throw new MetodoParamNotFoundException();
+		}
 		try {
-			switch (params.getString("metodo")) {
-			case "post":
+			switch (params.getString(Metodo.KEY_NAME)) {
+			case Metodo.Values.POST:
 				logger.info("Guardando apartado");
-				Thread.sleep(1000);
 				respuesta = this.procesoApartado(params);
 				logger.info("Apartado guardado");
 				return respuesta;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
+				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acción:" + e.getMessage());
-			return new JSONObject().put("message", e.getMessage());
-		} catch (InterruptedException e) {
-			logger.error("Error en el sleep: " + e.getMessage());
-			e.printStackTrace();
 			return new JSONObject().put("message", e.getMessage());
 		}
 	}
@@ -92,6 +99,7 @@ public class ControladorApartado {
 	 * Realiza el proceso para guardar un apartado
 	 * 
 	 * @param params Parametros de la peticion para guardar el apartado
+	 * 
 	 * @return respuesta Datos del apartado recien guardado. Si no se guardo solo contiene el mensaje de error
 	 */
 	private JSONObject procesoApartado(JSONObject params) {
@@ -180,7 +188,7 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException
 	 * @throws SQLException
 	 */
-	private synchronized void guardarApartados(JSONObject params) throws FaltanParametrosException, SQLException {
+	private  void guardarApartados(JSONObject params) throws FaltanParametrosException, SQLException {
 		this.apartados = new JSONArray();
 		String sql = getGuardarApartadoSqlQuery(params);
 		Statement stmt = this.conexion.createStatement();
@@ -229,6 +237,7 @@ public class ControladorApartado {
 	 * esta disponible para apartar
 	 * 
 	 * @param boleto Informacion del boleto
+	 * 
 	 * @return true Devuelve true si el boleto esta disponible para apartar de otra manera lanza una exception
 	 * 
 	 * @throws SQLException
@@ -253,7 +262,9 @@ public class ControladorApartado {
 	 * 
 	 * @param boleto El boleto que contiene el asiento que apartara el cliente
 	 * @param idApartado El id del apartado del cliente
+	 * 
 	 * @return sql Consulta SQL
+	 * 
 	 * @throws FaltanParametrosException
 	 */
 	private String getGuardarApartadoAsientosSqlQuery(JSONObject boleto, int idApartado) throws FaltanParametrosException {
@@ -300,7 +311,9 @@ public class ControladorApartado {
 	 * el ultimo realizado por el cliente de un evento en especifico
 	 * 
 	 * @param params Parametros de la peticion
+	 * 
 	 * @return sql Consulta SQL
+	 * 
 	 * @throws FaltanParametrosException
 	 */
 	private String getApartadoSqlQuery(JSONObject params) throws FaltanParametrosException {
@@ -329,6 +342,11 @@ public class ControladorApartado {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Inicializa con un mensaje de error personalizado.
+		 * 
+		 * @param msg Mensaje de error.
+		 */
 		public FaltanParametrosException(String msg) {
 			super(msg);
 		}
@@ -345,6 +363,11 @@ public class ControladorApartado {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Inicializa con un mensaje de error personalizado.
+		 * 
+		 * @param msg Mensaje de error.
+		 */
 		public AsientoOcupadoException(String msg) {
 			super(msg);
 		}
@@ -361,6 +384,11 @@ public class ControladorApartado {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Inicializa con un mensaje de error personalizado.
+		 * 
+		 * @param msg Mensaje de error.
+		 */
 		public BoletosExcedidosException() {
 			super("Número de boletos excedido: Máximo 4 boletos por apartado");
 		}
@@ -371,7 +399,9 @@ public class ControladorApartado {
 	 * el limite de boletos por apartado
 	 * 
 	 * @param params Parametros de la peticion de apartado
+	 * 
 	 * @return devuelve true si el numero de boletos no excede el limite
+	 * 
 	 * @throws FaltanParametrosException
 	 * @throws BoletosExcedidosException
 	 */

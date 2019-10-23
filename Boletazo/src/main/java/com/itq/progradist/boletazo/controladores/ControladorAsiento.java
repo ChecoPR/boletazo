@@ -12,9 +12,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.itq.progradist.boletazo.ParamNames.Metodo;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Asiento;
 
+/**
+ * Realiza los procesos que tienen que ver con el tipo de recurso "asiento".
+ * Se inicia con una conexion a la base de datos y los datos de la peticion.
+ * 
+ * @author Equipo 5
+ *
+ */
 public class ControladorAsiento {
 	
 	/**
@@ -50,24 +58,26 @@ public class ControladorAsiento {
 	 * el método que indiquen los parámetros
 	 * 
 	 * @param params Parámetros de la petición, debe contener el método de la petición
+	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
+	 * 
 	 * @throws MetodoParamNotFoundException 
 	 */
 	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
-		if(!params.has("metodo")) {
+		if(!params.has(Metodo.KEY_NAME)) {
 			throw new MetodoParamNotFoundException();
 		}
 		try {
-			switch (params.getString("metodo")) {
-			case "get":
+			switch (params.getString(Metodo.KEY_NAME)) {
+			case Metodo.Values.POST:
 				logger.info("Obteniendo eventos");
 				respuesta.put("data", this.getAsientosDeZonaYEvento(params));
 				logger.info("Eventos obtenidos");
 				break;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
+				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acción" + e.getMessage());
@@ -86,7 +96,9 @@ public class ControladorAsiento {
 	 * Obtiene eventos de la base de datos según los parámetros dados
 	 * 
 	 * @param params Parametros de búsqueda de los eventos
+	 * 
 	 * @return respuesta Eventos que coicidieron con los parámetros
+	 * 
 	 * @throws NoIdEventoException
 	 */
 	private JSONArray getAsientosDeZonaYEvento(JSONObject params) throws NoIdEventoException {
@@ -98,12 +110,15 @@ public class ControladorAsiento {
 			stmt = this.conexion.createStatement();
 			logger.info("Ejecutando consulta");
 			ResultSet rs = stmt.executeQuery(sql);
+			boolean estado;
 			while(rs.next()){
-		         Asiento asiento = new Asiento(
-		        		 rs.getBoolean("estado"), 
+				Integer idApartado = rs.getInt("idApartado");
+				estado = rs.wasNull();
+		        Asiento asiento = new Asiento(
+		        		 estado, 
 		        		 rs.getInt("idAsiento"),
 		        		 rs.getInt("idZona"),
-		        		 rs.getInt("idApartado")
+		        		 rs.getInt("idEvento")
 	        		 );
 		         Gson gson = new Gson();
 		         respuesta.put(gson.toJson(asiento));
@@ -121,15 +136,17 @@ public class ControladorAsiento {
 	/**
 	 * Devuelve la consulta SQL para obtener zonas de evento
 	 * 
-	 * @param params
-	 * @return sql
+	 * @param params Datos de la peticion. Debe contener el evento_id.
+	 * 
+	 * @return sql Consulta SQL resultante.
+	 * 
 	 * @throws NoIdEventoException
 	 */
 	private String getAsientosDeEventoYZonaSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT EventosAsientos.* FROM EventosAsientos";
+		String sql = "SELECT EventosAsientos.* FROM EventosAsientos ";
 		
 		if (params.has("id_evento")) {
-			sql += " AND EventosAsientos.idEvento = " + params.getInt("id_evento");
+			sql += " WHERE EventosAsientos.idEvento = " + params.getInt("id_evento");
 		} else {
 			throw new NoIdEventoException("Falta el id de evento en la petición");
 		}
@@ -145,7 +162,8 @@ public class ControladorAsiento {
 	/**
 	 * Exception para cuando la petición para
 	 * obtener zonas de un evento no tiene el parámetro id_evento
-	 * @author arman
+	 * 
+	 * @author Equipo 5
 	 *
 	 */
 	private class NoIdEventoException extends Exception {
@@ -154,6 +172,11 @@ public class ControladorAsiento {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Inicializa con un mensaje de error personalizado.
+		 * 
+		 * @param msg Mensaje de error.
+		 */
 		public NoIdEventoException(String msg) {
 			super(msg);
 		}

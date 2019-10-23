@@ -8,14 +8,14 @@ public class Asiento {
 	private boolean estado;
 	private int idAsiento;
 	private int idZona;
-	private int idApartado;
+	private int idEvento;
 	
-	public Asiento(boolean estado, int idAsiento, int idZona, int idApartado) {
+	public Asiento(boolean estado, int idAsiento, int idZona, int idEvento) {
 		super();
 		this.estado = estado;
 		this.idAsiento = idAsiento;
 		this.idZona = idZona;
-		this.idApartado = idApartado;
+		this.setIdEvento(idEvento);
 	}
 	
 	public boolean isEstado() {
@@ -37,12 +37,12 @@ public class Asiento {
 		this.idZona = idZona;
 	}
 
-	public int getIdApartado() {
-		return idApartado;
+	public int getIdEvento() {
+		return idEvento;
 	}
 
-	public void setIdApartado(int idApartado) {
-		this.idApartado = idApartado;
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
 	}
 	
 	

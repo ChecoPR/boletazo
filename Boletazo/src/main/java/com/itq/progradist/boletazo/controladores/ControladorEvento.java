@@ -6,16 +6,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
-import com.itq.progradist.boletazo.modelos.Asiento;
+import com.itq.progradist.boletazo.ParamNames.Metodo;
+import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Evento;
-import com.itq.progradist.boletazo.modelos.Zona;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
+/**
+ * Realiza los procesos que tienen que ver con el tipo de recurso "evento".
+ * Se inicia con una conexion a la base de datos y los datos de la peticion.
+ * 
+ * @author Equipo 5
+ *
+ */
 public class ControladorEvento {
 	
 	/**
@@ -51,20 +57,26 @@ public class ControladorEvento {
 	 * el método que indiquen los parámetros
 	 * 
 	 * @param params Parámetros de la petición, debe contener el método de la petición
+	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
+	 * 
+	 * @throws MetodoParamNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) {
+	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
+		if(!params.has(Metodo.KEY_NAME)) {
+			throw new MetodoParamNotFoundException();
+		}
 		try {
-			switch (params.getString("metodo")) {
-			case "get":
+			switch (params.getString(Metodo.KEY_NAME)) {
+			case Metodo.Values.GET:
 				logger.info("Obteniendo eventos");
 				respuesta.put("data", this.getEventos(params));
 				logger.info("Eventos obtenidos");
 				return respuesta;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
+				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acción" + e.getMessage());
@@ -73,8 +85,10 @@ public class ControladorEvento {
 	}
 	
 	/**
-	 * Obtener un evento por su ID
-	 * @param idEvento
+	 * Obtener un evento dado su ID
+	 * 
+	 * @param idEvento ID del evento a buscar
+	 * 
 	 * @return
 	 */
 	private Evento getEvento(int idEvento) {
@@ -85,6 +99,7 @@ public class ControladorEvento {
 	 * Obtiene eventos de la base de datos según los parámetros dados
 	 * 
 	 * @param params Parametros de búsqueda de los eventos
+	 * 
 	 * @return respuesta Eventos que coicidieron con los parámetros
 	 */
 	private JSONArray getEventos(JSONObject params) {
@@ -122,12 +137,13 @@ public class ControladorEvento {
 	 * cumplan con lo parámetros seleccionados
 	 * 
 	 * @param params Parámteros de la consulta
+	 * 
 	 * @return sql Consulta a la base de datos
 	 */
 	private String getEventosSqlQuery(JSONObject params) {
 		
-		String sql = "SELECT Eventos.* FROM EventosZonas, Lugar, Eventos"
-				+ " WHERE EventosZona.idEvento = Eventos.idEvento"
+		String sql = "SELECT Eventos.* FROM Eventos, EventosZonas, Lugar"
+				+ " WHERE Eventos.idEvento = EventosZonas.idEvento"
 				+ " AND Lugar.idLugar = Eventos.idLugar";
 		
 		if (params.has("nombre")) {

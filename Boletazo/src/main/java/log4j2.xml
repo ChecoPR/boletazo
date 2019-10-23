@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
  <Appenders>
- <File name="A1" fileName="C:\Users\arman\Documents\uni\7mo-Semestre\PROGRAMACION\eclipse-workspace\Boletazo\server.log" append="true">
- <PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
+ <File name="A1" fileName="C:\Users\arman\Documents\uni\7mo-Semestre\PROGRAMACION\boletazo\Boletazo\server.log" append="true">
+ <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
  </File>
  <Console name="STDOUT" target="SYSTEM_OUT">
  <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>

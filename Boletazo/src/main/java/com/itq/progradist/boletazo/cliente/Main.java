@@ -46,8 +46,6 @@ public class Main {
 		peticion2.put("num_boletos", boletos);
 		
 		peticiones.add(peticion1.toString());
-		peticiones.add(peticion2.toString());
-		
 		for (int i = 0; i < peticiones.size(); i++) {
 			new Cliente(peticiones.get(i)).start();
 		}

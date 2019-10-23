@@ -19,6 +19,13 @@ import org.json.JSONObject;
 
 import com.itq.progradist.boletazo.controladores.ControladorEvento;
 
+/**
+ * Realiza el proceso de inicio del servidor.
+ * Abre el socket para recibir la peticiones de los clientes.
+ * 
+ * @author Equipo 5
+ *
+ */
 public class BoletazoServer {
 	
 	/**
@@ -76,11 +83,11 @@ public class BoletazoServer {
 					
 					String input = dataIn.readUTF().toString();
 					
-					logger.debug("Datos recibidos:[" + input + "]");
+					logger.info("Datos recibidos de " + socket.getRemoteSocketAddress() + ":[" + input + "]");
 					
 					Peticion peticion = new Peticion(
 							decodeString(input), 
-							socket.getOutputStream()
+							socket
 						);
 					
 					peticion.start();
@@ -101,7 +108,7 @@ public class BoletazoServer {
 	
 	/**
 	 * Convert string to JSONObject
-	 * @param message
+	 * @param message Mensaje recibido del cliente
 	 */
 	private JSONObject decodeString(String message) {
 		return new JSONObject(message);

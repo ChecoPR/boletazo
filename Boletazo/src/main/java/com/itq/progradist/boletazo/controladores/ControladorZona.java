@@ -12,9 +12,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.itq.progradist.boletazo.ParamNames.Metodo;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Zona;
 
+/**
+ * Realiza los procesos que tienen que ver con el tipo de recurso "evento".
+ * Se inicia con una conexion a la base de datos y los datos de la peticion.
+ * 
+ * @author Equipo 5
+ *
+ */
 public class ControladorZona {
 	
 	/**
@@ -33,11 +41,11 @@ public class ControladorZona {
 	private JSONObject dataRequest;
 	
 	/**
-	 * Inicializar un controlador con una conexi�n a la base de datos y
-	 * datos de petici�n
+	 * Inicializar un controlador con una conexion a la base de datos y
+	 * datos de peticion
 	 * 
-	 * @param conexion Conexi�n a la base de datos
-	 * @param dataRequest Par�metros de la petici�n
+	 * @param conexion Conexion a la base de datos
+	 * @param dataRequest Parametros de la peticion
 	 */
 	public ControladorZona(Connection conexion, JSONObject dataRequest) {
 		super();
@@ -46,28 +54,30 @@ public class ControladorZona {
 	}
 	
 	/**
-	 * Devuelve datos consultados de la base de datos seg�n
-	 * el m�todo que indiquen los par�metros
+	 * Devuelve datos consultados de la base de datos segun
+	 * el metodo que indiquen los parametros
 	 * 
-	 * @param params Par�metros de la petici�n, debe contener el m�todo de la petici�n
+	 * @param params Parametros de la peticion, debe contener el metodo de la peticion
+	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
+	 * 
 	 * @throws MetodoParamNotFoundException 
 	 */
 	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
 		logger.info("Procesando acci�n");
 		JSONObject respuesta = new JSONObject();
-		if(!params.has("metodo")) {
+		if(!params.has(Metodo.KEY_NAME)) {
 			throw new MetodoParamNotFoundException();
 		}
 		try {
 			switch (params.getString("metodo")) {
-			case "get":
+			case Metodo.Values.GET:
 				logger.info("Obteniendo eventos");
 				respuesta.put("data", this.getZonasDeEvento(params));
 				logger.info("Eventos obtenidos");
 				break;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get("method"));
+				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acci�n" + e.getMessage());
@@ -86,7 +96,9 @@ public class ControladorZona {
 	 * Obtiene eventos de la base de datos seg�n los par�metros dados
 	 * 
 	 * @param params Parametros de b�squeda de los eventos
+	 * 
 	 * @return respuesta Eventos que coicidieron con los par�metros
+	 * 
 	 * @throws NoIdEventoException
 	 */
 	private JSONArray getZonasDeEvento(JSONObject params) throws NoIdEventoException {
@@ -121,7 +133,9 @@ public class ControladorZona {
 	 * Devuelve la consulta SQL para obtener zonas de evento
 	 * 
 	 * @param params
+	 * 
 	 * @return sql
+	 * 
 	 * @throws NoIdEventoException
 	 */
 	private String getZonasDeEventoSqlQuery(JSONObject params) throws NoIdEventoException {
@@ -138,9 +152,10 @@ public class ControladorZona {
 	}
 	
 	/**
-	 * Exception para cuando la petici�n para
-	 * obtener zonas de un evento no tiene el par�metro id_evento
-	 * @author arman
+	 * Exception para cuando la peticion para
+	 * obtener zonas de un evento no tiene el parametro id_evento
+	 * 
+	 * @author Equipo 5
 	 *
 	 */
 	private class NoIdEventoException extends Exception {
@@ -149,6 +164,11 @@ public class ControladorZona {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Inicializa con un mensaje de error personalizado.
+		 * 
+		 * @param msg Mensaje de error.
+		 */
 		public NoIdEventoException(String msg) {
 			super(msg);
 		}
