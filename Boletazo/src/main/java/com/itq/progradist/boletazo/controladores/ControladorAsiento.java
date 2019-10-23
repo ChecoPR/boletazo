@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
+import com.itq.progradist.boletazo.ParamNames.Recurso;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoAsientoTable;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Asiento;
 
@@ -112,13 +114,13 @@ public class ControladorAsiento {
 			ResultSet rs = stmt.executeQuery(sql);
 			boolean estado;
 			while(rs.next()){
-				Integer idApartado = rs.getInt("idApartado");
+				Integer idApartado = rs.getInt(EventoAsientoTable.Cols.ID_APARTADO);
 				estado = rs.wasNull();
 		        Asiento asiento = new Asiento(
 		        		 estado, 
-		        		 rs.getInt("idAsiento"),
-		        		 rs.getInt("idZona"),
-		        		 rs.getInt("idEvento")
+		        		 rs.getInt(EventoAsientoTable.Cols.ID_ASIENTO),
+		        		 rs.getInt(EventoAsientoTable.Cols.ID_ZONA),
+		        		 rs.getInt(EventoAsientoTable.Cols.ID_EVENTO)
 	        		 );
 		         Gson gson = new Gson();
 		         respuesta.put(gson.toJson(asiento));
@@ -143,16 +145,16 @@ public class ControladorAsiento {
 	 * @throws NoIdEventoException
 	 */
 	private String getAsientosDeEventoYZonaSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT EventosAsientos.* FROM EventosAsientos ";
+		String sql = "SELECT ea.* FROM " + EventoAsientoTable.NAME + " ea ";
 		
-		if (params.has("id_evento")) {
-			sql += " WHERE EventosAsientos.idEvento = " + params.getInt("id_evento");
+		if (params.has(Recurso.EventoZonaAsiento.Values.ID_EVENTO)) {
+			sql += " WHERE ea." + EventoAsientoTable.Cols.ID_EVENTO + " = " + params.getInt(Recurso.EventoZonaAsiento.Values.ID_EVENTO);
 		} else {
 			throw new NoIdEventoException("Falta el id de evento en la petición");
 		}
 		
-		if (params.has("id_zona")) {
-			sql += " AND EventosAsientos.idZona = " + params.getInt("id_zona");
+		if (params.has(Recurso.EventoZonaAsiento.Values.ID_ZONA)) {
+			sql += " AND ea." + EventoAsientoTable.Cols.ID_ZONA + " = " + params.getInt(Recurso.EventoZonaAsiento.Values.ID_ZONA);
 		} else {
 			throw new NoIdEventoException("Falta el id de zona en la petición");
 		}

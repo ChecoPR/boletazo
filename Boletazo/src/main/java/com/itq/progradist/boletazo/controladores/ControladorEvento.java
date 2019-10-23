@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.itq.progradist.boletazo.ParamNames.Recurso;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoZonaTable;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.LugarTable;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Evento;
@@ -14,6 +17,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import static com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoTable;
 
 /**
  * Realiza los procesos que tienen que ver con el tipo de recurso "evento".
@@ -113,11 +118,11 @@ public class ControladorEvento {
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 		         Evento evento = new Evento(
-		        		 rs.getInt("idEvento"), 
-		        		 rs.getInt("idLugar"), 
-		        		 rs.getString("nombre"),
-		        		 rs.getString("fecha"),
-		        		 rs.getString("hora")
+		        		 rs.getInt(EventoTable.Cols.ID_EVENTO), 
+		        		 rs.getInt(EventoTable.Cols.ID_LUGAR), 
+		        		 rs.getString(EventoTable.Cols.NOMBRE),
+		        		 rs.getString(EventoTable.Cols.FECHA),
+		        		 rs.getString(EventoTable.Cols.HORA)
 	        		 );
 		         Gson gson = new Gson();
 		         respuesta.put(gson.toJson(evento));
@@ -142,30 +147,31 @@ public class ControladorEvento {
 	 */
 	private String getEventosSqlQuery(JSONObject params) {
 		
-		String sql = "SELECT Eventos.* FROM Eventos, EventosZonas, Lugar"
-				+ " WHERE Eventos.idEvento = EventosZonas.idEvento"
-				+ " AND Lugar.idLugar = Eventos.idLugar";
+		String sql = "SELECT e.*"
+				+ " FROM " + EventoTable.NAME + " e, " + EventoZonaTable.NAME + " ez, " + LugarTable.NAME + " l"
+				+ " WHERE e." + EventoTable.Cols.ID_EVENTO + " = ez.idEvento"
+				+ " AND l." + LugarTable.Cols.ID_LUGAR + " = e." + EventoTable.Cols.ID_EVENTO;
 		
-		if (params.has("nombre")) {
-			sql += " AND Eventos.nombre LIKE '%" + params.getString("nombre") + "%'";
+		if (params.has(Recurso.Evento.Values.NOMBRE)) {
+			sql += " AND e. " + EventoTable.Cols.NOMBRE + " LIKE '%" + params.getString(Recurso.Evento.Values.NOMBRE) + "%'";
 		}
-		if (params.has("lugar")) {
-			sql += " AND Lugar.nombre LIKE '%" + params.getString("lugar") + "%'";
+		if (params.has(Recurso.Evento.Values.LUGAR)) {
+			sql += " AND l." + LugarTable.Cols.NOMBRE + " LIKE '%" + params.getString(Recurso.Evento.Values.LUGAR) + "%'";
 		}
-		if (params.has("estado")) {
-			sql += " AND Lugar.estado LIKE '%" + params.getString("estado") + "%'";
+		if (params.has(Recurso.Evento.Values.ESTADO)) {
+			sql += " AND l." + LugarTable.Cols.ESTADO + " LIKE '%" + params.getString(Recurso.Evento.Values.ESTADO) + "%'";
 		}
-		if (params.has("fecha")) {
-			sql += " AND Eventos.fecha LIKE '%" + params.getString("fecha") + "%'";
+		if (params.has(Recurso.Evento.Values.FECHA)) {
+			sql += " AND e. " + EventoTable.Cols.FECHA + " LIKE '%" + params.getString(Recurso.Evento.Values.FECHA) + "%'";
 		}
-		if (params.has("hora")) {
-			sql += " AND Eventos.hora LIKE '%" + params.getString("hora") + "%'";
+		if (params.has(Recurso.Evento.Values.HORA)) {
+			sql += " AND e. " + EventoTable.Cols.HORA + " LIKE '%" + params.getString(Recurso.Evento.Values.HORA) + "%'";
 		}
-		if (params.has("precio")) {
-			sql += " AND EventosZonas.precio LIKE '%" + params.getDouble("precio") + "%'";
+		if (params.has(Recurso.Evento.Values.PRECIO)) {
+			sql += " AND ez." + EventoZonaTable.Cols.PRECIO + " LIKE '%" + params.getDouble(Recurso.Evento.Values.PRECIO) + "%'";
 		}
 		
-		sql += " GROUP BY Eventos.idEvento";
+		sql += " GROUP BY e." + EventoTable.Cols.ID_EVENTO;
 		
 		return sql;
 	}

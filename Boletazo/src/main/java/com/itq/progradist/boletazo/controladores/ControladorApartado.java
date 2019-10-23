@@ -10,6 +10,9 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
+import com.itq.progradist.boletazo.ParamNames.Recurso.Apartado.Boletos;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.ApartadoTable;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoAsientoTable;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Apartado;
 
@@ -125,11 +128,11 @@ public class ControladorApartado {
 				
 				logger.info("Actualizando informacion de los asientos apartados");
 				
-				JSONArray boletos = params.getJSONArray("num_boletos");
+				JSONArray boletos = params.getJSONArray(Recurso.Apartado.Boletos.KEY);
 				String sql;
 				for (int i = 0; i < boletos.length(); i++) {
 					JSONObject boleto = boletos.getJSONObject(i);
-					int idApartado = apartados.getJSONObject(apartados.length() - 1).getInt("idApartado");
+					int idApartado = apartados.getJSONObject(apartados.length() - 1).getInt(ApartadoTable.Cols.ID_APARTADO);
 					
 					sql = getGuardarApartadoAsientosSqlQuery(boleto, idApartado);
 					stmt.executeUpdate(sql);
@@ -138,9 +141,9 @@ public class ControladorApartado {
 				logger.info("Informacion de los asientos apartados realizada");
 				
 				respuesta.put("respuesta", "Registrado");
-				respuesta.put("evento_id", params.getInt("evento_id"));
-				respuesta.put("num_boletos", params.getJSONArray("num_boletos").length());
-				respuesta.put("zona_id", params.getInt("zona_id"));
+				respuesta.put("evento_id", params.getInt(Recurso.Apartado.Values.ID_EVENTO));
+				respuesta.put("num_boletos", params.getJSONArray(Boletos.KEY).length());
+				respuesta.put("zona_id", params.getInt(Recurso.Apartado.Values.ID_ZONA));
 				respuesta.put("apartados", apartados);
 				
 				return respuesta;
@@ -196,11 +199,11 @@ public class ControladorApartado {
 		ResultSet rs = stmt.executeQuery(getApartadoSqlQuery(params));
 		while (rs.next()) {
 			Apartado apartado = new Apartado(
-	        		 rs.getInt("idApartado"),
-	        		 rs.getInt("idUsuario"), 
-	        		 rs.getInt("idEvento"),
-	        		 rs.getDouble("pagado"),
-	        		 rs.getString("tiempo")
+	        		 rs.getInt(ApartadoTable.Cols.ID_APARTADO),
+	        		 rs.getInt(ApartadoTable.Cols.ID_USUARIO), 
+	        		 rs.getInt(ApartadoTable.Cols.ID_EVENTO),
+	        		 rs.getDouble(ApartadoTable.Cols.PAGADO),
+	        		 rs.getString(ApartadoTable.Cols.TIEMPO)
         		 );
 	         Gson gson = new Gson();
 	         JSONObject apartadoJson = new JSONObject(gson.toJson(apartado));
@@ -221,11 +224,11 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException 
 	 */
 	private void comprobarDispBoletos(JSONObject params) throws JSONException, SQLException, AsientoOcupadoException, FaltanParametrosException {
-		if(!params.has("num_boletos")) {
-			throw new FaltanParametrosException("Falta el asiento_id en los parámetros de la petición");
+		if(!params.has(Boletos.KEY)) {
+			throw new FaltanParametrosException("Falta el " + Boletos.KEY + " en los parámetros de la petición");
 		}
 		
-		JSONArray boletos = params.getJSONArray("num_boletos");
+		JSONArray boletos = params.getJSONArray(Boletos.KEY);
 		for (int i = 0; i < boletos.length(); i++) {
 			JSONObject boleto = boletos.getJSONObject(i);
 			checarEstaDisponible(boleto);
@@ -245,15 +248,15 @@ public class ControladorApartado {
 	 * @throws AsientoOcupadoException
 	 */
 	private boolean checarEstaDisponible(JSONObject boleto) throws SQLException, JSONException, AsientoOcupadoException {
-		String sql = "SELECT * FROM eventosasientos "
-				+ " WHERE idApartado IS NULL "
-				+ " AND idAsiento = " + boleto.getInt("asiento_id");
+		String sql = "SELECT * FROM " + EventoAsientoTable.NAME
+				+ " WHERE " + EventoAsientoTable.Cols.ID_APARTADO + " IS NULL "
+				+ " AND " + EventoAsientoTable.Cols.ID_ASIENTO + " = " + boleto.getInt(Recurso.Apartado.Boletos.ID_ASIENTO);
 		Statement stmt = this.conexion.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		if(rs.first()) {
 			return true;
 		}
-		throw new AsientoOcupadoException("El asiento con id " + boleto.getInt("asiento_id") + " está ocupado");		
+		throw new AsientoOcupadoException("El asiento con id " + boleto.getInt(Recurso.Apartado.Boletos.ID_ASIENTO) + " está ocupado");		
 	}
 
 	/**
@@ -268,11 +271,11 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException
 	 */
 	private String getGuardarApartadoAsientosSqlQuery(JSONObject boleto, int idApartado) throws FaltanParametrosException {
-		if(!boleto.has("asiento_id")) {
-			throw new FaltanParametrosException("Falta el asiento_id en los parámetros de la petición");
+		if(!boleto.has(Recurso.Apartado.Boletos.ID_ASIENTO)) {
+			throw new FaltanParametrosException("Falta el " + Recurso.Apartado.Boletos.ID_ASIENTO + " en los parámetros de la petición");
 		}
-		String sql = "UPDATE eventosasientos SET idApartado = " + idApartado 
-				+ " WHERE idAsiento = " + boleto.getInt("asiento_id");
+		String sql = "UPDATE " + EventoAsientoTable.NAME + " SET " + EventoAsientoTable.Cols.ID_APARTADO + " = " + idApartado 
+				+ " WHERE " + EventoAsientoTable.Cols.ID_ASIENTO + " = " + boleto.getInt(Recurso.Apartado.Boletos.ID_ASIENTO);
 		return sql;
 	}
 
@@ -294,15 +297,15 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException
 	 */
 	private String getGuardarApartadoSqlQuery(JSONObject params) throws FaltanParametrosException {
-		if(!params.has("evento_id")) {
+		if(!params.has(Recurso.Apartado.Values.ID_EVENTO)) {
 			throw new FaltanParametrosException("Falta el evento_id en los parámetros de la petición");
 		}
-		if(!params.has("usuario_id")) {
-			throw new FaltanParametrosException("Falta el usuario_id en los parámetros de la petición");
+		if(!params.has(Recurso.Apartado.Values.ID_USUARIO)) {
+			throw new FaltanParametrosException("Falta el " + Recurso.Apartado.Values.ID_USUARIO + " en los parámetros de la petición");
 		}
-		String sql = "INSERT INTO Apartados (idEvento, idUsuario) VALUES ("
-				+ params.getInt("evento_id") + ", "
-				+ params.getInt("usuario_id") + ")";
+		String sql = "INSERT INTO " + ApartadoTable.NAME + " (" + ApartadoTable.Cols.ID_EVENTO + ", " + ApartadoTable.Cols.ID_EVENTO + ") VALUES ("
+				+ params.getInt(Recurso.Apartado.Values.ID_EVENTO) + ", "
+				+ params.getInt(Recurso.Apartado.Values.ID_USUARIO) + ")";
 		return sql;
 	}
 	
@@ -317,17 +320,18 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException
 	 */
 	private String getApartadoSqlQuery(JSONObject params) throws FaltanParametrosException {
-		if(!params.has("evento_id")) {
-			throw new FaltanParametrosException("Falta el evento_id en los parámetros de la petición");
+		if(!params.has(Recurso.Apartado.Values.ID_EVENTO)) {
+			throw new FaltanParametrosException("Falta el " + Recurso.Apartado.Values.ID_EVENTO + " en los parámetros de la petición");
 		}
-		if(!params.has("usuario_id")) {
-			throw new FaltanParametrosException("Falta el usuario_id en los parámetros de la petición");
+		if(!params.has(Recurso.Apartado.Values.ID_USUARIO)) {
+			throw new FaltanParametrosException("Falta el " + Recurso.Apartado.Values.ID_USUARIO + " en los parámetros de la petición");
 		}
-		String sql = "SELECT * FROM Apartados WHERE idEvento = "
-				+ params.getInt("evento_id") + " AND idUsuario = "
-				+ params.getInt("usuario_id") + " "
-				+ "ORDER BY tiempo DESC "
-				+ "LIMIT 0,1";
+		String sql = "SELECT *"
+				+ " FROM " + ApartadoTable.NAME 
+				+ " WHERE " + ApartadoTable.Cols.ID_EVENTO + " = " + params.getInt(Recurso.Apartado.Values.ID_EVENTO) 
+				+ " AND " + ApartadoTable.Cols.ID_USUARIO + " = " + params.getInt(Recurso.Apartado.Values.ID_USUARIO)
+				+ " ORDER BY " + ApartadoTable.Cols.TIEMPO + " DESC "
+				+ " LIMIT 0,1";
 		return sql;
 	}
 	
@@ -406,10 +410,10 @@ public class ControladorApartado {
 	 * @throws BoletosExcedidosException
 	 */
 	private boolean checkNumBoletos(JSONObject params) throws FaltanParametrosException, BoletosExcedidosException {
-		if(!params.has("num_boletos")) {
-			throw new FaltanParametrosException("Faltan num_boletos en los parámetros de la petición");
+		if(!params.has(Recurso.Apartado.Boletos.KEY)) {
+			throw new FaltanParametrosException("Faltan " + Recurso.Apartado.Boletos.KEY + " en los parámetros de la petición");
 		}
-		if(params.getJSONArray("num_boletos").length() > 4) {
+		if(params.getJSONArray(Recurso.Apartado.Boletos.KEY).length() > 4) {
 			throw new BoletosExcedidosException();
 		}
 		return true;

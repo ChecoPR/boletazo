@@ -13,6 +13,10 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
+import com.itq.progradist.boletazo.ParamNames.Recurso;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoTable;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoZonaTable;
+import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.LugarTable;
 import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
 import com.itq.progradist.boletazo.modelos.Zona;
 
@@ -70,7 +74,7 @@ public class ControladorZona {
 			throw new MetodoParamNotFoundException();
 		}
 		try {
-			switch (params.getString("metodo")) {
+			switch (params.getString(Metodo.KEY_NAME)) {
 			case Metodo.Values.GET:
 				logger.info("Obteniendo eventos");
 				respuesta.put("data", this.getZonasDeEvento(params));
@@ -112,9 +116,9 @@ public class ControladorZona {
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 		         Zona zona = new Zona(
-		        		 rs.getInt("idLugar"),
-		        		 rs.getInt("idZona"), 
-		        		 rs.getDouble("precio")
+		        		 rs.getInt(EventoZonaTable.Cols.ID_LUGAR),
+		        		 rs.getInt(EventoZonaTable.Cols.ID_ZONA), 
+		        		 rs.getDouble(EventoZonaTable.Cols.PRECIO)
 	        		 );
 		         Gson gson = new Gson();
 		         respuesta.put(gson.toJson(zona));
@@ -139,14 +143,18 @@ public class ControladorZona {
 	 * @throws NoIdEventoException
 	 */
 	private String getZonasDeEventoSqlQuery(JSONObject params) throws NoIdEventoException {
-		String sql = "SELECT Lugar.idLugar, EventosZonas.idZona, EventosZonas.precio FROM EventosZonas, Lugar, Eventos"
-				+ " WHERE EventosZonas.idEvento = Eventos.idEvento"
-				+ " AND Lugar.idLugar = Eventos.idLugar";
+		String sql = "SELECT "
+				+ "l." + LugarTable.Cols.ID_LUGAR 
+				+ ", ez." + EventoZonaTable.Cols.ID_ZONA 
+				+ ", ez." + EventoZonaTable.Cols.PRECIO
+				+ " FROM " + EventoZonaTable.NAME + " ez, " + LugarTable.NAME + " l, " + EventoTable.NAME + " e"
+				+ " WHERE ez." + EventoZonaTable.Cols.ID_EVENTO + " = " + EventoTable.Cols.ID_EVENTO
+				+ " AND l." + LugarTable.Cols.ID_LUGAR + " = e." + EventoTable.Cols.ID_LUGAR;
 		
-		if (params.has("id_evento")) {
-			sql += " AND EventosZonas.idEvento = " + params.getInt("id_evento");
+		if (params.has(Recurso.EventoZona.Values.ID_EVENTO)) {
+			sql += " AND ez. " + EventoZonaTable.Cols.ID_EVENTO + " = " + params.getInt(Recurso.EventoZona.Values.ID_EVENTO);
 		} else {
-			throw new NoIdEventoException("Falta el id de evento en la peticiï¿½n");
+			throw new NoIdEventoException("Falta el " + Recurso.EventoZona.Values.ID_EVENTO + " en la petición");
 		}
 		return sql;
 	}

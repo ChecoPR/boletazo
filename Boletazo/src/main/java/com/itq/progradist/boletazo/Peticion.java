@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
@@ -102,25 +101,25 @@ public class Peticion extends Thread {
 				throw new RecursoParamNotFoundException();
 			}
 			switch (params.getString(Recurso.KEY_NAME)) {
-			case Recurso.Values.EVENTOS:
+			case Recurso.Evento.VALUE:
 				logger.info("Obteniendo eventos");
 				 respuesta = new ControladorEvento(conexion, params).procesarAccion(params);
 				logger.info("Eventos obtenidos");
 				break;
 				
-			case Recurso.Values.EVENTOS_ZONAS:
+			case Recurso.EventoZona.VALUE:
 				logger.info("Obteniendo zonas del evento");
 				respuesta = new ControladorZona(conexion, params).procesarAccion(params);
 				logger.info("Zonas del evento obtenidas");
 				break;
 				
-			case Recurso.Values.EVENTOS_ZONAS_ASIENTOS:
+			case Recurso.EventoZonaAsiento.VALUE:
 				logger.info("Obteniendo asientos de la zona y del evento");
 				respuesta = new ControladorAsiento(conexion, params).procesarAccion(params);
 				logger.info("Zonas del evento obtenidas");
 				break;
 			
-			case Recurso.Values.APARTADO:
+			case Recurso.Apartado.VALUE:
 				logger.info("Realizando apartado");
 				respuesta = new ControladorApartado(conexion, params).procesarAccion(params);
 				logger.info("Apartado realizado");
