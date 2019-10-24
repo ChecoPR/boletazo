@@ -1,10 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2019 a las 15:19:15
--- Tiempo de generación: 01-10-2019 a las 04:43:04
+-- Tiempo de generación: 24-10-2019 a las 20:51:06
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.1
 
@@ -42,9 +41,7 @@ CREATE TABLE `apartados` (
 --
 
 INSERT INTO `apartados` (`idApartado`, `idUsuario`, `idEvento`, `pagado`, `tiempo`) VALUES
-(2, 1, 1, 0, '2019-10-02 11:32:37'),
-(5, 1, 1, 0, '2019-10-02 11:45:58'),
-(6, 1, 1, 0, '2019-10-02 11:46:23');
+(14, 1, 1, 0, '2019-10-10 21:03:26');
 
 -- --------------------------------------------------------
 
@@ -62,7 +59,12 @@ CREATE TABLE `asientos` (
 --
 
 INSERT INTO `asientos` (`idAsiento`, `idZona`) VALUES
-(1, 1);
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -83,10 +85,9 @@ CREATE TABLE `eventos` (
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `fecha`, `idLugar`) VALUES
-(1, 'Daft Punk', 'Estadio Azteca', '22:00:00', '2019-10-16', 1),
-(2, 'José José', 'Estadio La Corregidora', '17:00:00', '2019-10-31', 1);
-
+INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `idLugar`, `fecha`) VALUES
+(1, 'Daft Punk', 'Estadio La Corregidora', '22:00:00', 1, '2019-10-16'),
+(2, 'José José', 'Estadio La Corregidora', '17:00:00', 1, '2019-10-31');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,13 @@ CREATE TABLE `eventosasientos` (
 --
 
 INSERT INTO `eventosasientos` (`idEvento`, `idAsiento`, `idApartado`, `idZona`) VALUES
-(2, 1, NULL, 1);
+(1, 5, NULL, 1),
+(1, 6, NULL, 1),
+(1, 1, 14, 1),
+(1, 2, 14, 1),
+(1, 3, 14, 1),
+(1, 4, 14, 1),
+(2, 1, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +132,7 @@ CREATE TABLE `eventoszonas` (
 --
 
 INSERT INTO `eventoszonas` (`idEvento`, `idZona`, `precio`) VALUES
+(1, 1, 100),
 (2, 1, 1000);
 
 -- --------------------------------------------------------
@@ -136,9 +144,7 @@ INSERT INTO `eventoszonas` (`idEvento`, `idZona`, `precio`) VALUES
 CREATE TABLE `lugar` (
   `idLugar` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-
   `estado` varchar(100) COLLATE utf8_spanish_ci NOT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -179,7 +185,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `nombre`, `direccion`, `telefono`) VALUES
-(1, 'Armando', 'Candiles', '4427126321');
+(1, 'Armando', 'Candiles', '4427126321'),
+(2, 'Sergio', 'Pérez', '4245654665');
 
 -- --------------------------------------------------------
 
@@ -223,7 +230,6 @@ ALTER TABLE `asientos`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEvento`),
-
   ADD KEY `idLugar` (`idLugar`);
 
 --
@@ -276,13 +282,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT de la tabla `apartados`
 --
 ALTER TABLE `apartados`
-  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  MODIFY `idAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -317,7 +323,6 @@ ALTER TABLE `asientos`
 -- Filtros para la tabla `eventos`
 --
 ALTER TABLE `eventos`
-
   ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`idLugar`) REFERENCES `lugar` (`idLugar`);
 
 --
