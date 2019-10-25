@@ -14,8 +14,8 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
 import com.itq.progradist.boletazo.ParamNames.Recurso;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoAsientoTable;
-import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
+import com.itq.progradist.boletazo.database.DatabaseSchema.EventoAsientoTable;
+import com.itq.progradist.boletazo.exceptions.ParamMetodoNotFoundException;
 import com.itq.progradist.boletazo.modelos.Asiento;
 
 /**
@@ -38,21 +38,15 @@ public class ControladorAsiento {
 	private Connection conexion;
 	
 	/**
-	 * datos de la petición
-	 */
-	private JSONObject dataRequest;
-	
-	/**
 	 * Inicializar un controlador con una conexión a la base de datos y
 	 * datos de petición
 	 * 
 	 * @param conexion Conexión a la base de datos
 	 * @param dataRequest Parámetros de la petición
 	 */
-	public ControladorAsiento(Connection conexion, JSONObject dataRequest) {
+	public ControladorAsiento(Connection conexion) {
 		super();
 		this.conexion = conexion;
-		this.dataRequest = dataRequest;
 	}
 	
 	/**
@@ -63,17 +57,17 @@ public class ControladorAsiento {
 	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
 	 * 
-	 * @throws MetodoParamNotFoundException 
+	 * @throws ParamMetodoNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
+	public JSONObject procesarAccion(JSONObject params) throws ParamMetodoNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
 		if(!params.has(Metodo.KEY_NAME)) {
-			throw new MetodoParamNotFoundException();
+			throw new ParamMetodoNotFoundException();
 		}
 		try {
 			switch (params.getString(Metodo.KEY_NAME)) {
-			case Metodo.Values.POST:
+			case Metodo.Values.GET:
 				logger.info("Obteniendo eventos");
 				respuesta.put("data", this.getAsientosDeZonaYEvento(params));
 				logger.info("Eventos obtenidos");
@@ -82,14 +76,21 @@ public class ControladorAsiento {
 				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
 			}
 		} catch (IllegalArgumentException e) {
-			logger.error("Error procesando la acción" + e.getMessage());
+			logger.error("Error procesando la acción: " + e.getMessage());
+			logger.catching(e);
+			respuesta.put("message", "Error procesando la acción: " + e.getMessage());
 		} catch (JSONException e) {
 			logger.error("Error en el JSON" + e.getMessage());
-			e.printStackTrace();
+			logger.catching(e);
+			respuesta.put("message", "Error en el JSON: " + e.getMessage());
 		} catch (NoIdEventoException e) {
 			logger.error(e.getMessage());
+			logger.catching(e);
 			respuesta.put("message", e.getMessage());
-			e.printStackTrace();
+		} catch (SQLException e) {
+			logger.error("Error al consultar la base de datos: " + e.getMessage());
+			logger.catching(e);
+			respuesta.put("message", "Error al consultar la base de datos");
 		}
 		return respuesta;
 	}
@@ -102,37 +103,31 @@ public class ControladorAsiento {
 	 * @return respuesta Eventos que coicidieron con los parámetros
 	 * 
 	 * @throws NoIdEventoException
+	 * @throws SQLException 
 	 */
-	private JSONArray getAsientosDeZonaYEvento(JSONObject params) throws NoIdEventoException {
+	private JSONArray getAsientosDeZonaYEvento(JSONObject params) throws NoIdEventoException, SQLException {
 		logger.info("Iniciando consulta en la base de datos");
 		Statement stmt = null;
 		String sql = this.getAsientosDeEventoYZonaSqlQuery(params);
 		JSONArray respuesta = new JSONArray();
-		try {
-			stmt = this.conexion.createStatement();
-			logger.info("Ejecutando consulta");
-			ResultSet rs = stmt.executeQuery(sql);
-			boolean estado;
-			while(rs.next()){
-				Integer idApartado = rs.getInt(EventoAsientoTable.Cols.ID_APARTADO);
-				estado = rs.wasNull();
-		        Asiento asiento = new Asiento(
-		        		 estado, 
-		        		 rs.getInt(EventoAsientoTable.Cols.ID_ASIENTO),
-		        		 rs.getInt(EventoAsientoTable.Cols.ID_ZONA),
-		        		 rs.getInt(EventoAsientoTable.Cols.ID_EVENTO)
-	        		 );
-		         Gson gson = new Gson();
-		         respuesta.put(gson.toJson(asiento));
-			}
-			logger.info("Datos obtenidos de la base de datos");
-			return respuesta;
-		} catch (SQLException e) {
-			logger.error("Error al consultar la base de datos: " + e.getMessage());
-			e.printStackTrace();
+		stmt = this.conexion.createStatement();
+		logger.info("Ejecutando consulta");
+		ResultSet rs = stmt.executeQuery(sql);
+		boolean estado;
+		while(rs.next()){
+			rs.getInt(EventoAsientoTable.Cols.ID_APARTADO);
+			estado = rs.wasNull();
+	        Asiento asiento = new Asiento(
+	        		 estado, 
+	        		 rs.getInt(EventoAsientoTable.Cols.ID_ASIENTO),
+	        		 rs.getInt(EventoAsientoTable.Cols.ID_ZONA),
+	        		 rs.getInt(EventoAsientoTable.Cols.ID_EVENTO)
+        		 );
+	         Gson gson = new Gson();
+	         respuesta.put(gson.toJson(asiento));
 		}
-		
-		return null;
+		logger.info("Datos obtenidos de la base de datos");
+		return respuesta;
 	}
 
 	/**

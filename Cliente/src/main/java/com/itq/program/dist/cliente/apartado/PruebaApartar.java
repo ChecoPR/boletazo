@@ -1,22 +1,13 @@
-package com.itq.progradist.boletazo.cliente;
+package com.itq.program.dist.cliente.apartado;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Main {
+public class PruebaApartar {
 
-	private static final Logger logger = LogManager.getLogger(Main.class);
+//	private static final Logger logger = LogManager.getLogger(Main.class);
 
 	/*
 	 * Client socket main method. Requests a connection, sends a message and receives an answer
@@ -46,6 +37,7 @@ public class Main {
 		peticion2.put("num_boletos", boletos);
 		
 		peticiones.add(peticion1.toString());
+		peticiones.add(peticion2.toString());
 		for (int i = 0; i < peticiones.size(); i++) {
 			new Cliente(peticiones.get(i)).start();
 		}

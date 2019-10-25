@@ -18,7 +18,7 @@ import com.itq.program.dist.cliente.PruebaZonas.Excepcion;
 
 public class PruebaAsientos {
 	private static Logger Logger = LogManager.getLogger(Cliente.class);
-	static final String HOST = "192.168.1.1";								
+	static final String HOST = "localhost";								
 	static final int PORT = 5000;
 	static private ArrayList<String> filtros_disp = new ArrayList<String>(); //Filtros disponibles a seleccionar
 	

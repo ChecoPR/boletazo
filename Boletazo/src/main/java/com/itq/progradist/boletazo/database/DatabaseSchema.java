@@ -1,6 +1,6 @@
 package com.itq.progradist.boletazo.database;
 
-public class BoletazoDatabaseSchema {
+public class DatabaseSchema {
 	
 	public static final class LugarTable {
 		public static final String NAME = "Lugar";
@@ -55,6 +55,19 @@ public class BoletazoDatabaseSchema {
 			public static final String ID_EVENTO = "idEvento";
 			public static final String PAGADO = "pagado";
 			public static final String TIEMPO = "tiempo";
+			public static final String IMPORTE = "importe";
+		}
+	}
+	
+	public static final class MetodoPagoTable {
+		public static final String NAME = "metodospago";
+		
+		public static final class Cols {
+			public static final String ID_METODO_PAGO = "idMetodoPago";
+			public static final String ID_USUARIO = "idUsuario";
+			public static final String NUMERO_TARJETA = "numeroTarjeta";
+			public static final String DOMICILIO = "domicilio";
+			public static final String SALDO = "saldo";
 		}
 	}
 }

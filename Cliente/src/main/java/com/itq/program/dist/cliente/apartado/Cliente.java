@@ -1,4 +1,4 @@
-package com.itq.progradist.boletazo.cliente;
+package com.itq.program.dist.cliente.apartado;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 public class Cliente extends Thread {
 	

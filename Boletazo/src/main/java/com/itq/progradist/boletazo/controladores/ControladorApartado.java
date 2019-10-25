@@ -1,6 +1,7 @@
 package com.itq.progradist.boletazo.controladores;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,10 +12,12 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
 import com.itq.progradist.boletazo.ParamNames.Recurso.Apartado.Boletos;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.ApartadoTable;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoAsientoTable;
-import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
+import com.itq.progradist.boletazo.database.CommonQueries;
+import com.itq.progradist.boletazo.database.DatabaseSchema.ApartadoTable;
+import com.itq.progradist.boletazo.database.DatabaseSchema.EventoAsientoTable;
+import com.itq.progradist.boletazo.exceptions.ParamMetodoNotFoundException;
 import com.itq.progradist.boletazo.modelos.Apartado;
+import com.itq.progradist.boletazo.util.ApartadoTimerTask;
 
 import static com.itq.progradist.boletazo.ParamNames.*;
 
@@ -38,23 +41,15 @@ public class ControladorApartado {
 	private Connection conexion;
 	
 	/**
-	 * datos recibidos de la petición
-	 */
-	private JSONObject dataRequest;
-
-	private JSONArray apartados;
-	
-	/**
 	 * Inicializar un controlador con una conexión a la base de datos y
 	 * datos de petición
 	 * 
 	 * @param conexion Conexión a la base de datos
 	 * @param dataRequest Parámetros de la petición
 	 */
-	public ControladorApartado(Connection conexion, JSONObject dataRequest) {
+	public ControladorApartado(Connection conexion) {
 		super();
 		this.conexion = conexion;
-		this.dataRequest = dataRequest;
 	}
 	
 	/**
@@ -65,13 +60,13 @@ public class ControladorApartado {
 	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
 	 * 
-	 * @throws MetodoParamNotFoundException 
+	 * @throws ParamMetodoNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
+	public JSONObject procesarAccion(JSONObject params) throws ParamMetodoNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
 		if(!params.has(Metodo.KEY_NAME)) {
-			throw new MetodoParamNotFoundException();
+			throw new ParamMetodoNotFoundException();
 		}
 		try {
 			switch (params.getString(Metodo.KEY_NAME)) {
@@ -114,8 +109,6 @@ public class ControladorApartado {
 				
 				checkNumBoletos(params);
 				
-				Statement stmt = this.conexion.createStatement();
-				
 				logger.info("Comprobando disponibilidad de los boletos");
 				
 				comprobarDispBoletos(params);
@@ -123,59 +116,62 @@ public class ControladorApartado {
 				logger.info("Comprobación de dispobilidad exitosa");
 				
 				logger.info("Guardando informacion del apartado");
-				guardarApartados(params);
+				
+				Apartado apartadoActualizado = guardarApartado(params);
+				
 				logger.info("Informacion del apartado guardada");
 				
 				logger.info("Actualizando informacion de los asientos apartados");
 				
-				JSONArray boletos = params.getJSONArray(Recurso.Apartado.Boletos.KEY);
-				String sql;
-				for (int i = 0; i < boletos.length(); i++) {
-					JSONObject boleto = boletos.getJSONObject(i);
-					int idApartado = apartados.getJSONObject(apartados.length() - 1).getInt(ApartadoTable.Cols.ID_APARTADO);
-					
-					sql = getGuardarApartadoAsientosSqlQuery(boleto, idApartado);
-					stmt.executeUpdate(sql);
-				}
+				actualizarAsientos(params, apartadoActualizado);
+				
+				double importe = CommonQueries.calculateImporteOf(conexion, apartadoActualizado);
+				apartadoActualizado.setImporte(importe);
 				
 				logger.info("Informacion de los asientos apartados realizada");
+				
+				JSONObject apartadoJson = new JSONObject(new Gson().toJson(apartadoActualizado));
 				
 				respuesta.put("respuesta", "Registrado");
 				respuesta.put("evento_id", params.getInt(Recurso.Apartado.Values.ID_EVENTO));
 				respuesta.put("num_boletos", params.getJSONArray(Boletos.KEY).length());
 				respuesta.put("zona_id", params.getInt(Recurso.Apartado.Values.ID_ZONA));
-				respuesta.put("apartados", apartados);
+				respuesta.put("apartados", apartadoJson);
+				
+				logger.info("Iniciando cuenta atrás para la caducidad del apartado");
+				ApartadoTimerTask task = new ApartadoTimerTask(apartadoActualizado);
+				task.schedule();
 				
 				return respuesta;
 				
 			} catch (FaltanParametrosException e) {
 				
 				logger.error(e.getMessage());
-				e.printStackTrace();
+				logger.catching(e);
 				return new JSONObject().put("message", e.getMessage());
 				
 			} catch (SQLException e) {
 				
 				logger.error("Error al consultar la base de datos: " + e.getMessage());
-				e.printStackTrace();
-				return new JSONObject().put("message", e.getMessage());
+				logger.catching(e);
+				return new JSONObject().put("message", "Error al consultar la base de datos");
 				
 			} catch (BoletosExcedidosException e) {
 				
 				logger.error(e.getMessage());
-				e.printStackTrace();
+				logger.catching(e);
 				return new JSONObject().put("message", e.getMessage());
 				
 			} catch (JSONException e) {
 				
 				logger.error(e.getMessage());
-				e.printStackTrace();
+				logger.catching(e);
 				return new JSONObject().put("message", e.getMessage());
 				
 			} catch (AsientoOcupadoException e) {
 				
 				logger.error(e.getMessage());
-				e.printStackTrace();
+				logger.catching(e);
 				return new JSONObject().put("message", e.getMessage());
 				
 			}
@@ -191,9 +187,10 @@ public class ControladorApartado {
 	 * @throws FaltanParametrosException
 	 * @throws SQLException
 	 */
-	private  void guardarApartados(JSONObject params) throws FaltanParametrosException, SQLException {
-		this.apartados = new JSONArray();
+	private Apartado guardarApartado(JSONObject params) throws FaltanParametrosException, SQLException {
+		ArrayList<Apartado> apartados = new ArrayList<Apartado>();
 		String sql = getGuardarApartadoSqlQuery(params);
+		
 		Statement stmt = this.conexion.createStatement();
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery(getApartadoSqlQuery(params));
@@ -205,9 +202,29 @@ public class ControladorApartado {
 	        		 rs.getDouble(ApartadoTable.Cols.PAGADO),
 	        		 rs.getString(ApartadoTable.Cols.TIEMPO)
         		 );
-	         Gson gson = new Gson();
-	         JSONObject apartadoJson = new JSONObject(gson.toJson(apartado));
-	         apartados.put(apartadoJson);
+			
+			apartados.add(apartado);
+		}
+		return apartados.get(apartados.size() - 1);
+	}
+	
+	/**
+	 * Actualiza la información de los asientos que se quieren apartar
+	 * 
+	 * @param params Parametros de la peticion
+	 * @throws SQLException
+	 * @throws FaltanParametrosException
+	 */
+	private void actualizarAsientos(JSONObject params, Apartado apartado) throws SQLException, FaltanParametrosException {
+		Statement stmt = this.conexion.createStatement();
+		JSONArray boletos = params.getJSONArray(Recurso.Apartado.Boletos.KEY);
+		String sql;
+		for (int i = 0; i < boletos.length(); i++) {
+			JSONObject boleto = boletos.getJSONObject(i);
+			int idApartado = apartado.getIdApartado();
+			
+			sql = getGuardarApartadoAsientosSqlQuery(boleto, idApartado);
+			stmt.executeUpdate(sql);
 		}
 	}
 
@@ -258,6 +275,27 @@ public class ControladorApartado {
 		}
 		throw new AsientoOcupadoException("El asiento con id " + boleto.getInt(Recurso.Apartado.Boletos.ID_ASIENTO) + " está ocupado");		
 	}
+	
+	/**
+	 * Checa si el numero de boletos de la peticion excede o no
+	 * el limite de boletos por apartado
+	 * 
+	 * @param params Parametros de la peticion de apartado
+	 * 
+	 * @return devuelve true si el numero de boletos no excede el limite
+	 * 
+	 * @throws FaltanParametrosException
+	 * @throws BoletosExcedidosException
+	 */
+	private boolean checkNumBoletos(JSONObject params) throws FaltanParametrosException, BoletosExcedidosException {
+		if(!params.has(Recurso.Apartado.Boletos.KEY)) {
+			throw new FaltanParametrosException("Faltan " + Recurso.Apartado.Boletos.KEY + " en los parámetros de la petición");
+		}
+		if(params.getJSONArray(Recurso.Apartado.Boletos.KEY).length() > 4) {
+			throw new BoletosExcedidosException();
+		}
+		return true;
+	}
 
 	/**
 	 * Devuelve la consulta SQL que sirve para actualizar
@@ -284,9 +322,9 @@ public class ControladorApartado {
 	 * @param params
 	 * @return
 	 */
-	private JSONArray hacerPago(JSONObject params) {
-		return null;
-	}
+//	private JSONArray hacerPago(JSONObject params) {
+//		return null;
+//	}
 	
 	/**
 	 * Devuelve la consulta SQL que sirve para insertar
@@ -303,7 +341,7 @@ public class ControladorApartado {
 		if(!params.has(Recurso.Apartado.Values.ID_USUARIO)) {
 			throw new FaltanParametrosException("Falta el " + Recurso.Apartado.Values.ID_USUARIO + " en los parámetros de la petición");
 		}
-		String sql = "INSERT INTO " + ApartadoTable.NAME + " (" + ApartadoTable.Cols.ID_EVENTO + ", " + ApartadoTable.Cols.ID_EVENTO + ") VALUES ("
+		String sql = "INSERT INTO " + ApartadoTable.NAME + " (" + ApartadoTable.Cols.ID_EVENTO + ", " + ApartadoTable.Cols.ID_USUARIO + ") VALUES ("
 				+ params.getInt(Recurso.Apartado.Values.ID_EVENTO) + ", "
 				+ params.getInt(Recurso.Apartado.Values.ID_USUARIO) + ")";
 		return sql;
@@ -396,26 +434,5 @@ public class ControladorApartado {
 		public BoletosExcedidosException() {
 			super("Número de boletos excedido: Máximo 4 boletos por apartado");
 		}
-	}
-	
-	/**
-	 * Checa si el numero de boletos de la peticion excede o no
-	 * el limite de boletos por apartado
-	 * 
-	 * @param params Parametros de la peticion de apartado
-	 * 
-	 * @return devuelve true si el numero de boletos no excede el limite
-	 * 
-	 * @throws FaltanParametrosException
-	 * @throws BoletosExcedidosException
-	 */
-	private boolean checkNumBoletos(JSONObject params) throws FaltanParametrosException, BoletosExcedidosException {
-		if(!params.has(Recurso.Apartado.Boletos.KEY)) {
-			throw new FaltanParametrosException("Faltan " + Recurso.Apartado.Boletos.KEY + " en los parámetros de la petición");
-		}
-		if(params.getJSONArray(Recurso.Apartado.Boletos.KEY).length() > 4) {
-			throw new BoletosExcedidosException();
-		}
-		return true;
 	}
 }

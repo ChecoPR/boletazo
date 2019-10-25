@@ -7,10 +7,10 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.itq.progradist.boletazo.ParamNames.Recurso;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoZonaTable;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.LugarTable;
+import com.itq.progradist.boletazo.database.DatabaseSchema.EventoZonaTable;
+import com.itq.progradist.boletazo.database.DatabaseSchema.LugarTable;
 import com.itq.progradist.boletazo.ParamNames.Metodo;
-import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
+import com.itq.progradist.boletazo.exceptions.ParamMetodoNotFoundException;
 import com.itq.progradist.boletazo.modelos.Evento;
 
 import java.sql.Connection;
@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.itq.progradist.boletazo.database.BoletazoDatabaseSchema.EventoTable;
+import static com.itq.progradist.boletazo.database.DatabaseSchema.EventoTable;
 
 /**
  * Realiza los procesos que tienen que ver con el tipo de recurso "evento".
@@ -40,21 +40,15 @@ public class ControladorEvento {
 	private Connection conexion;
 	
 	/**
-	 * datos de la petición
-	 */
-	private JSONObject dataRequest;
-	
-	/**
 	 * Inicializar un controlador con una conexión a la base de datos y
 	 * datos de petición
 	 * 
 	 * @param conexion Conexión a la base de datos
 	 * @param dataRequest Parámetros de la petición
 	 */
-	public ControladorEvento(Connection conexion, JSONObject dataRequest) {
+	public ControladorEvento(Connection conexion) {
 		super();
 		this.conexion = conexion;
-		this.dataRequest = dataRequest;
 	}
 
 	/**
@@ -65,13 +59,13 @@ public class ControladorEvento {
 	 * 
 	 * @return respuesta Respuesta obtenida de la base de datos
 	 * 
-	 * @throws MetodoParamNotFoundException 
+	 * @throws ParamMetodoNotFoundException 
 	 */
-	public JSONObject procesarAccion(JSONObject params) throws MetodoParamNotFoundException {
+	public JSONObject procesarAccion(JSONObject params) throws ParamMetodoNotFoundException {
 		logger.info("Procesando acción");
 		JSONObject respuesta = new JSONObject();
 		if(!params.has(Metodo.KEY_NAME)) {
-			throw new MetodoParamNotFoundException();
+			throw new ParamMetodoNotFoundException();
 		}
 		try {
 			switch (params.getString(Metodo.KEY_NAME)) {
@@ -85,8 +79,14 @@ public class ControladorEvento {
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error("Error procesando la acción" + e.getMessage());
+			logger.catching(e);
+			respuesta.put("message", e.getMessage());
+		} catch (SQLException e) {
+			logger.error("Error al consultar la base de datos: " + e.getMessage());
+			logger.catching(e);
+			respuesta.put("message", "Error al consultar la base de datos");
 		}
-		return null;
+		return respuesta;
 	}
 	
 	/**
@@ -96,9 +96,9 @@ public class ControladorEvento {
 	 * 
 	 * @return
 	 */
-	private Evento getEvento(int idEvento) {
-		return null;
-	}
+//	private Evento getEvento(int idEvento) {
+//		return null;
+//	}
 	
 	/**
 	 * Obtiene eventos de la base de datos según los parámetros dados
@@ -106,35 +106,29 @@ public class ControladorEvento {
 	 * @param params Parametros de búsqueda de los eventos
 	 * 
 	 * @return respuesta Eventos que coicidieron con los parámetros
+	 * @throws SQLException 
 	 */
-	private JSONArray getEventos(JSONObject params) {
+	private JSONArray getEventos(JSONObject params) throws SQLException {
 		logger.info("Iniciando consulta en la base de datos");
 		Statement stmt = null;
 		String sql = getEventosSqlQuery(params);
 		JSONArray respuesta = new JSONArray();
-		try {
-			stmt = this.conexion.createStatement();
-			logger.info("Ejecutando consulta");
-			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()){
-		         Evento evento = new Evento(
-		        		 rs.getInt(EventoTable.Cols.ID_EVENTO), 
-		        		 rs.getInt(EventoTable.Cols.ID_LUGAR), 
-		        		 rs.getString(EventoTable.Cols.NOMBRE),
-		        		 rs.getString(EventoTable.Cols.FECHA),
-		        		 rs.getString(EventoTable.Cols.HORA)
-	        		 );
-		         Gson gson = new Gson();
-		         respuesta.put(gson.toJson(evento));
-			}
-			logger.info("Datos obtenidos de la base de datos");
-			return respuesta;
-		} catch (SQLException e) {
-			logger.error("Error al consultar la base de datos: " + e.getMessage());
-			e.printStackTrace();
+		stmt = this.conexion.createStatement();
+		logger.info("Ejecutando consulta");
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()){
+	         Evento evento = new Evento(
+	        		 rs.getInt(EventoTable.Cols.ID_EVENTO), 
+	        		 rs.getInt(EventoTable.Cols.ID_LUGAR), 
+	        		 rs.getString(EventoTable.Cols.NOMBRE),
+	        		 rs.getString(EventoTable.Cols.FECHA),
+	        		 rs.getString(EventoTable.Cols.HORA)
+        		 );
+	         Gson gson = new Gson();
+	         respuesta.put(gson.toJson(evento));
 		}
-		
-		return null;
+		logger.info("Datos obtenidos de la base de datos");
+		return respuesta;
 	}
 	
 	/**
@@ -150,10 +144,10 @@ public class ControladorEvento {
 		String sql = "SELECT e.*"
 				+ " FROM " + EventoTable.NAME + " e, " + EventoZonaTable.NAME + " ez, " + LugarTable.NAME + " l"
 				+ " WHERE e." + EventoTable.Cols.ID_EVENTO + " = ez.idEvento"
-				+ " AND l." + LugarTable.Cols.ID_LUGAR + " = e." + EventoTable.Cols.ID_EVENTO;
+				+ " AND l." + LugarTable.Cols.ID_LUGAR + " = e." + EventoTable.Cols.ID_LUGAR;
 		
 		if (params.has(Recurso.Evento.Values.NOMBRE)) {
-			sql += " AND e. " + EventoTable.Cols.NOMBRE + " LIKE '%" + params.getString(Recurso.Evento.Values.NOMBRE) + "%'";
+			sql += " AND e." + EventoTable.Cols.NOMBRE + " LIKE '%" + params.getString(Recurso.Evento.Values.NOMBRE) + "%'";
 		}
 		if (params.has(Recurso.Evento.Values.LUGAR)) {
 			sql += " AND l." + LugarTable.Cols.NOMBRE + " LIKE '%" + params.getString(Recurso.Evento.Values.LUGAR) + "%'";
@@ -162,16 +156,18 @@ public class ControladorEvento {
 			sql += " AND l." + LugarTable.Cols.ESTADO + " LIKE '%" + params.getString(Recurso.Evento.Values.ESTADO) + "%'";
 		}
 		if (params.has(Recurso.Evento.Values.FECHA)) {
-			sql += " AND e. " + EventoTable.Cols.FECHA + " LIKE '%" + params.getString(Recurso.Evento.Values.FECHA) + "%'";
+			sql += " AND e." + EventoTable.Cols.FECHA + " LIKE '%" + params.getString(Recurso.Evento.Values.FECHA) + "%'";
 		}
 		if (params.has(Recurso.Evento.Values.HORA)) {
-			sql += " AND e. " + EventoTable.Cols.HORA + " LIKE '%" + params.getString(Recurso.Evento.Values.HORA) + "%'";
+			sql += " AND e." + EventoTable.Cols.HORA + " LIKE '%" + params.getString(Recurso.Evento.Values.HORA) + "%'";
 		}
 		if (params.has(Recurso.Evento.Values.PRECIO)) {
 			sql += " AND ez." + EventoZonaTable.Cols.PRECIO + " LIKE '%" + params.getDouble(Recurso.Evento.Values.PRECIO) + "%'";
 		}
 		
 		sql += " GROUP BY e." + EventoTable.Cols.ID_EVENTO;
+		
+		logger.debug("Consulta: " + sql);
 		
 		return sql;
 	}

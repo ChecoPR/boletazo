@@ -34,6 +34,11 @@ public class Apartado {
 	private String tiempo;
 	
 	/**
+	 * Importe del apartado
+	 */
+	private double importe;
+	
+	/**
 	 * Inicializa un Apartado con todos sus campos.
 	 * 
 	 * @param idApartado
@@ -49,6 +54,7 @@ public class Apartado {
 		this.idEvento = idEvento;
 		this.pagado = pagado;
 		this.tiempo = tiempo;
+		this.setImporte(0);
 	}
 	
 	/**
@@ -132,5 +138,21 @@ public class Apartado {
 	 */
 	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getImporte() {
+		return importe;
+	}
+
+	/**
+	 * 
+	 * @param importe
+	 */
+	public void setImporte(double importe) {
+		this.importe = importe;
 	}
 }

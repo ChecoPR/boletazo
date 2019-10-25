@@ -18,6 +18,21 @@ public class Evento {
 		this.fecha = fecha;
 		this.hora = hora;
 	}
+	
+	public Evento(int idLugar, String nombre, String fecha, String hora) {
+		super();
+		this.idLugar = idLugar;
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.hora = hora;
+	}
+	
+	public Evento(String nombre, String fecha, String hora) {
+		super();
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.hora = hora;
+	}
 
 	public int getIdEvento() {
 		return idEvento;

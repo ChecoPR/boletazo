@@ -1,23 +1,15 @@
 package com.itq.progradist.boletazo;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
-import com.itq.progradist.boletazo.controladores.ControladorEvento;
 
 /**
  * Realiza el proceso de inicio del servidor.
@@ -41,12 +33,7 @@ public class BoletazoServer {
 	/**
 	 * Tiempo de reserva de un boleto
 	 */
-	private static final double RESERVED_TIME = 1000000;
-	
-	/**
-	 * Conexion a la base de datos
-	 */
-	private Connection conexion;
+	public static final int RESERVED_TIME = 360000;
 	
 	/**
 	 * Inicia la ejecución del servidor
@@ -67,40 +54,31 @@ public class BoletazoServer {
 		try {
 			
 			serverSocket = new ServerSocket(PORT);
-			logger.info("Servidor iniciado existosamente en el puerto [" + PORT + "]");
 			
-			try {
+			logger.info("Servidor iniciado existosamente en el puerto [" + PORT + "]");
 				
-				while(alive) {
-					
-					logger.info("Inicia while...");
-					
-					Socket socket = serverSocket.accept();
-					
-					InputStream inputStream = socket.getInputStream();
-					
-					DataInputStream dataIn = new DataInputStream(inputStream);
-					
-					String input = dataIn.readUTF().toString();
-					
-					logger.info("Datos recibidos de " + socket.getRemoteSocketAddress() + ":[" + input + "]");
-					
-					Peticion peticion = new Peticion(
-							decodeString(input), 
-							socket
-						);
-					
-					peticion.start();
-				}
+			while(alive) {
 				
-				serverSocket.close();
-			} catch (Exception e) {
-				logger.error("Ocurrió un error en el server:");
-				logger.error(e.getMessage());
-				e.printStackTrace();
+				logger.info("Inicia ejecución  del servidor...");
+				
+				Socket socket = serverSocket.accept();
+				InputStream inputStream = socket.getInputStream();
+				DataInputStream dataIn = new DataInputStream(inputStream);
+				String input = dataIn.readUTF().toString();
+				
+				logger.info("Datos recibidos de " + socket.getRemoteSocketAddress() + ":[" + input + "]");
+				
+				Peticion peticion = new Peticion(decodeString(input), socket);
+				peticion.start();
 			}
+			
+			serverSocket.close();
 		} catch (IOException e) {
 			logger.error("Puerto ocupado: [" + PORT + "]");
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("Ocurrió un error en el server:");
 			logger.error(e.getMessage());
 			e.printStackTrace();
 		}

@@ -4,12 +4,13 @@ import com.itq.progradist.boletazo.ParamNames;
 
 /**
  * Exception para cuando los datos de la peticion 
- * no contienen el campo "recurso".
+ * no contienen el campo "metodo".
  * 
  * @author Equipo 5
  *
  */
-public class RecursoParamNotFoundException extends Exception {
+public class ParamMetodoNotFoundException extends Exception {
+	
 	/**
 	 * 
 	 */
@@ -18,8 +19,8 @@ public class RecursoParamNotFoundException extends Exception {
 	/**
 	 * Inicializa la exception con un mensaje de error predeterminado.
 	 */
-	public RecursoParamNotFoundException() {
-		super("Parámtero " + ParamNames.Recurso.KEY_NAME + " no encontrado en los datos de la petición");
+	public ParamMetodoNotFoundException() {
+		super("Parámtero " + ParamNames.Metodo.KEY_NAME + " no encontrado en los datos de la petición");
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class RecursoParamNotFoundException extends Exception {
 	 * 
 	 * @param msg Mensaje de error.
 	 */
-	public RecursoParamNotFoundException(String msg) {
+	public ParamMetodoNotFoundException(String msg) {
 		super(msg);
 	}
 }

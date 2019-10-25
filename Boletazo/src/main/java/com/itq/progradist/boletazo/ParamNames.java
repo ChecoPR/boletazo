@@ -59,6 +59,20 @@ public class ParamNames {
 			}
 			
 		}
+		
+		public static final class Pago {
+			
+			public static final String VALUE = "pago";
+			
+			public static final class Metodo {
+				public static final String POST = "post";
+			}
+			
+			public static final class Values {
+				public static final String METODO_PAGO = "metodo_pago";
+				public static final String ID_APARTADO = "apartado_id";
+			}
+		}
 	}
 	
 	public static final class Metodo {

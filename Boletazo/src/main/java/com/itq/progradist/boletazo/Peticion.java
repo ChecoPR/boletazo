@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,10 +13,11 @@ import org.json.JSONObject;
 import com.itq.progradist.boletazo.controladores.ControladorApartado;
 import com.itq.progradist.boletazo.controladores.ControladorAsiento;
 import com.itq.progradist.boletazo.controladores.ControladorEvento;
+import com.itq.progradist.boletazo.controladores.ControladorPago;
 import com.itq.progradist.boletazo.controladores.ControladorZona;
-import com.itq.progradist.boletazo.database.BoletazoDatabaseHandler;
-import com.itq.progradist.boletazo.exceptions.MetodoParamNotFoundException;
-import com.itq.progradist.boletazo.exceptions.RecursoParamNotFoundException;
+import com.itq.progradist.boletazo.database.DatabaseHandler;
+import com.itq.progradist.boletazo.exceptions.ParamMetodoNotFoundException;
+import com.itq.progradist.boletazo.exceptions.ParamRecursoNotFoundException;
 
 import static com.itq.progradist.boletazo.ParamNames.*;
 
@@ -59,103 +59,107 @@ public class Peticion extends Thread {
 	}
 	
 	/**
-	 * Corre el proceso de la petición
+	 * Ejecuta el proceso de la petición
 	 */
 	@Override
 	public void run() {
 		try {
-		
-			String respuesta = procesarRequest(dataRequest);
-			
 			OutputStream outputStream = socket.getOutputStream();
-			
 			DataOutputStream flowOut = new DataOutputStream(outputStream);
+			String respuesta = procesarRequest(dataRequest);
 			
 			flowOut.writeUTF(respuesta);
 			
-			logger.info("La siguiente respuesta enviada al cliente " + this.socket.getRemoteSocketAddress()  + ": " + respuesta);
-			
-			Thread.sleep(1000);
+			logger.info("La siguiente respuesta fue enviada al cliente " + this.socket.getRemoteSocketAddress()  + ": " + respuesta);
 		
 		} catch (IOException e) {
 			logger.error("Error al imprimir el resultado: " + e.getMessage());
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			logger.error("Error en la ejecucion del hilo: " + e.getMessage());
-			e.printStackTrace();
+			logger.catching(e);
 		}
 	}
 	
 	/**
-	 * Elegir la accion a realizar segun el parametro "recurso" que 
-	 * contiene los datos de la peticion.
+	 * Obtiene una conexión a la base de datos y 
+	 * devuelve una respuesta según los datos de la petición.
 	 * 
-	 * @param params Datos de la peticion
+	 * Si hay un error en los datos de la petición se devuelve 
+	 * como respuesta el mensaje de error correspondiente.
+	 * 
+	 * @param params Datos de la petición
 	 */
 	private String procesarRequest(JSONObject params) {
 		logger.info("Procesando peticion");
-		Connection conexion = BoletazoDatabaseHandler.getConnection();
+		
+		Connection conexion = DatabaseHandler.getConnection();
+		
 		JSONObject respuesta = new JSONObject();
 		try {
-			if (!params.has(Recurso.KEY_NAME)) {
-				throw new RecursoParamNotFoundException();
-			}
-			switch (params.getString(Recurso.KEY_NAME)) {
-			case Recurso.Evento.VALUE:
-				logger.info("Obteniendo eventos");
-				 respuesta = new ControladorEvento(conexion, params).procesarAccion(params);
-				logger.info("Eventos obtenidos");
-				break;
-				
-			case Recurso.EventoZona.VALUE:
-				logger.info("Obteniendo zonas del evento");
-				respuesta = new ControladorZona(conexion, params).procesarAccion(params);
-				logger.info("Zonas del evento obtenidas");
-				break;
-				
-			case Recurso.EventoZonaAsiento.VALUE:
-				logger.info("Obteniendo asientos de la zona y del evento");
-				respuesta = new ControladorAsiento(conexion, params).procesarAccion(params);
-				logger.info("Zonas del evento obtenidas");
-				break;
 			
-			case Recurso.Apartado.VALUE:
-				logger.info("Realizando apartado");
-				respuesta = new ControladorApartado(conexion, params).procesarAccion(params);
-				logger.info("Apartado realizado");
-				break;
-				
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + params.get(Recurso.KEY_NAME));
-			}
+			respuesta = obtenerRespuesta(params, conexion);
+			
 		} catch(IllegalArgumentException e) {
 			logger.error("Error al procesar la peticion: " + e.getMessage());
-		} catch (MetodoParamNotFoundException e) {
+			respuesta.put("message", e.getMessage());
+		} catch (ParamMetodoNotFoundException e) {
 			logger.error(e.getMessage());
 			respuesta.put("message", e.getMessage());
-			e.printStackTrace();
-		} catch (RecursoParamNotFoundException e) {
+		} catch (ParamRecursoNotFoundException e) {
 			logger.error(e.getMessage());
 			respuesta.put("message", e.getMessage());
-			e.printStackTrace();
 		}
-		cerrarConexion(conexion);
+		
+		DatabaseHandler.cerrarConexion(conexion);
+		
 		return respuesta.toString();
 	}
 	
 	/**
-	 * Cierra la conexion a la base de datos
+	 * Elegir la acción a realizar según el parámetro "recurso" que 
+	 * contienen los datos de la petición.
 	 * 
-	 * @param conexion Conexion a la base de datos
+	 * @param params Datos de la petición
+	 * @conexion params Conexión a la base de datos
 	 */
-	private void cerrarConexion(Connection conexion) {
-		try {
-			logger.info("Cerrando conexion a la base de datos");
-			conexion.close();
-			logger.info("Conexion a la base de datos cerrada");
-		} catch (SQLException e) {
-			logger.error("Error al cerrar la base de datos: " + e.getMessage());
-			e.printStackTrace();
+	private JSONObject obtenerRespuesta(JSONObject params, Connection conexion) throws ParamRecursoNotFoundException, ParamMetodoNotFoundException {
+		JSONObject respuesta;
+		
+		if (!params.has(Recurso.KEY_NAME)) {
+			throw new ParamRecursoNotFoundException();
+		}
+		
+		switch (params.getString(Recurso.KEY_NAME)) {
+			case Recurso.Evento.VALUE:
+				logger.info("Obteniendo eventos");
+				respuesta = new ControladorEvento(conexion).procesarAccion(params);
+				logger.info("Eventos obtenidos");
+				return respuesta;
+				
+			case Recurso.EventoZona.VALUE:
+				logger.info("Obteniendo zonas del evento");
+				respuesta = new ControladorZona(conexion).procesarAccion(params);
+				logger.info("Zonas del evento obtenidas");
+				return respuesta;
+				
+			case Recurso.EventoZonaAsiento.VALUE:
+				logger.info("Obteniendo asientos de la zona y del evento");
+				respuesta = new ControladorAsiento(conexion).procesarAccion(params);
+				logger.info("Zonas del evento obtenidas");
+				return respuesta;
+			
+			case Recurso.Apartado.VALUE:
+				logger.info("Realizando apartado");
+				respuesta = new ControladorApartado(conexion).procesarAccion(params);
+				logger.info("Apartado realizado");
+				return respuesta;
+				
+			case Recurso.Pago.VALUE:
+				logger.info("Realizando pago");
+				respuesta = new ControladorPago(conexion).procesarAccion(params);
+				logger.info("Pago realizado");
+				return respuesta;
+				
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + params.get(Recurso.KEY_NAME));
 		}
 	}
 }

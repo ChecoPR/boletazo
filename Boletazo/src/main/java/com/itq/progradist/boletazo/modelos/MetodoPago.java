@@ -7,11 +7,13 @@ public class MetodoPago {
 	 */
 	private int idMetodoPago;
 	private int idUsuario;
+	private double saldo;
 	
-	public MetodoPago(int idMetodoPago, int idUsuario) {
+	public MetodoPago(int idMetodoPago, int idUsuario, double saldo) {
 		super();
 		this.idMetodoPago = idMetodoPago;
 		this.idUsuario = idUsuario;
+		this.saldo = saldo;
 	}
 	
 	public int getIdMetodoPago() {
@@ -26,6 +28,15 @@ public class MetodoPago {
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+	
 	
 	
 	
