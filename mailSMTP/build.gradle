@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	compile	"com.sun.mail:javax.mail:1.5.2",
+			"com.itextpdf:itextpdf:5.5.13.1"
+	
+}
+
+
