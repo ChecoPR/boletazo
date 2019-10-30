@@ -13,7 +13,7 @@ public class PruebaPagar {
 		peticion1.put("recurso", "pago");
 		peticion1.put("metodo", "post");
 		peticion1.put("metodo_pago", 1);
-		peticion1.put("apartado_id", 34);
+		peticion1.put("apartado_id", 40);
 		
 		peticiones.add(peticion1.toString());
 		for (int i = 0; i < peticiones.size(); i++) {

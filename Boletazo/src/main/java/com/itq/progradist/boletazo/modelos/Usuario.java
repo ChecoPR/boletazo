@@ -4,11 +4,13 @@ public class Usuario {
 	
 	private int idUsuario;
 	private String nombre;
+	private String email;
 	
-	public Usuario(int idUsuario, String nombre) {
+	public Usuario(int idUsuario, String nombre, String email) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
+		this.email = email;
 	}
 	
 	public int getIdUsuario() {
@@ -22,6 +24,14 @@ public class Usuario {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

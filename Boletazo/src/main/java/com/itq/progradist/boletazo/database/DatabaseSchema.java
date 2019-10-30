@@ -70,4 +70,16 @@ public class DatabaseSchema {
 			public static final String SALDO = "saldo";
 		}
 	}
+	
+	public static final class UsuarioTable {
+		public static final String NAME = "usuarios";
+		
+		public static final class Cols {
+			public static final String ID_USUARIO = "idUsuario";
+			public static final String NOMBRE = "nombre";
+			public static final String DIRECCION = "direccion";
+			public static final String TELEFONO = "telefono";
+			public static final String EMAIL = "email";
+		}
+	}
 }

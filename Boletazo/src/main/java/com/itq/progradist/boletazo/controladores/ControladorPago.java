@@ -5,6 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.MimeMultipart;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
@@ -17,8 +22,11 @@ import com.itq.progradist.boletazo.exceptions.ApartadoNotFound;
 import com.itq.progradist.boletazo.database.DatabaseSchema.ApartadoTable;
 import com.itq.progradist.boletazo.database.DatabaseSchema.MetodoPagoTable;
 import com.itq.progradist.boletazo.exceptions.ParamMetodoNotFoundException;
+import com.itq.progradist.boletazo.exceptions.UsuarioNotFound;
 import com.itq.progradist.boletazo.modelos.Apartado;
 import com.itq.progradist.boletazo.modelos.MetodoPago;
+import com.itq.progradist.boletazo.modelos.Usuario;
+import com.itq.progradist.boletazo.util.EmailUtils;
 
 /**
  * Realiza los procesos que tienen que ver con el tipo de recurso "pago".
@@ -69,9 +77,11 @@ public class ControladorPago {
 		try {
 			switch (params.getString(Metodo.KEY_NAME)) {
 			case Pago.Metodo.POST:
+				
 				logger.info("Realizando pago");
 				respuesta.put("data", this.hacerPago(params));
 				logger.info("Pago realizado");
+				
 				return respuesta;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + params.get(Metodo.KEY_NAME));
@@ -123,6 +133,17 @@ public class ControladorPago {
 			respuesta.put("apartado_id", idApartado);
 			respuesta.put("metodo_pago_id", idMetodoPago);
 			
+			Usuario usuario = CommonQueries.getUsuarioById(conexion, apartado.getIdUsuario());
+			
+			logger.info("Enviando correo a " + usuario.getEmail() + " por el pago del apartado " + apartado.getIdApartado());
+			Multipart multipart = new MimeMultipart();
+			EmailUtils.sendPaymentEmail(
+					usuario, 
+					apartado, 
+					EmailUtils.BOLETO_PAGADO_SUBJECT, 
+					multipart
+				);
+			
 		} catch (ParamIdApartadoNotFound | ParamIdMetodoPagoNotFound | MetodoPagoNotFound e) {
 			logger.error(e.getMessage());
 			logger.catching(e);
@@ -144,6 +165,21 @@ public class ControladorPago {
 			respuesta.put("respuesta", "Error");
 			respuesta.put("message", "Error al consultar la base de datos");
 		} catch (ApartadoNotFound e) {
+			logger.error(e.getMessage());
+			logger.catching(e);
+			respuesta.put("respuesta", "Error");
+			respuesta.put("message", e.getMessage());
+		} catch (AddressException e) {
+			logger.error("Error al enviar correo: " + e.getMessage());
+			logger.catching(e);
+			respuesta.put("respuesta", "Error");
+			respuesta.put("message", e.getMessage());
+		} catch (MessagingException e) {
+			logger.error("Error al enviar correo: " + e.getMessage());
+			logger.catching(e);
+			respuesta.put("respuesta", "Error");
+			respuesta.put("message", e.getMessage());
+		} catch (UsuarioNotFound e) {
 			logger.error(e.getMessage());
 			logger.catching(e);
 			respuesta.put("respuesta", "Error");
