@@ -52,16 +52,42 @@ public class ApartadoTimerTask extends TimerTask {
 		seconds ++;
 		try {
 			logger.debug("Segundos transcurridos: " + seconds * DELAY);
+			Statement stmt = connection.createStatement();
+			
+			ResultSet rs = stmt.executeQuery(getCantidadPagadaSqlQuery());
+			rs.next();
+			double pagado = rs.getDouble(ApartadoTable.Cols.PAGADO);
+			
+			double importe = CommonQueries.calculateImporteOf(connection, apartado);
+			
 			if (seconds * DELAY >= PERIOD) {
+				logger.info("El tiempo del apartado " + this.apartado.getIdApartado() + " ha caducado");
+				logger.info("Total pagado: " + pagado + " del apartado " + apartado.getIdApartado() + " al momento de la comprobación");
+				logger.info("Importe: " + importe + " del apartado " + apartado.getIdApartado() + " al momento de la comprobación");
+				
+				if(pagado < importe) {
+					logger.debug("Iniciando borrado del apartado " + apartado.getIdApartado());
+					resetAsientos();
+					deleteApartado();
+					logger.info("El apartado con número " + apartado.getIdApartado() + " ha sido caducado");
+				}
+				DatabaseHandler.cerrarConexion(connection);
+				cancel();
+			} else if(pagado >= importe) {
+				DatabaseHandler.cerrarConexion(connection);
+				cancel();
+			}
+			
+			/*if (seconds * DELAY >= PERIOD) {
 				logger.info("Iniciando comprobación de pago del apartado " + apartado.getIdApartado());
 				
-				Statement stmt = connection.createStatement();
+				stmt = connection.createStatement();
 				
-				ResultSet rs = stmt.executeQuery(getCantidadPagadaSqlQuery());
+				rs = stmt.executeQuery(getCantidadPagadaSqlQuery());
 				rs.next();
-				double pagado = rs.getDouble(ApartadoTable.Cols.PAGADO);
+				pagado = rs.getDouble(ApartadoTable.Cols.PAGADO);
 				
-				double importe = CommonQueries.calculateImporteOf(connection, apartado);
+				importe = CommonQueries.calculateImporteOf(connection, apartado);
 				
 				logger.info("Total pagado: " + pagado + " del apartado " + apartado.getIdApartado() + " al momento de la comprobación");
 				logger.info("Importe: " + importe + " del apartado " + apartado.getIdApartado() + " al momento de la comprobación");
@@ -75,7 +101,7 @@ public class ApartadoTimerTask extends TimerTask {
 				DatabaseHandler.cerrarConexion(connection);
 				
 				cancel();
-			}
+			}*/
 		} catch (SQLException e) {
 			logger.error("Error al consultar la base de datos: " + e.getMessage());
 			logger.catching(e);
