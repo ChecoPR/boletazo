@@ -56,59 +56,61 @@ public class EmailUtils {
             Apartado apartado,
             String subject, 
             Multipart multipart) throws AddressException, MessagingException {
- 
-		logger.debug("Contruyendo propiedades del correo");
-        // sets SMTP accessMail properties
-        Properties properties = new Properties();
-        properties.put(SmtpParameters.HOST_PROPIERTY_NAME, SmtpParameters.HOST);
-        properties.put(SmtpParameters.PORT_PROPIERTY_NAME, SmtpParameters.PORT);
-        properties.put(SmtpParameters.AUTH_PROPIERTY_NAME, SmtpParameters.AUTH);
-        properties.put(SmtpParameters.TTLS_PROPIERTY_NAME, SmtpParameters.TTLS);
- 
-        logger.debug("Generando autenticación del cliente de correo");
-        // creates a new session with an authenticator
-        Authenticator auth = new Authenticator() {
-            public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SmtpParameters.USER, SmtpParameters.PASSWORD);
-            }
-        };
-        
-        logger.debug("Creando sesión");
-        // Get the Session object.
-        Session session = Session.getInstance(properties, auth);
- 
-        logger.debug("Construyendo mensaje");
-        // creates a new e-mail message
-        Message msg = new MimeMessage(session);
-        
-        // constructs from and to address objects
-        InternetAddress fromAddress = new InternetAddress(SmtpParameters.USER); 
-        InternetAddress[] toAddresses = { new InternetAddress(usuario.getEmail()) };
- 
-        msg.setFrom(fromAddress);
-        msg.setRecipients(Message.RecipientType.TO, toAddresses);
-        msg.setSubject(subject);
-        msg.setSentDate(new Date());
-        
-        logger.debug("Construyendo PDF");
-        MimeBodyPart attachementPart = new MimeBodyPart();
-        try {
-			attachementPart.attachFile(buildPdf(usuario, apartado));
-		} catch (IOException e) {
-			logger.error("Error en el PDF: " + e.getMessage());
-			logger.catching(e);
+		
+		synchronized (EmailUtils.class) {
+			logger.debug("Contruyendo propiedades del correo");
+	        // sets SMTP accessMail properties
+	        Properties properties = new Properties();
+	        properties.put(SmtpParameters.HOST_PROPIERTY_NAME, SmtpParameters.HOST);
+	        properties.put(SmtpParameters.PORT_PROPIERTY_NAME, SmtpParameters.PORT);
+	        properties.put(SmtpParameters.AUTH_PROPIERTY_NAME, SmtpParameters.AUTH);
+	        properties.put(SmtpParameters.TTLS_PROPIERTY_NAME, SmtpParameters.TTLS);
+	 
+	        logger.debug("Generando autenticación del cliente de correo");
+	        // creates a new session with an authenticator
+	        Authenticator auth = new Authenticator() {
+	            public PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(SmtpParameters.USER, SmtpParameters.PASSWORD);
+	            }
+	        };
+	        
+	        logger.debug("Creando sesión");
+	        // Get the Session object.
+	        Session session = Session.getInstance(properties, auth);
+	 
+	        logger.debug("Construyendo mensaje");
+	        // creates a new e-mail message
+	        Message msg = new MimeMessage(session);
+	        
+	        // constructs from and to address objects
+	        InternetAddress fromAddress = new InternetAddress(SmtpParameters.USER); 
+	        InternetAddress[] toAddresses = { new InternetAddress(usuario.getEmail()) };
+	 
+	        msg.setFrom(fromAddress);
+	        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+	        msg.setSubject(subject);
+	        msg.setSentDate(new Date());
+	        
+	        logger.debug("Construyendo PDF");
+	        MimeBodyPart attachementPart = new MimeBodyPart();
+	        try {
+				attachementPart.attachFile(buildPdf(usuario, apartado));
+			} catch (IOException e) {
+				logger.error("Error en el PDF: " + e.getMessage());
+				logger.catching(e);
+			}
+	        multipart.addBodyPart(attachementPart);
+	        
+	        msg.setContent(multipart, SmtpParameters.MYME_TYPE);
+	        
+	        logger.debug("Enviando mensaje");
+	        // sends the e-mail
+	        Transport.send(msg);
+	        logger.debug("Mensaje enviado");
 		}
-        multipart.addBodyPart(attachementPart);
-        
-        msg.setContent(multipart, SmtpParameters.MYME_TYPE);
-        
-        logger.debug("Enviando mensaje");
-        // sends the e-mail
-        Transport.send(msg);
-        logger.debug("Mensaje enviado");
     }
 	
-	public static File buildPdf(Usuario usuario, Apartado apartado) {
+	private static File buildPdf(Usuario usuario, Apartado apartado) {
 		 // Se crea el documento
         Document documento = new Document();
 

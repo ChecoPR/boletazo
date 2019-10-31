@@ -9,6 +9,7 @@ public class Evento {
 	private String nombre;
 	private String fecha;
 	private String hora;
+	private double total;
 	
 	public Evento(int idEvento, int idLugar, String nombre, String fecha, String hora) {
 		super();
@@ -17,6 +18,16 @@ public class Evento {
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.hora = hora;
+	}
+	
+	public Evento(int idEvento, int idLugar, String nombre, String fecha, String hora, double total) {
+		super();
+		this.idEvento = idEvento;
+		this.idLugar = idLugar;
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.setTotal(total);
 	}
 	
 	public Evento(int idLugar, String nombre, String fecha, String hora) {
@@ -72,6 +83,14 @@ public class Evento {
 
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 	
 }

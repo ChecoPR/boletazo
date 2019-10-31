@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import com.itq.progradist.boletazo.controladores.ControladorApartado;
 import com.itq.progradist.boletazo.controladores.ControladorAsiento;
 import com.itq.progradist.boletazo.controladores.ControladorEvento;
+import com.itq.progradist.boletazo.controladores.ControladorLugar;
 import com.itq.progradist.boletazo.controladores.ControladorPago;
 import com.itq.progradist.boletazo.controladores.ControladorZona;
 import com.itq.progradist.boletazo.database.DatabaseHandler;
@@ -156,6 +157,10 @@ public class Peticion extends Thread {
 				logger.info("Realizando pago");
 				respuesta = new ControladorPago(conexion).procesarAccion(params);
 				logger.info("Pago realizado");
+				return respuesta;
+				
+			case Recurso.LugarVentas.VALUE:
+				respuesta = new ControladorLugar(conexion).procesarAccion(params);
 				return respuesta;
 				
 			default:

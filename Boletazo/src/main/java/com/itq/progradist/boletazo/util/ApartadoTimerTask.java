@@ -118,7 +118,7 @@ public class ApartadoTimerTask extends TimerTask {
 			stmt.executeUpdate(getResetAsientoSqlQuery());
 		} catch (SQLException e) {
 			logger.error("Error al resetear los asientos: " + e.getMessage());
-			e.printStackTrace();
+			logger.catching(e);
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class ApartadoTimerTask extends TimerTask {
 			stmt.executeUpdate(getBorrarApartadoSqlQuery());
 		} catch (SQLException e) {
 			logger.error("Error al borrar el apartado: " + e.getMessage());
-			e.printStackTrace();
+			logger.catching(e);
 		}
 	}
 	

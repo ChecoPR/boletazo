@@ -21,6 +21,7 @@ public class DatabaseSchema {
 			public static final String NOMBRE = "nombre";
 			public static final String FECHA = "fecha";
 			public static final String HORA = "hora";
+			public static final String TOTAL = "total";
 		}
 	}
 	

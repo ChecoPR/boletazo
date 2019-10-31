@@ -8,6 +8,11 @@ public class ParamNames {
 		public static final class Values {
 		}
 		
+		public static final class LugarVentas {
+
+			public static final String VALUE = "lugar/ventas";
+		}
+		
 		public static final class Evento {
 
 			public static final String VALUE = "eventos";

@@ -10,6 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
+import com.itq.progradist.boletazo.util.InformesTimerTask;
+
 
 /**
  * Realiza el proceso de inicio del servidor.
@@ -47,6 +49,7 @@ public class BoletazoServer {
 	 * Iniciar el socket del servidor
 	 */
 	private void initSocket() {
+		
 		ServerSocket serverSocket;
 		
 		boolean alive = true;

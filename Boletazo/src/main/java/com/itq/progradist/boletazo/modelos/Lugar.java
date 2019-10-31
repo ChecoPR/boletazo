@@ -1,5 +1,7 @@
 package com.itq.progradist.boletazo.modelos;
 
+import java.util.List;
+
 public class Lugar {
 	/**
 	 * Propiedades de un lugar
@@ -7,6 +9,7 @@ public class Lugar {
 	private int idLugar;
 	private String nombre;
 	private String estado;
+	private List<Evento> eventos;
 	
 	public Lugar(int idLugar, String nombre) {
 		super();
@@ -46,6 +49,14 @@ public class Lugar {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public List<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
 	}
 	
 }

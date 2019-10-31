@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2019 a las 20:51:06
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 31-10-2019 a las 22:31:18
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.2.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE `apartados` (
 --
 
 INSERT INTO `apartados` (`idApartado`, `idUsuario`, `idEvento`, `pagado`, `tiempo`) VALUES
-(14, 1, 1, 0, '2019-10-10 21:03:26');
+(44, 2, 2, 1000, '2019-10-31 11:03:42');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,6 @@ INSERT INTO `asientos` (`idAsiento`, `idZona`) VALUES
 CREATE TABLE `eventos` (
   `idEvento` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `lugar` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `hora` time NOT NULL,
   `idLugar` int(11) NOT NULL,
   `fecha` date NOT NULL
@@ -85,9 +84,9 @@ CREATE TABLE `eventos` (
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`idEvento`, `nombre`, `lugar`, `hora`, `idLugar`, `fecha`) VALUES
-(1, 'Daft Punk', 'Estadio La Corregidora', '22:00:00', 1, '2019-10-16'),
-(2, 'José José', 'Estadio La Corregidora', '17:00:00', 1, '2019-10-31');
+INSERT INTO `eventos` (`idEvento`, `nombre`, `hora`, `idLugar`, `fecha`) VALUES
+(1, 'Daft Punk', '22:00:00', 1, '2019-10-16'),
+(2, 'José José', '17:00:00', 1, '2019-10-31');
 
 -- --------------------------------------------------------
 
@@ -107,13 +106,7 @@ CREATE TABLE `eventosasientos` (
 --
 
 INSERT INTO `eventosasientos` (`idEvento`, `idAsiento`, `idApartado`, `idZona`) VALUES
-(1, 5, NULL, 1),
-(1, 6, NULL, 1),
-(1, 1, 14, 1),
-(1, 2, 14, 1),
-(1, 3, 14, 1),
-(1, 4, 14, 1),
-(2, 1, 14, 1);
+(2, 1, 44, 1);
 
 -- --------------------------------------------------------
 
@@ -164,8 +157,16 @@ CREATE TABLE `metodospago` (
   `idMetodoPago` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `numeroTarjeta` varchar(16) COLLATE utf8_spanish_ci NOT NULL,
-  `domicilio` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `domicilio` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `saldo` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `metodospago`
+--
+
+INSERT INTO `metodospago` (`idMetodoPago`, `idUsuario`, `numeroTarjeta`, `domicilio`, `saldo`) VALUES
+(1, 1, '16140693', 'Candiles', 94000);
 
 -- --------------------------------------------------------
 
@@ -177,16 +178,17 @@ CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` varchar(12) COLLATE utf8_spanish_ci NOT NULL
+  `telefono` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuario`, `nombre`, `direccion`, `telefono`) VALUES
-(1, 'Armando', 'Candiles', '4427126321'),
-(2, 'Sergio', 'Pérez', '4245654665');
+INSERT INTO `usuarios` (`idUsuario`, `nombre`, `direccion`, `telefono`, `email`) VALUES
+(1, 'Armando', 'Candiles', '4427126321', 'armandoserna97@gmail.com'),
+(2, 'Sergio', 'Pérez', '4245654665', 'ropealse@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -282,7 +284,7 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT de la tabla `apartados`
 --
 ALTER TABLE `apartados`
-  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idApartado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `asientos`
@@ -295,6 +297,12 @@ ALTER TABLE `asientos`
 --
 ALTER TABLE `eventos`
   MODIFY `idEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `metodospago`
+--
+ALTER TABLE `metodospago`
+  MODIFY `idMetodoPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `zona`

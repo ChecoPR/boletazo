@@ -31,11 +31,33 @@ public class CommonQueries {
 	 * logger del servidor, escribe en server.log
 	 */
 	private static final Logger logger = LogManager.getLogger(CommonQueries.class);
+	
+	public static String getDatabaseCurrentDate(Connection connection) throws SQLException {
+		String sql = "SELECT CURDATE() as today";
+		Statement stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		rs.next();
+		return rs.getString("today");
+	}
+	
+	public static List<Lugar> getLugares(Connection connection) throws SQLException {
+		String sql = "SELECT * FROM " + LugarTable.NAME;
+		Statement stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		List<Lugar> lugares = new ArrayList<Lugar>();
+		while(rs.next()) {
+			lugares.add(new Lugar(
+					rs.getInt(LugarTable.Cols.ID_LUGAR), 
+					rs.getString(LugarTable.Cols.NOMBRE), 
+					rs.getString(LugarTable.Cols.ESTADO))
+				);
+		}
+		return lugares;
+	}
 
 	public static Apartado getApartadoById(Connection connection, int idApartado) throws SQLException, ApartadoNotFound {
 		String sql = getApartadoSqlQuery(idApartado);
 		Statement stmt = connection.createStatement();
-		logger.info("Ejecutando consulta");
 		ResultSet rs = stmt.executeQuery(sql);
 		if(!rs.next()) {
 			throw new ApartadoNotFound(idApartado);
@@ -68,7 +90,6 @@ public class CommonQueries {
 	public static List<Asiento> getAsientosOfApartado(Connection connection, int idApartado) throws SQLException, ModelNotFound {
 		String sql = getAsientosOfApartadoSqlQuery(idApartado);
 		Statement stmt = connection.createStatement();
-		logger.info("Ejecutando consulta");
 		ResultSet rs = stmt.executeQuery(sql);
 		ArrayList<Asiento> asientos = new ArrayList<>();
 		boolean estado;
@@ -134,7 +155,6 @@ public class CommonQueries {
 	public static Usuario getUsuarioById(Connection connection, int idUsuario) throws SQLException, UsuarioNotFound {
 		String sql = getUserSqlQuery(idUsuario);
 		Statement stmt = connection.createStatement();
-		logger.info("Ejecutando consulta");
 		ResultSet rs = stmt.executeQuery(sql);
 		if(!rs.next()) {
 			throw new UsuarioNotFound(idUsuario);
@@ -155,7 +175,6 @@ public class CommonQueries {
 	public static Evento getEventoById(Connection connection, int idEvento) throws SQLException, ModelNotFound {
 		String sql = getEventoSqlQuery(idEvento);
 		Statement stmt = connection.createStatement();
-		logger.info("Ejecutando consulta");
 		ResultSet rs = stmt.executeQuery(sql);
 		if(!rs.next()) {
 			throw new ModelNotFound(EventoTable.NAME, idEvento);
@@ -178,7 +197,6 @@ public class CommonQueries {
 	public static Lugar getLugarById(Connection connection, int idLugar) throws SQLException, ModelNotFound {
 		String sql = getLugarSqlQuery(idLugar);
 		Statement stmt = connection.createStatement();
-		logger.info("Ejecutando consulta");
 		ResultSet rs = stmt.executeQuery(sql);
 		if(!rs.next()) {
 			throw new ModelNotFound(EventoTable.NAME, idLugar);
