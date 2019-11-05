@@ -15,13 +15,13 @@ public class DatabaseHandler {
 	 */
 	private static final Logger logger = LogManager.getLogger(DatabaseHandler.class);
 	
-	private static final String HOST = "localhost";
+	private static final String HOST = "192.168.1.2";
 	
 	private static final String PORT = "3306";
 	
 	private static final String DATABASE = "boletazo";
 	
-	private static final String USER = "root";
+	private static final String USER = "boletazo";
 	
 	private static final String PASSWORD = "password";
 	
