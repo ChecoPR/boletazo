@@ -29,6 +29,12 @@ import com.itq.progradist.boletazo.ftp.modelos.Lugar;
 import com.itq.progradist.boletazo.ftp.params.ParamNames;
 import com.itq.progradist.boletazo.ftp.params.Response;
 
+/**
+ * Clase que contiene la funcionalidad para subir los informes al servidor FTP
+ * 
+ * @author Equipo 5
+ *
+ */
 public class InformesTimerTask extends TimerTask {
 	/**
 	 * logger del servidor, escribe en server.log
@@ -36,26 +42,26 @@ public class InformesTimerTask extends TimerTask {
 	private static final Logger logger = LogManager.getLogger(InformesTimerTask.class);
 	
 	/*
-	 * Defines remote host
+	 * Dirección IP del servidor boletazo
 	 */
 	static final String HOST = "localhost";
 	
 	/*
-	 * Defines remote host
+	 * Puerto del servidor boletazo
 	 */
 	static final int PORT = 5000;
 	
 	// private static final int DELAY = 10000;
 	
-	private static final int DELAY = 86400000; // un día
-	
 	/**
-	 * 
+	 * El timer task se ejecutará despues del tiempo que indique
 	 */
-	public InformesTimerTask() {
-		
-	}
+	private static final int DELAY = 86400000; // un día
 
+	/**
+	 * Obtiene datos del servidor boletazo, genera un informe y sube un respaldo 
+	 * al servidor FTP
+	 */
 	@Override
 	public void run() {
 		Object[] data = getData();
@@ -130,11 +136,20 @@ public class InformesTimerTask extends TimerTask {
 		}
 	}
 
+	/**
+	 * Agenda el proceso según el tiempo configurado
+	 */
 	public void schedule() {
 		Timer timer = new Timer();
 		timer.schedule(this, 0, DELAY);
 	}
 	
+	/**
+	 * Hace una petición al servidor boletazo para obtener la información 
+	 * que contendrá el informe.
+	 * 
+	 * @return data Contiene la fecha del informe y la información
+	 */
 	private Object[] getData() {
 		JSONObject dataRequest = new JSONObject();
 		
@@ -179,6 +194,12 @@ public class InformesTimerTask extends TimerTask {
 		return data;
 	}
 	
+	/**
+	 * Convierte el JSON a una lista de lugares
+	 * 
+	 * @param responseJson JSON que contiene los lugares
+	 * @return lugares Lugares en formato de lista
+	 */
 	private List<Lugar> decodeListArray(JSONObject responseJson) {
 		JSONArray lugaresJsonArray = responseJson.getJSONArray("data");
 		List<Lugar> lugares = new ArrayList<>();
@@ -189,6 +210,13 @@ public class InformesTimerTask extends TimerTask {
 		return lugares;
 	}
 	
+	/**
+	 * Convierte un JSON que representa el lugar a un 
+	 * objeto de tipo Lugar
+	 * 
+	 * @param lugarJson JSON de lugar
+	 * @return lugar Lista con la información del lugar
+	 */
 	private Lugar getApartadoFromJsonObject(JSONObject lugarJson) {
 		int idLugar = lugarJson.getInt(Response.Lugar.Values.ID_LUGAR);
 		String nombre = lugarJson.getString(Response.Lugar.Values.NOMBRE);
@@ -201,6 +229,12 @@ public class InformesTimerTask extends TimerTask {
 		return lugar;
 	}
 	
+	/**
+	 * Convierte el JSON a una lista de eventoos
+	 * 
+	 * @param eventosArray
+	 * @return eventos
+	 */
 	private List<Evento> decodeEventosJsonArray(JSONArray eventosArray) {
 		List<Evento> eventos = new ArrayList<Evento>();
 		for (int i = 0; i < eventosArray.length(); i++) {
@@ -211,6 +245,13 @@ public class InformesTimerTask extends TimerTask {
 		return eventos;
 	}
 	
+	/**
+	 * Convierte un JSON que representa el evento a un 
+	 * objeto de tipo Evento
+	 * 
+	 * @param eventoJson Evento en tipo JSON
+	 * @return evento
+	 */
 	private Evento getEventoFromJsonObject(JSONObject eventoJson) {
 		int idEvento = eventoJson.getInt(Response.Lugar.Evento.ID_EVENTO);
 		int idLugar = eventoJson.getInt(Response.Lugar.Evento.ID_LUGAR);

@@ -1,5 +1,11 @@
 package com.itq.progradist.boletazo.ftp.params;
 
+/**
+ * Paramétros de la petición al servidor boletazo
+ * 
+ * @author Equipo 5
+ *
+ */
 public class ParamNames {
 	
 	public static final class Recurso {

@@ -17,6 +17,12 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itq.progradist.boletazo.ftp.modelos.Evento;
 
+/**
+ * Informe de las ventas de los lugares
+ * 
+ * @author Equipo 5
+ *
+ */
 public class BoletazoDocument extends Document {
 	
 	/**
@@ -24,12 +30,34 @@ public class BoletazoDocument extends Document {
 	 */
 	private static final Logger logger = LogManager.getLogger(BoletazoDocument.class);
 	
-	private String dirName;
-	private String pdfName;
-	
+	/**
+	 * Ruta raíz donde se almacenarán los archivos
+	 */
 	private static final String BASE_PATH = "C:/Users/arman/Documents/uni/7mo-Semestre/PROGRAMACION/";
+	
+	/**
+	 * Extensión del los documentos
+	 */
 	private static final String EXT = ".pdf";
 	
+	/**
+	 * Nombre del directorio del archivo
+	 */
+	private String dirName;
+	
+	/**
+	 * Nombre del archivo
+	 */
+	private String pdfName;
+	
+	/**
+	 * Crea un archivo en el directorio y con el nombre especificado
+	 * 
+	 * @param dirName Directorio del archivo
+	 * @param pdfName Nombre del archivo
+	 * @throws FileNotFoundException
+	 * @throws DocumentException
+	 */
 	public BoletazoDocument(String dirName, String pdfName) throws FileNotFoundException, DocumentException {
 		super();
 		
@@ -49,6 +77,13 @@ public class BoletazoDocument extends Document {
         PdfWriter.getInstance(this,ficheroPdf).setInitialLeading(20);
 	}
 	
+	/**
+	 * Añade el header al archivo
+	 * 
+	 * @param today Fecha del informe
+	 * @param nombre Nombre de la sede
+	 * @throws DocumentException
+	 */
 	public void addBoletazoHeader(String today, String nombre) throws DocumentException {
 		this.add(new Paragraph("Informe de ventas del día: " + today,
 				FontFactory.getFont("arial",   // fuente
@@ -62,6 +97,12 @@ public class BoletazoDocument extends Document {
 				BaseColor.GREEN)));
 	}
 	
+	/**
+	 * Añade el pieal informe
+	 * 
+	 * @param totalVentas Total de las ventas
+	 * @throws DocumentException
+	 */
 	public void addBoletazoFooter(double totalVentas) throws DocumentException {
 		this.add(
 				new Paragraph(
@@ -69,6 +110,12 @@ public class BoletazoDocument extends Document {
 				));		
 	}
 
+	/**
+	 * Añade los eventos al informe
+	 * 
+	 * @param eventos
+	 * @throws DocumentException
+	 */
 	public void addEventos(List<Evento> eventos) throws DocumentException {
 		Paragraph paragraph = null;
 		for (Evento evento: eventos) {
@@ -95,6 +142,11 @@ public class BoletazoDocument extends Document {
 		return pdfName + EXT;
 	}
 	
+	/**
+	 * Devuelve el nombre completo del archivo con la ruta raíz
+	 * 
+	 * @return
+	 */
 	public String getFullName() {
 		return BASE_PATH + this.dirName + this.pdfName + EXT; 
 	}

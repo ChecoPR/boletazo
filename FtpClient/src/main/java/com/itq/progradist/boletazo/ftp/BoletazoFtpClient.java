@@ -13,6 +13,13 @@ import org.apache.logging.log4j.Logger;
 import com.itq.progradist.boletazo.ftp.documento.BoletazoDocument;
 import com.itq.progradist.boletazo.ftp.exceptions.BoletazoFtpClientException;
 
+/**
+ * Clase customizada de FTPClient. Contiene la configuración 
+ * para conectar con el servidor FTP y algunos métodos útiles
+ * 
+ * @author Equipo 5
+ *
+ */
 public class BoletazoFtpClient extends FTPClient {
 	
 	/**
@@ -20,11 +27,33 @@ public class BoletazoFtpClient extends FTPClient {
 	 */
 	private static final Logger logger = LogManager.getLogger(BoletazoFtpClient.class);
 	
+	/**
+	 * Dirección IP del servidor FTP
+	 */
 	public static final String SERVER = "192.168.1.2";
+	
+	/**
+	 * Puerto del servidor FTP
+	 */
 	public static final int PORT = 21;
+	
+	/**
+	 * Usuario FTP
+	 */
 	public static final String USER = "ftpBoletazo";
+	
+	/**
+	 * Contraseña del usuario FTP
+	 */
 	public static final String PASS = "test2019";
 	
+	/**
+	 * Conectar al servidor FTP
+	 * 
+	 * @throws SocketException
+	 * @throws IOException
+	 * @throws BoletazoFtpClientException
+	 */
 	public void connectToBoletazoFtpServer() throws SocketException, IOException, BoletazoFtpClientException {
 		this.connect(SERVER, PORT);
 		logger.info(this.getReplyString());
@@ -34,6 +63,12 @@ public class BoletazoFtpClient extends FTPClient {
         }
 	}
 	
+	/**
+	 * Ejecuta el login al servidor FTP
+	 * 
+	 * @throws IOException
+	 * @throws BoletazoFtpClientException
+	 */
 	public void loginToBoletazoFtpServer() throws IOException, BoletazoFtpClientException {
 		boolean login = this.login(USER, PASS);
 		logger.info(this.getReplyString());
@@ -42,6 +77,13 @@ public class BoletazoFtpClient extends FTPClient {
 		}
 	}
 	
+	/**
+	 * Sube un informe al servidor
+	 * 
+	 * @param boletazoDocument
+	 * @throws IOException
+	 * @throws BoletazoFtpClientException
+	 */
 	public void uploadBoletazoDocument(BoletazoDocument boletazoDocument) throws IOException, BoletazoFtpClientException {
 		this.createDirectoryTree(boletazoDocument.getDirName());
 		logger.info(this.getReplyString());
@@ -62,7 +104,8 @@ public class BoletazoFtpClient extends FTPClient {
 	}
 	
 	/**
-	* utility to create an arbitrary directory hierarchy on the remote ftp server 
+	* Utility to create an arbitrary directory hierarchy on the remote ftp server
+	*  
 	* @param client
 	* @param dirTree  the directory tree only delimited with / chars.  No file name!
 	* @throws Exception

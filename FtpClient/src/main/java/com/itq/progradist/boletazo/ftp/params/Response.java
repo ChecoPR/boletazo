@@ -1,5 +1,12 @@
 package com.itq.progradist.boletazo.ftp.params;
 
+/**
+ * Contiene las claves para acceder a los datos de la respuesta
+ * del servidor boletazo
+ *  
+ * @author Equipo 5
+ *
+ */
 public class Response {
 	public static final class Lugar {
 		public static final class Informe {

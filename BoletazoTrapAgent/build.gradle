@@ -1,0 +1,14 @@
+apply plugin : 'application'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	// snmp
+	compile "org.snmp4j:snmp4j:2.8.0"
+	
+	// logger
+	compile "org.apache.logging.log4j:log4j-core:2.8.2"
+}
