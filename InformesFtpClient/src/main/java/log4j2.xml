@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
  <Appenders>
- <File name="A1" fileName="C:\Users\arman\Documents\uni\7mo-Semestre\PROGRAMACION\boletazo\FtpClient\ftp-client.log" append="true">
+ <File name="A1" fileName="C:\Users\arman\Documents\uni\7mo-Semestre\PROGRAMACION\boletazo\InformesFtpClient\ftp-client.log" append="true">
  <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
  </File>
  <Console name="STDOUT" target="SYSTEM_OUT">

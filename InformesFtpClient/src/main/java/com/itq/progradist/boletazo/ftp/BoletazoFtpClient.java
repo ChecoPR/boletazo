@@ -1,20 +1,17 @@
 package com.itq.progradist.boletazo.ftp;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.Scanner;
 
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.itq.progradist.boletazo.ftp.documento.BoletazoDocument;
 import com.itq.progradist.boletazo.ftp.exceptions.BoletazoFtpClientException;
 
 /**
@@ -51,14 +48,6 @@ public class BoletazoFtpClient extends FTPClient {
 	 */
 	public static final String PASS = "test2019";
 	
-	public static final String BASE_PATH = "C:\\Users\\arman\\Desktop\\";
-	
-	private Scanner rd; 
-	
-	public BoletazoFtpClient() {
-		rd = new Scanner(System.in);
-	}
-	
 	/**
 	 * Conectar al servidor FTP
 	 * 
@@ -87,6 +76,32 @@ public class BoletazoFtpClient extends FTPClient {
 		if(!login) {
 			throw new BoletazoFtpClientException("No se pudo logear al servidor " + SERVER + " con el usuario " + USER);
 		}
+	}
+	
+	/**
+	 * Sube un informe al servidor
+	 * 
+	 * @param boletazoDocument
+	 * @throws IOException
+	 * @throws BoletazoFtpClientException
+	 */
+	public void uploadBoletazoDocument(BoletazoDocument boletazoDocument) throws IOException, BoletazoFtpClientException {
+		this.createDirectoryTree(boletazoDocument.getDirName());
+		logger.info(this.getReplyString());
+		this.changeWorkingDirectory(boletazoDocument.getDirName());
+		logger.info(this.getReplyString());
+		logger.info("pwd:" + this.printWorkingDirectory());
+		logger.info(boletazoDocument.getDirName());
+		
+		File file = new File(boletazoDocument.getFullName());
+		FileInputStream input = new FileInputStream(file);
+		this.setFileType(BINARY_FILE_TYPE);
+		this.enterLocalActiveMode();
+		boolean uploaded = this.storeFile(boletazoDocument.getPdfName(), input);
+		if(!uploaded) {
+			throw new BoletazoFtpClientException("Falló la subida del archivo con nombre: " + boletazoDocument.getPdfName());
+		}
+		logger.info("El archivo " + boletazoDocument.getFullName() + " se subió correctamente");
 	}
 	
 	/**
@@ -167,128 +182,6 @@ public class BoletazoFtpClient extends FTPClient {
                 System.out.println("CANNOT remove the directory: " + dirToList);
             }
         }
-    }
-
-	public void archivos() throws IOException //Se muestran los archivos en el directorio actual
-	{
-		String lista [];
-		System.out.println("\nArchivos en "+ this.printWorkingDirectory() +":\n");
-	    lista = this.listNames();
-	    for(int i = 0; i < lista.length;i++)
-	    {
-	   	 	System.out.println(lista[i]);
-	    }
-	}
-
-	public void menuReubicacion(String archivo,String aux) throws IOException
-	{
-		int opc = 0;
-		boolean termino = false;
-		String nueva_ruta = "";
-		while(termino == false)
-		{
-			this.archivos();
-			System.out.print("1.Abrir directorio\n2.Reubicar aqui\nSeleccion: ");
-			opc = FtpClientApp.rd.nextInt();
-			switch(opc)
-			{
-				case 1:
-					this.abrirDirectorio();
-					break;
-				case 2:
-					nueva_ruta = this.printWorkingDirectory() + "/" + aux;
-					this.rename(archivo,nueva_ruta);
-					termino = true;
-					System.out.print("\nArchivo reubicado exitosamente.");
-					break;
-				default:
-					System.out.print("ERROR");
-			}
-		}
-	}
-	
-	public void abrirDirectorio() throws IOException
-    {
-    	System.out.print("\nAbrir directorio: ");
-    	String directorio = rd.next();
-    	this.changeWorkingDirectory(directorio);
-    }
-	
-	public void eliminarDirectorio() throws IOException
-    {
-    	System.out.print("\nDirectorio a borrar: ");
-    	String dir = rd.next();
-    	// cliente.rmd(dir);
-    	this.removeDirectory(this.printWorkingDirectory(), dir);
-    	System.out.print("\nDirectorio eliminado exitosamente.");
-    }
-	
-	public void crearArchivo() throws IOException
-    {
-    	System.out.print("\nNombre de archivo nuevo: ");
-    	String fichero = rd.next();
-    	String ruta = BoletazoFtpClient.BASE_PATH + 
-    			"" + fichero + ".txt";
-    	File nuevoA = new File(ruta);
-    	BufferedWriter bw;
-    	if(nuevoA.exists())
-    	{
-    		System.out.print("Existe");
-    	}
-    	else
-    	{
-    		bw = new BufferedWriter(new FileWriter(nuevoA));
-    		bw.close();
-    		System.out.print("\nSe guardo exitosamente.");
-    	}
-    	File file = new File(ruta);
-    	FileInputStream input = new FileInputStream(file);
-    	this.setFileType(FTP.BINARY_FILE_TYPE);
-    	this.enterLocalActiveMode();
-    	System.out.print("\nArchivo creado exitosamente.");
-    	if (!this.storeFile(file.getName(),input))
-    	{
-    		System.out.println("Subida fallida.");
-    	}
-    	nuevoA.delete();	
-    }
-	
-	public void crearDirectorio() throws IOException
-    {
-    	System.out.print("\nNombre de directorio nuevo: ");
-    	String nom = rd.next();
-    	this.makeDirectory(nom);
-    	System.out.print("\nDirectorio creado exitosamente.");
-    }
-	
-	public void renombrarDirectorio() throws IOException
-    {
-    	System.out.print("\nDirectorio a renombrar: ");
-    	String viejo = rd.next();
-    	System.out.print("Nuevo nombre: ");
-    	String nom = rd.next();
-    	this.rename(viejo, nom);
-    	System.out.print("\nDirectorio renombrado exitosamente.");
-    }
-	
-	public void borrarArchivo() throws IOException
-    {
-    	System.out.print("\nArchivo a eliminar: ");
-    	String archivo = rd.next();
-    	this.deleteFile(archivo);
-    	System.out.print("\nArchivo eliminado exitosamente.");
-    }
-	
-	public void reubicarArchivo() throws IOException
-    {
-    	String ruta = this.printWorkingDirectory();
-    	System.out.print("\nArchivo a reubicar: ");
-    	String arc = rd.next();
-    	ruta = ruta + "/" + arc;
-    	this.changeWorkingDirectory("/");
-    	System.out.print(this.printWorkingDirectory());
-    	System.out.println("Seleccione una ruta: ");
-    	this.menuReubicacion(ruta,arc);
     }
 
 }

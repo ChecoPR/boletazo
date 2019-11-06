@@ -14,10 +14,8 @@ public class BoletazoFtpClientMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/*InformesTimerTask informesTimerTask = new InformesTimerTask();
-		informesTimerTask.schedule();*/
-		
-		FtpClientApp.execute();
+		InformesTimerTask informesTimerTask = new InformesTimerTask();
+		informesTimerTask.schedule();
 	}
 
 }
