@@ -4,7 +4,12 @@ import java.util.Scanner;
 
 import org.apache.commons.net.ftp.FTPReply;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class FtpClientApp {
+
+	private static final Logger logger = LogManager.getLogger(FtpClientApp.class);
 	static Scanner rd = new Scanner(System.in);
 	
 	public static void execute() {
@@ -23,12 +28,14 @@ public class FtpClientApp {
             
         	if (FTPReply.isPositiveCompletion(RESPUESTA)) 
         	{
+				logger.info(RESPUESTA);
         		System.out.println("Codigo de retorno: "+RESPUESTA);
         	}
            
         	boolean loginSatisfactorio = clienteFtp.login(USUARIO, PASS);
         	if (loginSatisfactorio) 
         	{
+				logger.info("Sesion iniciada exitosamente en servidor FTP" + BoletazoFtpClient.SERVER + ".");
         		System.out.println("Sesion iniciada con exito.-----------\n");
         		
         		boolean salir = false;
@@ -63,18 +70,21 @@ public class FtpClientApp {
                 		case 8:
                 			salir = true;
                 			break;
-                		default:
-                			System.out.print("ERROR");
+						default:
+							logger.error("Opcion ingresada no valida.");
+                			System.out.print("Opcion ingresada no valida.");
                 	}
                  }
              }
              else
              {
-                 System.out.println("Sesion no iniciada");
+				 logger.error("Sesion no iniciada, verificar que los datos de usuario sean los correctos.");
+                 System.out.println("Sesion no iniciada, verificar que los datos de usuario sean los correctos.");
              }                
         } 
         catch (Exception e) 
         {
+			logger.error("Error de conexion: " + e.getMessage());
             System.out.println("Error en conexion: "+ e.getMessage());
         }
 	}

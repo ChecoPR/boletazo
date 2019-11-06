@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	// logger
+	compile "org.apache.logging.log4j:log4j-core:2.8.2"
+	
+	// send email
+	compile	"com.sun.mail:javax.mail:1.5.2","com.itextpdf:itextpdf:5.5.13.1"
+	
+	// snmp
+	compile "org.snmp4j:snmp4j:2.8.0"
+	
+}
+
+

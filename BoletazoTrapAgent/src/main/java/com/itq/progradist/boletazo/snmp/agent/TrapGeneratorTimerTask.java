@@ -1,4 +1,4 @@
-package com.itq.progradist.snmp.agent;
+package com.itq.progradist.boletazo.snmp.agent;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,13 +13,13 @@ import org.snmp4j.smi.VariableBinding;
 public class TrapGeneratorTimerTask extends TimerTask {
 	private static final Logger logger = LogManager.getLogger(TrapGeneratorTimerTask.class);
 	
-	private static final int DELAY = 3000;
+	private static final int DELAY = 1000000;
 
 	@Override
 	public void run() {
 		logger.info("Envíando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
-		PDU response = TrapGenerator.sendPdu().getResponse();
+		PDU response = TrapGenerator.searchOids(Config.OIDS).getResponse();
 		
 		logger.info("Se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
@@ -34,10 +34,12 @@ public class TrapGeneratorTimerTask extends TimerTask {
 		}
 		
 		Vector<? extends VariableBinding> vbs = response.getVariableBindings();
-		for (VariableBinding vb : vbs) {
-			logger.info("Envíando trap a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
-			TrapGenerator.sendTrap(vb);
-		}
+		
+		BoletazoTrap diskTrap = TrapGenerator.createMemoryTrap(vbs);
+		BoletazoTrap ramTrap = TrapGenerator.createDiskTrap(vbs);
+		
+		TrapGenerator.sendTrap(diskTrap);
+		TrapGenerator.sendTrap(ramTrap);
 	}
 	
 	/**

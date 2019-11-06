@@ -1,0 +1,24 @@
+2019-11-06 15:52:19,195 INFO  [Trap.0] administrador.Receiver (Receiver.java:77) - ===== NEW SNMP 2/3 TRAP RECEIVED FROM 127.0.0.1/60077 ====
+2019-11-06 15:52:19,195 INFO  [Trap.1] administrador.Receiver (Receiver.java:77) - ===== NEW SNMP 2/3 TRAP RECEIVED FROM 127.0.0.1/60078 ====
+2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:79) - errorStatus 0
+2019-11-06 15:52:19,199 INFO  [Trap.1] administrador.Receiver (Receiver.java:79) - errorStatus 0
+2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:80) - errorIndex 0
+2019-11-06 15:52:19,199 INFO  [Trap.1] administrador.Receiver (Receiver.java:80) - errorIndex 0
+2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:81) - requestID 123
+2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:82) - pduType -89
+2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:81) - requestID 123
+2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:83) - communityString snmpServer
+2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:82) - pduType -89
+2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:90) - -----------
+2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:83) - communityString snmpServer
+2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:90) - -----------
+2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:95) - OID: 1.3.6.1.6.3.1.1.4.1.0
+2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:95) - OID: 1.3.6.1.6.3.1.1.4.1.1
+2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:103) - Porcentaje de Disco: 48.08644532905025
+2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:99) - Porcentaje de Memoria: 49.52308190952447
+2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:104) - syntaxstring: OCTET STRING
+2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:100) - syntaxstring: OCTET STRING
+2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:105) - syntax: 4
+2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:107) - -----------
+2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:101) - syntax: 4
+2019-11-06 15:52:19,211 INFO  [Trap.0] administrador.Receiver (Receiver.java:107) - -----------
