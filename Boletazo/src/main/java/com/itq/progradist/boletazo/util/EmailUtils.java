@@ -115,7 +115,7 @@ public class EmailUtils {
         Document documento = new Document();
 
         // Se crea el OutputStream para el fichero donde queremos dejar el pdf.
-        String dest = "C:/Users/arman/Documents/uni/7mo-Semestre/PROGRAMACION/fichero.pdf";
+        String dest = "C:/Users/ropea/Documents/fichero.pdf";
         
         FileOutputStream ficheroPdf;
         

@@ -27,6 +27,8 @@ import com.itq.progradist.boletazo.modelos.Apartado;
 import com.itq.progradist.boletazo.modelos.MetodoPago;
 import com.itq.progradist.boletazo.modelos.Usuario;
 import com.itq.progradist.boletazo.util.EmailUtils;
+import com.itq.program.dist.queues.Consumer;
+import com.itq.program.dist.queues.Producer;
 
 /**
  * Realiza los procesos que tienen que ver con el tipo de recurso "pago".
@@ -137,10 +139,13 @@ public class ControladorPago {
 			
 			logger.info("Enviando correo a " + usuario.getEmail() + " por el pago del apartado " + apartado.getIdApartado());
 			Multipart multipart = new MimeMultipart();
-			EmailUtils.sendPaymentEmail(
-					usuario, 
-					apartado, 
-					EmailUtils.BOLETO_PAGADO_SUBJECT, 
+	        Producer producer = new Producer();
+	        producer.send("localhost", "1099", "B", "Correo enviado a " + usuario.getEmail());
+	        System.out.println("Correo enviado a la cola");
+			Consumer.mail(
+					usuario,
+					apartado,
+					EmailUtils.BOLETO_PAGADO_SUBJECT,
 					multipart
 				);
 			
@@ -166,16 +171,6 @@ public class ControladorPago {
 			respuesta.put("message", "Error al consultar la base de datos");
 		} catch (ApartadoNotFound e) {
 			logger.error(e.getMessage());
-			logger.catching(e);
-			respuesta.put("respuesta", "Error");
-			respuesta.put("message", e.getMessage());
-		} catch (AddressException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
-			logger.catching(e);
-			respuesta.put("respuesta", "Error");
-			respuesta.put("message", e.getMessage());
-		} catch (MessagingException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
 			logger.catching(e);
 			respuesta.put("respuesta", "Error");
 			respuesta.put("message", e.getMessage());

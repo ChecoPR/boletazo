@@ -13,18 +13,18 @@ import org.snmp4j.smi.VariableBinding;
 public class TrapGeneratorTimerTask extends TimerTask {
 	private static final Logger logger = LogManager.getLogger(TrapGeneratorTimerTask.class);
 	
-	private static final int DELAY = 1000000;
+	private static final int DELAY = 10000;
 
 	@Override
 	public void run() {
-		logger.info("Envíando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Envï¿½ando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
 		PDU response = TrapGenerator.searchOids(Config.OIDS).getResponse();
 		
-		logger.info("Se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Se recibiï¿½ respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
 		if (response == null) {
-			logger.error("No se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+			logger.error("No se recibiï¿½ respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 			return;
 		}
 		
@@ -43,7 +43,7 @@ public class TrapGeneratorTimerTask extends TimerTask {
 	}
 	
 	/**
-	 * Agenda el proceso según el tiempo configurado
+	 * Agenda el proceso segï¿½n el tiempo configurado
 	 */
 	public void schedule() {
 		Timer timer = new Timer();
