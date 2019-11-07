@@ -16,9 +16,26 @@ import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
+/**
+ * Clase de utilidades para el proceso de consulta de la MIB 
+ * y envío de traps a la maquina que monitorea
+ * 
+ * @author Equipo 5
+ *
+ */
 public class TrapGenerator {
+	
+	/**
+	 * Escribe en el archivo configurado en el log4j.propierties
+	 */
 	private static final Logger logger = LogManager.getLogger(TrapGenerator.class);
 	
+	/**
+	 * Realiza el proceso de consulta de los OIDs dados
+	 * 
+	 * @param oids OIDs a consultar en la MIB de la maquina configurada
+	 * @return responseEvent Respuesta a la consulta, contiene los valores solicitados o null si no encontró resultados
+	 */
 	public static ResponseEvent searchOids(VariableBinding[] oids) {
 		ResponseEvent responseEvent = null;
 		try {
@@ -46,7 +63,12 @@ public class TrapGenerator {
 		
 		return responseEvent;
 	}
-	
+
+	/**
+	 * Envía un trap a la maquina de destino configurada
+	 * 
+	 * @param boletazoTrap
+	 */
 	public static void sendTrap(BoletazoTrap boletazoTrap) {
 		try {
 			Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
@@ -68,6 +90,14 @@ public class TrapGenerator {
 		}
 	}
 	
+	/**
+	 * Crea el trap que contiene los valores del almacenamiento 
+	 * en la maquina. Se utilizan los valores provientes de la repuesta de la 
+	 * maquina que es monitoreada 
+	 * 
+	 * @param vectorVariableBinding Contiene los valores del almacenamiento
+	 * @return boletazoTrap Trap que contiene los valores del almacenamiento
+	 */
 	public static BoletazoTrap createDiskTrap(Vector<? extends VariableBinding> vectorVariableBinding) {
 		BoletazoTrap boletazoTrap = new BoletazoTrap();
 		
@@ -90,6 +120,14 @@ public class TrapGenerator {
 		return boletazoTrap;
 	}
 	
+	/**
+	 * Crea el trap que contiene los valores de la memoria 
+	 * en la maquina. Se utilizan los valores provientes de la repuesta de la 
+	 * maquina que es monitoreada.
+	 * 
+	 * @param vectorVariableBinding Contiene los valores de la memoria.
+	 * @return boletazoTrap Trap que contiene los valores de la memoria.
+	 */
 	public static BoletazoTrap createMemoryTrap(Vector<? extends VariableBinding> vectorVariableBinding) {
 		BoletazoTrap boletazoTrap = new BoletazoTrap();
 		

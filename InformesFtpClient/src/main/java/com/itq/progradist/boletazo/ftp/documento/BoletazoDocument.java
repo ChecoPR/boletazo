@@ -15,6 +15,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itq.progradist.boletazo.ftp.Config;
 import com.itq.progradist.boletazo.ftp.modelos.Evento;
 
 /**
@@ -26,19 +27,9 @@ import com.itq.progradist.boletazo.ftp.modelos.Evento;
 public class BoletazoDocument extends Document {
 	
 	/**
-	 * logger del servidor, escribe en ftp-client.log
+	 * logger del servidor, escribe en el archivo configurado
 	 */
 	private static final Logger logger = LogManager.getLogger(BoletazoDocument.class);
-	
-	/**
-	 * Ruta raíz donde se almacenarán los archivos
-	 */
-	private static final String BASE_PATH = "C:/Users/arman/Documents/uni/7mo-Semestre/PROGRAMACION/";
-	
-	/**
-	 * Extensión del los documentos
-	 */
-	private static final String EXT = ".pdf";
 	
 	/**
 	 * Nombre del directorio del archivo
@@ -64,7 +55,7 @@ public class BoletazoDocument extends Document {
 		this.dirName = dirName;
 		this.pdfName = pdfName; 
 
-        String basePath = BASE_PATH + dirName;
+        String basePath = Config.BASE_PATH + dirName;
         
         File directory = new File(basePath);
         if(!directory.exists()) {
@@ -73,7 +64,7 @@ public class BoletazoDocument extends Document {
         
         FileOutputStream ficheroPdf;
         
-		ficheroPdf = new FileOutputStream(new File(basePath, pdfName + EXT));
+		ficheroPdf = new FileOutputStream(new File(basePath, pdfName + Config.EXT));
         PdfWriter.getInstance(this,ficheroPdf).setInitialLeading(20);
 	}
 	
@@ -134,12 +125,22 @@ public class BoletazoDocument extends Document {
 		
 	}
 
+	/**
+	 * Develve el nombre del directorio dónde se encuentra el 
+	 * archivo pero sin la raíz
+	 * @return
+	 */
 	public String getDirName() {
 		return dirName;
 	}
 
+	/**
+	 * Devuelve el nombre del archivo con extensión
+	 * 
+	 * @return
+	 */
 	public String getPdfName() {
-		return pdfName + EXT;
+		return pdfName + Config.EXT;
 	}
 	
 	/**
@@ -148,7 +149,7 @@ public class BoletazoDocument extends Document {
 	 * @return
 	 */
 	public String getFullName() {
-		return BASE_PATH + this.dirName + this.pdfName + EXT; 
+		return Config.BASE_PATH + this.dirName + this.pdfName + Config.EXT; 
 	}
 
 }

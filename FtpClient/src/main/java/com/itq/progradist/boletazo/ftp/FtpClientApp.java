@@ -9,14 +9,25 @@ import org.apache.logging.log4j.LogManager;
 
 public class FtpClientApp {
 
+	/**
+	 * Escribe en el archivo configurado
+	 */
 	private static final Logger logger = LogManager.getLogger(FtpClientApp.class);
+	
+	/**
+	 * Maneja la entrada del usuario y contraseña 
+	 * y la selección del menú
+	 */
 	static Scanner rd = new Scanner(System.in);
 	
+	/**
+	 * Ejecuta el login del usuario y el despligue del menú
+	 */
 	public static void execute() {
 		System.out.print("Usuario: ");
-        final String USUARIO = rd.next(); //Aqu� se indica el nombre de usuario dado de alta en el servidor
+        final String USUARIO = rd.next(); //Aquíse indica el nombre de usuario dado de alta en el servidor
         System.out.print("Contraseña: ");
-        final String PASS = rd.next(); // Su respectiva contrase�a
+        final String PASS = rd.next(); // Su respectiva contraseñaa
         
         BoletazoFtpClient clienteFtp = new BoletazoFtpClient();
          
@@ -33,9 +44,10 @@ public class FtpClientApp {
         	}
            
         	boolean loginSatisfactorio = clienteFtp.login(USUARIO, PASS);
+        	
         	if (loginSatisfactorio) 
         	{
-				logger.info("Sesion iniciada exitosamente en servidor FTP" + BoletazoFtpClient.SERVER + ".");
+				logger.info("Sesion iniciada exitosamente en servidor FTP" + Config.SERVER + ".");
         		System.out.println("Sesion iniciada con exito.-----------\n");
         		
         		boolean salir = false;

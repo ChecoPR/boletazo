@@ -11,20 +11,42 @@ import org.snmp4j.PDU;
 import org.snmp4j.smi.VariableBinding;
 
 public class TrapGeneratorTimerTask extends TimerTask {
+	
+	/**
+	 * Escribe en el archivo configurado
+	 */
 	private static final Logger logger = LogManager.getLogger(TrapGeneratorTimerTask.class);
 	
+	/**
+	 * Marca el intervalo de tiempo de la ejecución del proceso de envío de traps
+	 */
 	private static final int DELAY = 10000;
+	
+	/**
+	 * Entrada de la aplicación. Crea y agenda el proceso de envío de traps. 
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[]) {
+		String log4jConfPath = Config.LOG4J_PROPIERTIES;
+		PropertyConfigurator.configure(log4jConfPath);
+		TrapGeneratorTimerTask generator = new TrapGeneratorTimerTask();
+		generator.schedule();
+	}
 
+	/**
+	 * Realiza el proceso de envio de traps a la maquina destino
+	 */
 	@Override
 	public void run() {
-		logger.info("Envï¿½ando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Enviando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
 		PDU response = TrapGenerator.searchOids(Config.OIDS).getResponse();
 		
-		logger.info("Se recibiï¿½ respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 		
 		if (response == null) {
-			logger.error("No se recibiï¿½ respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+			logger.error("No se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
 			return;
 		}
 		
@@ -43,17 +65,10 @@ public class TrapGeneratorTimerTask extends TimerTask {
 	}
 	
 	/**
-	 * Agenda el proceso segï¿½n el tiempo configurado
+	 * Agenda el proceso según el tiempo configurado
 	 */
 	public void schedule() {
 		Timer timer = new Timer();
 		timer.schedule(this, 0, DELAY);
-	}
-	
-	public static void main(String args[]) {
-		String log4jConfPath = Config.LOG4J_PROPIERTIES;
-		PropertyConfigurator.configure(log4jConfPath);
-		TrapGeneratorTimerTask generator = new TrapGeneratorTimerTask();
-		generator.schedule();
 	}
 }

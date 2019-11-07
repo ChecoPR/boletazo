@@ -24,29 +24,9 @@ import com.itq.progradist.boletazo.ftp.exceptions.BoletazoFtpClientException;
 public class BoletazoFtpClient extends FTPClient {
 	
 	/**
-	 * logger del servidor, escribe en ftp-client.log
+	 * logger del servidor, escribe en el archivo configurado en log4j.propierties
 	 */
 	private static final Logger logger = LogManager.getLogger(BoletazoFtpClient.class);
-	
-	/**
-	 * Dirección IP del servidor FTP
-	 */
-	public static final String SERVER = "192.168.1.3";
-	
-	/**
-	 * Puerto del servidor FTP
-	 */
-	public static final int PORT = 21;
-	
-	/**
-	 * Usuario FTP
-	 */
-	public static final String USER = "ftpBoletazo";
-	
-	/**
-	 * Contraseña del usuario FTP
-	 */
-	public static final String PASS = "test2019";
 	
 	/**
 	 * Conectar al servidor FTP
@@ -56,11 +36,11 @@ public class BoletazoFtpClient extends FTPClient {
 	 * @throws BoletazoFtpClientException
 	 */
 	public void connectToBoletazoFtpServer() throws SocketException, IOException, BoletazoFtpClientException {
-		this.connect(SERVER, PORT);
+		this.connect(Config.SERVER, Config.PORT);
 		logger.info(this.getReplyString());
 		int replyCode = this.getReplyCode();
         if (!FTPReply.isPositiveCompletion(replyCode)) {
-            throw new BoletazoFtpClientException("No se pudo hacer la conexión al servidor " + SERVER + ":" + PORT);
+            throw new BoletazoFtpClientException("No se pudo hacer la conexión al servidor " + Config.SERVER + ":" + Config.PORT);
         }
 	}
 	
@@ -71,10 +51,10 @@ public class BoletazoFtpClient extends FTPClient {
 	 * @throws BoletazoFtpClientException
 	 */
 	public void loginToBoletazoFtpServer() throws IOException, BoletazoFtpClientException {
-		boolean login = this.login(USER, PASS);
+		boolean login = this.login(Config.USER, Config.PASS);
 		logger.info(this.getReplyString());
 		if(!login) {
-			throw new BoletazoFtpClientException("No se pudo logear al servidor " + SERVER + " con el usuario " + USER);
+			throw new BoletazoFtpClientException("No se pudo logear al servidor " + Config.SERVER + " con el usuario " + Config.USER);
 		}
 	}
 	

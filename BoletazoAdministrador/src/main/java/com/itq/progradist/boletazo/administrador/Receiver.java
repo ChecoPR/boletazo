@@ -37,7 +37,7 @@ public class Receiver implements CommandResponder {
 	private Address listenAddress;
 	private ThreadPool threadPool;
 
-	smtpMail correo = new smtpMail();
+	MailUtils correo = new MailUtils();
 	
 	public static void main(String[] args) {
 		

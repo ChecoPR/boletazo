@@ -1,2 +1,3 @@
 /bin/
 /.gradle/
+/src/main/java/com/itq/progradist/boletazo/administrador/Config.java

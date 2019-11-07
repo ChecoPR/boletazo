@@ -32,29 +32,13 @@ public class BoletazoFtpClient extends FTPClient {
 	private static final Logger logger = LogManager.getLogger(BoletazoFtpClient.class);
 	
 	/**
-	 * Direcci�n IP del servidor FTP
+	 * Método para controlar la entrada del usuario
 	 */
-	public static final String SERVER = "192.168.1.3";
-	
-	/**
-	 * Puerto del servidor FTP
-	 */
-	public static final int PORT = 21;
-	
-	/**
-	 * Usuario FTP
-	 */
-	public static final String USER = "ftpBoletazo";
-	
-	/**
-	 * Contrase�a del usuario FTP
-	 */
-	public static final String PASS = "test2019";
-	
-	public static final String BASE_PATH = "C:\\Users\\arman\\Desktop\\";
-	
 	private Scanner rd; 
 	
+	/**
+	 * Crea un nuevo cliente FTP para el servidor FTP de boletazo
+	 */
 	public BoletazoFtpClient() {
 		rd = new Scanner(System.in);
 	}
@@ -67,11 +51,11 @@ public class BoletazoFtpClient extends FTPClient {
 	 * @throws BoletazoFtpClientException
 	 */
 	public void connectToBoletazoFtpServer() throws SocketException, IOException, BoletazoFtpClientException {
-		this.connect(SERVER, PORT);
+		this.connect(Config.SERVER, Config.PORT);
 		logger.info(this.getReplyString());
 		int replyCode = this.getReplyCode();
         if (!FTPReply.isPositiveCompletion(replyCode)) {
-            throw new BoletazoFtpClientException("No se pudo hacer la conexi�n al servidor " + SERVER + ":" + PORT);
+            throw new BoletazoFtpClientException("No se pudo hacer la conexi�n al servidor " + Config.SERVER + ":" + Config.PORT);
         }
 	}
 	
@@ -82,41 +66,11 @@ public class BoletazoFtpClient extends FTPClient {
 	 * @throws BoletazoFtpClientException
 	 */
 	public void loginToBoletazoFtpServer() throws IOException, BoletazoFtpClientException {
-		boolean login = this.login(USER, PASS);
+		boolean login = this.login(Config.USER, Config.PASS);
 		logger.info(this.getReplyString());
 		if(!login) {
-			throw new BoletazoFtpClientException("No se pudo logear al servidor " + SERVER + " con el usuario " + USER);
+			throw new BoletazoFtpClientException("No se pudo logear al servidor " + Config.SERVER + " con el usuario " + Config.USER);
 		}
-	}
-	
-	/**
-	* Utility to create an arbitrary directory hierarchy on the remote ftp server
-	*  
-	* @param client
-	* @param dirTree  the directory tree only delimited with / chars.  No file name!
-	* @throws Exception
-	*/
-	private void createDirectoryTree(String dirTree ) throws IOException {
-
-	  boolean dirExists = true;
-
-	  //tokenize the string and attempt to change into each directory level.  If you cannot, then start creating.
-	  String[] directories = dirTree.split("/");
-	  for (String dir : directories ) {
-	    if (!dir.isEmpty() ) {
-	      if (dirExists) {
-	        dirExists = this.changeWorkingDirectory(dir);
-	      }
-	      if (!dirExists) {
-	        if (!this.makeDirectory(dir)) {
-	          throw new IOException("Unable to create remote directory '" + dir + "'.  error='" + this.getReplyString()+"'");
-	        }
-	        if (!this.changeWorkingDirectory(dir)) {
-	          throw new IOException("Unable to change into newly created remote directory '" + dir + "'.  error='" + this.getReplyString()+"'");
-	        }
-	      }
-	    }
-	  }     
 	}
 	
 	/**
@@ -169,7 +123,12 @@ public class BoletazoFtpClient extends FTPClient {
         }
     }
 
-	public void archivos() throws IOException //Se muestran los archivos en el directorio actual
+    /**
+     * Se muestran los archivos en el directorio actual
+     * 
+     * @throws IOException
+     */
+	public void archivos() throws IOException
 	{
 		String lista [];
 		System.out.println("\nArchivos en "+ this.printWorkingDirectory() +":\n");
@@ -180,7 +139,14 @@ public class BoletazoFtpClient extends FTPClient {
 	    }
 	}
 
-	public void menuReubicacion(String archivo,String aux) throws IOException
+	/**
+	 * Mueve un archivo de directorio
+	 * 
+	 * @param archivo El nombre del archivo que se moverá
+	 * @param aux Variable auxiliar
+	 * @throws IOException
+	 */
+	public void menuReubicacion(String archivo, String aux) throws IOException
 	{
 		int opc = 0;
 		boolean termino = false;
@@ -209,6 +175,13 @@ public class BoletazoFtpClient extends FTPClient {
 		}
 	}
 	
+	/**
+	 * Cambia el directorio de trabajo al 
+	 * directorio espefificado. Solo funciona para ir directorios 
+	 * hacia adentro y no hacia afuera
+	 * 
+	 * @throws IOException
+	 */
 	public void abrirDirectorio() throws IOException
     {
     	System.out.print("\nAbrir directorio: ");
@@ -217,6 +190,11 @@ public class BoletazoFtpClient extends FTPClient {
 		logger.info("Directorio " + directorio + "abierto, ruta actual: " + this.printWorkingDirectory());
     }
 	
+	/**
+	 * Eliminar un directorio según el nombre especificado
+	 * 
+	 * @throws IOException
+	 */
 	public void eliminarDirectorio() throws IOException
     {
     	System.out.print("\nDirectorio a borrar: ");
@@ -226,11 +204,16 @@ public class BoletazoFtpClient extends FTPClient {
     	System.out.print("\nDirectorio eliminado exitosamente.");
     }
 	
+	/**
+	 * Crear un archivo en la raíz
+	 * 
+	 * @throws IOException
+	 */
 	public void crearArchivo() throws IOException
     {
     	System.out.print("\nNombre de archivo nuevo: ");
     	String fichero = rd.next();
-    	String ruta = BoletazoFtpClient.BASE_PATH + 
+    	String ruta = Config.BASE_PATH + 
     			"" + fichero + ".txt";
     	File nuevoA = new File(ruta);
     	BufferedWriter bw;
@@ -260,6 +243,11 @@ public class BoletazoFtpClient extends FTPClient {
     	nuevoA.delete();	
     }
 	
+	/**
+	 * Crea un directorio en el directorio de trabajo actual
+	 * 
+	 * @throws IOException
+	 */
 	public void crearDirectorio() throws IOException
     {
     	System.out.print("\nNombre de directorio nuevo: ");
@@ -269,6 +257,11 @@ public class BoletazoFtpClient extends FTPClient {
     	System.out.print("\nDirectorio creado exitosamente.");
     }
 	
+	/**
+	 * Cambia el nombre de un directorio
+	 * 
+	 * @throws IOException
+	 */
 	public void renombrarDirectorio() throws IOException
     {
     	System.out.print("\nDirectorio a renombrar: ");
@@ -280,6 +273,11 @@ public class BoletazoFtpClient extends FTPClient {
     	System.out.print("\nDirectorio renombrado exitosamente.");
     }
 	
+	/**
+	 * Borra un archivo
+	 * 
+	 * @throws IOException
+	 */
 	public void borrarArchivo() throws IOException
     {
     	System.out.print("\nArchivo a eliminar: ");
@@ -289,6 +287,11 @@ public class BoletazoFtpClient extends FTPClient {
     	System.out.print("\nArchivo eliminado exitosamente.");
     }
 	
+	/**
+	 * Cambia un archivo de directorio
+	 * 
+	 * @throws IOException
+	 */
 	public void reubicarArchivo() throws IOException
     {
     	String ruta = this.printWorkingDirectory();
