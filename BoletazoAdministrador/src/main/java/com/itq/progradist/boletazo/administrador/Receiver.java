@@ -25,6 +25,9 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.snmp4j.util.MultiThreadedMessageDispatcher;
 import org.snmp4j.util.ThreadPool;
 
+import com.itq.program.dist.queues.Consumer;
+import com.itq.program.dist.queues.Producer;
+
 /**
  * @author 
  * 
@@ -103,7 +106,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Memoria de Armando: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.ARMANDO_MEMORY_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Armando\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de memoria usada excedido en equipo de Armando\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -111,7 +117,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Disco de Armando: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.ARMANDO_DISK_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Armando\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de disco usado excedido en equipo de Armando\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -119,7 +128,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Memoria de Mariano: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.MARIANO_MEMORY_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de memoria usada excedido en equipo de Mariano\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de memoria usada excedido en equipo de Mariano\\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -127,7 +139,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Disco de Mariano: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.MARIANO_DISK_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Mariano\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de disco usado excedido en equipo de Mariano\\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -135,7 +150,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Estado de la base de datos: " + vb.getVariable());
 			        if(vb.getVariable().toString() == "Inactivo")
 			        {
-			        	correo.enviarCorreo("Base de datos inactiva");
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Base de datos inactiva" + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -143,7 +161,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Memoria de Sergio: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.SERGIO_MEMORY_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de memoria usada excedido en equipo de Sergio\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de memoria usada excedido en equipo de Sergio\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
@@ -151,7 +172,10 @@ public class Receiver implements CommandResponder {
 			        logger.info("Porcentaje de Disco de Sergio: " + vb.getVariable());
 			        if(Double.parseDouble(vb.getVariable().toString()) > Config.SERGIO_DISK_LIMIT)
 			        {
-			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Sergio\n Usado: " + vb.getVariable());
+			        	Producer producer = new Producer();
+				        producer.send("localhost", "1099", "A", "Correo enviado a Mariano");
+				        System.out.println("Correo enviado a la cola");
+			        	Consumer.mail("Limite de disco usado excedido en equipo de Sergio\n Usado: " + vb.getVariable());
 			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);

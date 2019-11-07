@@ -13,5 +13,15 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/concurrent.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jbossall-client.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jboss-client.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jboss-common.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jboss-jmx.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jboss-messaging.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jboss-messaging-client.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jbossmq-client.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jms.jar"/>
+	<classpathentry kind="lib" path="E:/Descargas/DriversJBoss/DriversJBoss/jnp-client.jar"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
