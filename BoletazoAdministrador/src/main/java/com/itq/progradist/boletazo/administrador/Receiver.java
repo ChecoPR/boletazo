@@ -37,7 +37,10 @@ public class Receiver implements CommandResponder {
 	private Address listenAddress;
 	private ThreadPool threadPool;
 
+	smtpMail correo = new smtpMail();
+	
 	public static void main(String[] args) {
+		
 		String log4jConfPath = Config.LOG4J_PROPIERTIES;
 		PropertyConfigurator.configure(log4jConfPath);
 		new Receiver().run();
@@ -85,8 +88,9 @@ public class Receiver implements CommandResponder {
 	    Vector<? extends VariableBinding> varBinds = pdu.getVariableBindings();
 	    if (varBinds != null && !varBinds.isEmpty()) {
 	    	Iterator<? extends VariableBinding> varIter = varBinds.iterator();
-
-	    	while (varIter.hasNext()) {
+	    	
+	    	while (varIter.hasNext()) 
+	    	{
 	    		logger.info("-----------");
 		        VariableBinding vb = varIter.next();
 	
@@ -97,10 +101,58 @@ public class Receiver implements CommandResponder {
 		        // Checa si el trap de la memoria o del disco
 		        if (vb.getOid().toString().equals(Config.ARMANDO_OID_ID_MEMORY_PERCENTAGE)) {
 			        logger.info("Porcentaje de Memoria de Armando: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.ARMANDO_MEMORY_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Armando\n Usado: " + vb.getVariable());
+			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
 		        } else if (vb.getOid().toString().equals(Config.ARMANDO_OID_ID_DISK_PERCENTAGE)) {
 			        logger.info("Porcentaje de Disco de Armando: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.ARMANDO_DISK_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Armando\n Usado: " + vb.getVariable());
+			        }
+			        logger.info("syntaxstring: " + syntaxstr);
+			        logger.info("syntax: " + syntax);
+		    	}else if (vb.getOid().toString().equals(Config.MARIANO_OID_ID_MEMORY_PERCENTAGE)) {
+			        logger.info("Porcentaje de Memoria de Mariano: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.MARIANO_MEMORY_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de memoria usada excedido en equipo de Mariano\n Usado: " + vb.getVariable());
+			        }
+			        logger.info("syntaxstring: " + syntaxstr);
+			        logger.info("syntax: " + syntax);
+		        } else if (vb.getOid().toString().equals(Config.MARIANO_OID_ID_DISK_PERCENTAGE)) {
+			        logger.info("Porcentaje de Disco de Mariano: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.MARIANO_DISK_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Mariano\n Usado: " + vb.getVariable());
+			        }
+			        logger.info("syntaxstring: " + syntaxstr);
+			        logger.info("syntax: " + syntax);
+		        } else if (vb.getOid().toString().equals(Config.MARIANO_OID_ID_DATABASE_PROCESS)) {
+			        logger.info("Estado de la base de datos: " + vb.getVariable());
+			        if(vb.getVariable().toString() == "Inactivo")
+			        {
+			        	correo.enviarCorreo("Base de datos inactiva");
+			        }
+			        logger.info("syntaxstring: " + syntaxstr);
+			        logger.info("syntax: " + syntax);
+		        }else if (vb.getOid().toString().equals(Config.SERGIO_OID_ID_MEMORY_PERCENTAGE)) {
+			        logger.info("Porcentaje de Memoria de Sergio: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.SERGIO_MEMORY_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de memoria usada excedido en equipo de Sergio\n Usado: " + vb.getVariable());
+			        }
+			        logger.info("syntaxstring: " + syntaxstr);
+			        logger.info("syntax: " + syntax);
+		        }else if (vb.getOid().toString().equals(Config.SERGIO_OID_ID_DISK_PERCENTAGE)) {
+			        logger.info("Porcentaje de Disco de Sergio: " + vb.getVariable());
+			        if(Double.parseDouble(vb.getVariable().toString()) > Config.SERGIO_DISK_LIMIT)
+			        {
+			        	correo.enviarCorreo("Limite de disco usado excedido en equipo de Sergio\n Usado: " + vb.getVariable());
+			        }
 			        logger.info("syntaxstring: " + syntaxstr);
 			        logger.info("syntax: " + syntax);
 		        }
