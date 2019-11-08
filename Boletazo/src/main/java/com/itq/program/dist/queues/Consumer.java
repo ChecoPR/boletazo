@@ -22,7 +22,6 @@ import javax.naming.NamingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.itq.progradist.boletazo.controladores.ControladorPago;
 import com.itq.progradist.boletazo.modelos.Apartado;
 import com.itq.progradist.boletazo.modelos.Usuario;
 import com.itq.progradist.boletazo.util.EmailUtils;
@@ -32,7 +31,7 @@ public class Consumer implements MessageListener {
 	/**
 	 * logger del servidor, escribe en server.log
 	 */
-	private static final Logger logger = LogManager.getLogger(ControladorPago.class);
+	private static final Logger logger = LogManager.getLogger(Consumer.class);
 	
     /**
      * Contexto de comunicación JMS.
@@ -43,7 +42,10 @@ public class Consumer implements MessageListener {
      * Conexión a la queue.
      */
     private Connection connection = null;
-
+    private static Usuario user;
+    private static Apartado apart;
+    private static String subj;
+    private static Multipart multi;
     /**
      * Programa principal para leer mensajes de queues.
      * 
@@ -111,22 +113,6 @@ public class Consumer implements MessageListener {
     /**
      * Libera recursos utilizados.
      */
-    public static void mail(Usuario usuario, Apartado apartado, String subject, Multipart multipart){
-	try {
-    	EmailUtils.sendPaymentEmail(
-			usuario,
-			apartado,
-			EmailUtils.BOLETO_PAGADO_SUBJECT,
-			multipart
-		);
-	}catch (AddressException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
-			logger.catching(e);
-	} catch (MessagingException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
-			logger.catching(e);
-	}
-    }
     
     private void freeResources() {
         if (ctx != null) {
@@ -145,16 +131,34 @@ public class Consumer implements MessageListener {
         }
     }
 
+    /**
+     * El consumidor lee el mensaje y envia el correo
+     * al destinatario.
+     */
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
             String text = textMessage.getText();
             text = text.trim();
             String parts[] = text.split(",");
-            System.out.println("Mensaje recibido: [" + text + "]");
+            System.out.println("Mensaje recibido: [" + text + "]");        
+            EmailUtils.sendPaymentEmail(
+            		Integer.parseInt(parts[0]),
+            		parts[1],
+            		Integer.parseInt(parts[2]),
+            		Integer.parseInt(parts[3]),
+            		parts[4],
+            		parts[5]
+        		);
         } catch (JMSException e) {
             e.printStackTrace();
-        }
+        } catch (AddressException e) {
+			logger.error("Error al enviar correo: " + e.getMessage());
+			logger.catching(e);
+        } catch (MessagingException e) {
+			logger.error("Error al enviar correo: " + e.getMessage());
+			logger.catching(e);
+}
     }
 }
 

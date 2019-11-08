@@ -21,6 +21,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +42,7 @@ import com.itq.progradist.boletazo.modelos.Asiento;
 import com.itq.progradist.boletazo.modelos.Evento;
 import com.itq.progradist.boletazo.modelos.Lugar;
 import com.itq.progradist.boletazo.modelos.Usuario;
+import com.itq.program.dist.queues.Producer;
 
 public class EmailUtils {
 	
@@ -52,10 +54,12 @@ public class EmailUtils {
 	public static final String BOLETO_PAGADO_SUBJECT = "Felicidades por tu compra";
 	
 	public static void sendPaymentEmail( 
-            Usuario usuario,
-            Apartado apartado,
-            String subject, 
-            Multipart multipart) throws AddressException, MessagingException {
+            int idUsuario,
+            String email,
+            int idEvento,
+            int idApartado,
+            String nombre,
+            String subject) throws AddressException, MessagingException {
 		
 		synchronized (EmailUtils.class) {
 			logger.debug("Contruyendo propiedades del correo");
@@ -84,7 +88,7 @@ public class EmailUtils {
 	        
 	        // constructs from and to address objects
 	        InternetAddress fromAddress = new InternetAddress(SmtpParameters.USER); 
-	        InternetAddress[] toAddresses = { new InternetAddress(usuario.getEmail()) };
+	        InternetAddress[] toAddresses = { new InternetAddress(email) };
 	 
 	        msg.setFrom(fromAddress);
 	        msg.setRecipients(Message.RecipientType.TO, toAddresses);
@@ -94,11 +98,13 @@ public class EmailUtils {
 	        logger.debug("Construyendo PDF");
 	        MimeBodyPart attachementPart = new MimeBodyPart();
 	        try {
-				attachementPart.attachFile(buildPdf(usuario, apartado));
+				attachementPart.attachFile(buildPdf(idUsuario, nombre, idApartado,idEvento));
 			} catch (IOException e) {
 				logger.error("Error en el PDF: " + e.getMessage());
 				logger.catching(e);
 			}
+	        Multipart multipart = new MimeMultipart();
+	        
 	        multipart.addBodyPart(attachementPart);
 	        
 	        msg.setContent(multipart, SmtpParameters.MYME_TYPE);
@@ -110,7 +116,7 @@ public class EmailUtils {
 		}
     }
 	
-	private static File buildPdf(Usuario usuario, Apartado apartado) {
+	private static File buildPdf(int idUsuario, String nombre, int idApartado, int idEvento) {
 		 // Se crea el documento
         Document documento = new Document();
 
@@ -135,13 +141,13 @@ public class EmailUtils {
 							BaseColor.GREEN)));
 			
 			Paragraph idParagraph = new Paragraph(
-					String.format("ID Usuario: %d", usuario.getIdUsuario())
+					String.format("ID Usuario: %d", idUsuario)
 				);
 			documento.add(idParagraph);
 			
 			Connection connection = DatabaseHandler.getConnection();
 			
-			Evento evento = CommonQueries.getEventoById(connection, apartado.getIdEvento());
+			Evento evento = CommonQueries.getEventoById(connection, idEvento);
 			Paragraph eventoParagraph = new Paragraph(
 					String.format("Evento: %s , Fecha: %s, Hora: %s", 
 							evento.getNombre(), 
@@ -156,7 +162,7 @@ public class EmailUtils {
 				);
 			documento.add(lugarParagraph);
 			
-			List<Asiento> asientos = CommonQueries.getAsientosOfApartado(connection, apartado.getIdApartado());
+			List<Asiento> asientos = CommonQueries.getAsientosOfApartado(connection, idApartado);
 			
 			String asientosString = "";
 			
@@ -169,11 +175,11 @@ public class EmailUtils {
 				);
 			documento.add(asientosParagraph);
 			
-			double importe = CommonQueries.calculateImporteOf(connection, apartado); 
+			double importe = CommonQueries.calculateImporteOf(connection, idApartado, idEvento); 
 			documento.add(new Paragraph("Importe: $" + importe));
 			
 			Paragraph greetingsParagraph = new Paragraph(
-					String.format("Gracias por tu compra, %s", usuario.getNombre())
+					String.format("Gracias por tu compra, %s", nombre)
 				);
 			documento.add(greetingsParagraph);
 			

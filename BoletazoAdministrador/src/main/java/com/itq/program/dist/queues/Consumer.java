@@ -108,9 +108,6 @@ public class Consumer implements MessageListener {
     /**
      * Libera recursos utilizados.
      */
-    public static void mail(String descripcion){
-		MailUtils.enviarCorreo(descripcion);
-    }
     
     private void freeResources() {
         if (ctx != null) {
@@ -136,6 +133,7 @@ public class Consumer implements MessageListener {
             text = text.trim();
             String parts[] = text.split(",");
             System.out.println("Mensaje recibido: [" + text + "]");
+            MailUtils.enviarCorreo(text);
         } catch (JMSException e) {
             e.printStackTrace();
         }

@@ -128,9 +128,9 @@ public class CommonQueries {
 	 * @param idApartado Apartado del que se quiere obtener el importe
 	 * @throws SQLException 
 	 */
-	public static double calculateImporteOf(Connection connection, Apartado apartado) throws SQLException {
+	public static double calculateImporteOf(Connection connection, int idApartado, int idEvento) throws SQLException {
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery(getImporteApartadoSqlQuery(apartado));
+		ResultSet rs = stmt.executeQuery(getImporteApartadoSqlQuery(idApartado, idEvento));
 		rs.next();
 		double importe = rs.getDouble(ApartadoTable.Cols.IMPORTE);
 		return importe;
@@ -142,13 +142,13 @@ public class CommonQueries {
 	 * @param idApartado ID del apartado del que se quiere obtener el importe
 	 * @return sql Consulta SQL
 	 */
-	private static String getImporteApartadoSqlQuery(Apartado apartado) {
+	private static String getImporteApartadoSqlQuery(int idApartado, int idEvento) {
 		return "SELECT SUM(ez." + EventoZonaTable.Cols.PRECIO + ") as " + ApartadoTable.Cols.IMPORTE
 				+ " FROM " + EventoAsientoTable.NAME + " ea, " + EventoZonaTable.NAME + " ez"
 				+ " WHERE ea." + EventoAsientoTable.Cols.ID_ZONA + " = ez." + EventoZonaTable.Cols.ID_ZONA
 				+ " AND ea." + EventoAsientoTable.Cols.ID_EVENTO + " = ez." + EventoZonaTable.Cols.ID_EVENTO
-				+ " AND ea." + EventoAsientoTable.Cols.ID_APARTADO + " = " + apartado.getIdApartado()
-				+ " AND ea." + EventoAsientoTable.Cols.ID_EVENTO + " = " + apartado.getIdEvento()
+				+ " AND ea." + EventoAsientoTable.Cols.ID_APARTADO + " = " + idApartado
+				+ " AND ea." + EventoAsientoTable.Cols.ID_EVENTO + " = " + idEvento
 				+ " GROUP BY ea." + EventoAsientoTable.Cols.ID_APARTADO;
 	}
 	

@@ -58,7 +58,7 @@ public class ApartadoTimerTask extends TimerTask {
 			rs.next();
 			double pagado = rs.getDouble(ApartadoTable.Cols.PAGADO);
 			
-			double importe = CommonQueries.calculateImporteOf(connection, apartado);
+			double importe = CommonQueries.calculateImporteOf(connection, apartado.getIdApartado(), apartado.getIdEvento());
 			
 			if (seconds * DELAY >= PERIOD) {
 				logger.info("El tiempo del apartado " + this.apartado.getIdApartado() + " ha caducado");
