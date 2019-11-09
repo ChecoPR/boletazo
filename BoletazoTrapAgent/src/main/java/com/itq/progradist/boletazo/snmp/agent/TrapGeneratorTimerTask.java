@@ -20,7 +20,7 @@ public class TrapGeneratorTimerTask extends TimerTask {
 	/**
 	 * Marca el intervalo de tiempo de la ejecución del proceso de envío de traps
 	 */
-	private static final int DELAY = 10000;
+	private static final int DELAY = 5000;
 	
 	/**
 	 * Entrada de la aplicación. Crea y agenda el proceso de envío de traps. 

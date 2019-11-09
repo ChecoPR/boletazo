@@ -56,7 +56,7 @@ public class InformesTimerTask extends TimerTask {
 	/**
 	 * El timer task se ejecutará despues del tiempo que indique
 	 */
-	private static final int DELAY = 86400000; // un día
+	private static final int DELAY = 5000; // un día
 
 	/**
 	 * Obtiene datos del servidor boletazo, genera un informe y sube un respaldo 

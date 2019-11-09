@@ -69,6 +69,7 @@ public class EmailUtils {
 	        properties.put(SmtpParameters.PORT_PROPIERTY_NAME, SmtpParameters.PORT);
 	        properties.put(SmtpParameters.AUTH_PROPIERTY_NAME, SmtpParameters.AUTH);
 	        properties.put(SmtpParameters.TTLS_PROPIERTY_NAME, SmtpParameters.TTLS);
+	        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	 
 	        logger.debug("Generando autenticación del cliente de correo");
 	        // creates a new session with an authenticator
@@ -121,7 +122,7 @@ public class EmailUtils {
         Document documento = new Document();
 
         // Se crea el OutputStream para el fichero donde queremos dejar el pdf.
-        String dest = "C:/Users/ropea/Documents/fichero.pdf";
+        String dest = "C:/Users/arman/Documents/fichero.pdf";
         
         FileOutputStream ficheroPdf;
         

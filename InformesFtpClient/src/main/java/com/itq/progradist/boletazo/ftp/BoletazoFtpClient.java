@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.SocketException;
+import java.util.StringTokenizer;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -68,18 +69,16 @@ public class BoletazoFtpClient extends FTPClient {
 	public void uploadBoletazoDocument(BoletazoDocument boletazoDocument) throws IOException, BoletazoFtpClientException {
 		this.createDirectoryTree(boletazoDocument.getDirName());
 		logger.info(this.getReplyString());
-		this.changeWorkingDirectory(boletazoDocument.getDirName());
-		logger.info(this.getReplyString());
 		logger.info("pwd:" + this.printWorkingDirectory());
-		logger.info(boletazoDocument.getDirName());
-		
+		logger.info(this.getReplyString());
+		logger.info(boletazoDocument.getFullName());
 		File file = new File(boletazoDocument.getFullName());
 		FileInputStream input = new FileInputStream(file);
 		this.setFileType(BINARY_FILE_TYPE);
-		this.enterLocalActiveMode();
+		this.enterLocalPassiveMode();
 		boolean uploaded = this.storeFile(boletazoDocument.getPdfName(), input);
 		if(!uploaded) {
-			throw new BoletazoFtpClientException("Falló la subida del archivo con nombre: " + boletazoDocument.getPdfName());
+			throw new BoletazoFtpClientException("Falló la subida del archivo con nombre: " + boletazoDocument.getPdfName() + ", error: " + this.getReplyString());
 		}
 		logger.info("El archivo " + boletazoDocument.getFullName() + " se subió correctamente");
 	}

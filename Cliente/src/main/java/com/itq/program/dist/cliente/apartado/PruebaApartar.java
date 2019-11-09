@@ -28,16 +28,16 @@ public class PruebaApartar {
 		peticion1.put("zona_id", 1);
 		peticion1.put("num_boletos", boletos);
 		
-		JSONObject peticion2 = new JSONObject();
-		peticion2.put("recurso", "apartado");
-		peticion2.put("metodo", "post");
-		peticion2.put("evento_id", 2);
-		peticion2.put("usuario_id", 2);
-		peticion2.put("zona_id", 1);
-		peticion2.put("num_boletos", boletos);
+//		JSONObject peticion2 = new JSONObject();
+//		peticion2.put("recurso", "apartado");
+//		peticion2.put("metodo", "post");
+//		peticion2.put("evento_id", 2);
+//		peticion2.put("usuario_id", 2);
+//		peticion2.put("zona_id", 1);
+//		peticion2.put("num_boletos", boletos);
 		
 		peticiones.add(peticion1.toString());
-		peticiones.add(peticion2.toString());
+//		peticiones.add(peticion2.toString());
 		for (int i = 0; i < peticiones.size(); i++) {
 			new Cliente(peticiones.get(i)).start();
 		}
