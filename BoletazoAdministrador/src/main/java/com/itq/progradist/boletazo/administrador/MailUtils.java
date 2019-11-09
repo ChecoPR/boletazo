@@ -76,7 +76,7 @@ public class MailUtils {
      * 
      * @param descripcion Mensaje del problema
      */
-    public void enviarCorreo(String descripcion)
+    public static void enviarCorreo(String descripcion)
     {
 
         // outgoing message information

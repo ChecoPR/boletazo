@@ -125,7 +125,7 @@ public class ControladorApartado {
 				
 				actualizarAsientos(params, apartadoActualizado);
 				
-				double importe = CommonQueries.calculateImporteOf(conexion, apartadoActualizado);
+				double importe = CommonQueries.calculateImporteOf(conexion, apartadoActualizado.getIdApartado(), apartadoActualizado.getIdEvento());
 				apartadoActualizado.setImporte(importe);
 				
 				logger.info("Informacion de los asientos apartados realizada");

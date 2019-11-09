@@ -24,7 +24,7 @@ public class PruebaApartar {
 		peticion1.put("recurso", "apartado");
 		peticion1.put("metodo", "post");
 		peticion1.put("evento_id", 2);
-		peticion1.put("usuario_id", 1);
+		peticion1.put("usuario_id", 2);
 		peticion1.put("zona_id", 1);
 		peticion1.put("num_boletos", boletos);
 		

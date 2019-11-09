@@ -121,7 +121,7 @@ public class ControladorPago {
 			
 			int idApartado = params.getInt(Pago.Values.ID_APARTADO);
 			Apartado apartado = CommonQueries.getApartadoById(conexion, idApartado);
-			double importe = CommonQueries.calculateImporteOf(conexion, apartado);
+			double importe = CommonQueries.calculateImporteOf(conexion, apartado.getIdApartado(), apartado.getIdEvento());
 			
 			if(metodoPago.getSaldo() < importe) {
 				throw new SaldoInsuficienteException(idMetodoPago, idApartado);
@@ -138,16 +138,11 @@ public class ControladorPago {
 			Usuario usuario = CommonQueries.getUsuarioById(conexion, apartado.getIdUsuario());
 			
 			logger.info("Enviando correo a " + usuario.getEmail() + " por el pago del apartado " + apartado.getIdApartado());
-			Multipart multipart = new MimeMultipart();
-	        Producer producer = new Producer();
-	        producer.send("localhost", "1099", "B", "Correo enviado a " + usuario.getEmail());
-	        System.out.println("Correo enviado a la cola");
-			Consumer.mail(
-					usuario,
-					apartado,
-					EmailUtils.BOLETO_PAGADO_SUBJECT,
-					multipart
-				);
+			Producer producer = new Producer();
+	        producer.send("localhost", "1099", "B", usuario.getIdUsuario() + "," + usuario.getEmail() + "," + apartado.getIdEvento() + ","
+	    	        + apartado.getIdApartado() + "," + usuario.getNombre() + "," + EmailUtils.BOLETO_PAGADO_SUBJECT);
+	        System.out.println(usuario.getIdUsuario() + "," + usuario.getEmail() + "," + apartado.getIdEvento() + ","
+	    	        + apartado.getIdApartado() + "," + usuario.getNombre() + "," + EmailUtils.BOLETO_PAGADO_SUBJECT);
 			
 		} catch (ParamIdApartadoNotFound | ParamIdMetodoPagoNotFound | MetodoPagoNotFound e) {
 			logger.error(e.getMessage());

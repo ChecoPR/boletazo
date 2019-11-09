@@ -62,3 +62,26 @@ java.net.SocketException: Connection reset
 	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:67) [main/:?]
 	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
 	at java.util.TimerThread.run(Timer.java:506) [?:?]
+2019-11-09 08:09:03,214 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:159) - Inicia la ejecución del cliente.
+2019-11-09 08:09:03,627 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:178) - Respuesta del server: [{"data":[{"estado":"Querétaro","eventos":[],"idLugar":1,"nombre":"Estadio Corregidora"}],"day":"2019-11-09"}]
+2019-11-09 08:09:03,631 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:75) - Generando informes de ventas del día 2019-11-09
+2019-11-09 08:09:03,632 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:87) - Generando informe de ventas de al sede 1 del día 2019-11-09
+2019-11-09 08:09:03,985 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:110) - Informe de ventas de la sede 1 generado exitosamente, día:2019-11-09
+2019-11-09 08:09:03,985 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:112) - Comenzando la subida del respaldo del archivo C:/Users/arman/Documents/uni/7mo-Semestre/PROGRAMACION/Estadio-Corregidora/2019-11/2019-11-09-08_09_03-Estadio-Corregidora.pdf
+2019-11-09 08:09:04,009 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:40) - 220 Bienvenido al servicio FTP de boletazo, ingrese usuario y contraseÃ±a para continuar.
+
+2019-11-09 08:11:10,262 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:55) - 230 Login successful.
+
+2019-11-09 08:11:10,267 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:70) - 250 Directory successfully changed.
+
+2019-11-09 08:11:10,268 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:72) - 550 Failed to change directory.
+
+2019-11-09 08:11:10,270 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:73) - pwd:/Estadio-Corregidora/2019-11
+2019-11-09 08:11:10,270 INFO  [Timer-0] ftp.BoletazoFtpClient (BoletazoFtpClient.java:74) - Estadio-Corregidora/2019-11/
+2019-11-09 08:11:10,277 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:125) - Error al subir el documento 2019-11-09-08_09_03-Estadio-Corregidora.pdf: Falló la subida del archivo con nombre: 2019-11-09-08_09_03-Estadio-Corregidora.pdf
+2019-11-09 08:11:10,277 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:126) - Catching
+com.itq.progradist.boletazo.ftp.exceptions.BoletazoFtpClientException: Falló la subida del archivo con nombre: 2019-11-09-08_09_03-Estadio-Corregidora.pdf
+	at com.itq.progradist.boletazo.ftp.BoletazoFtpClient.uploadBoletazoDocument(BoletazoFtpClient.java:82) ~[main/:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:118) [main/:?]
+	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
+	at java.util.TimerThread.run(Timer.java:506) [?:?]

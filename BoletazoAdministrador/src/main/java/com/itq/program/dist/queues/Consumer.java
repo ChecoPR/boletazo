@@ -13,25 +13,23 @@ import javax.jms.MessageListener;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.AddressException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.snmp4j.smi.Variable;
 
-import com.itq.progradist.boletazo.modelos.Apartado;
-import com.itq.progradist.boletazo.modelos.Usuario;
-import com.itq.progradist.boletazo.util.EmailUtils;
+import com.itq.progradist.boletazo.administrador.MailUtils;
+import com.itq.progradist.boletazo.administrador.Receiver;
+
 
 public class Consumer implements MessageListener {
 
 	/**
 	 * logger del servidor, escribe en server.log
 	 */
-	private static final Logger logger = LogManager.getLogger(Consumer.class);
+	private static final Logger logger = LogManager.getLogger(Receiver.class);
 	
     /**
      * Contexto de comunicación JMS.
@@ -42,10 +40,7 @@ public class Consumer implements MessageListener {
      * Conexión a la queue.
      */
     private Connection connection = null;
-    private static Usuario user;
-    private static Apartado apart;
-    private static String subj;
-    private static Multipart multi;
+
     /**
      * Programa principal para leer mensajes de queues.
      * 
@@ -55,7 +50,7 @@ public class Consumer implements MessageListener {
     
     public static void main(String args[]) {
     	    Consumer consumer = new Consumer();
-            consumer.consume("localhost", "1099", "B");
+            consumer.consume("localhost", "1099", "A");
     }
 
     /**
@@ -131,34 +126,17 @@ public class Consumer implements MessageListener {
         }
     }
 
-    /**
-     * El consumidor lee el mensaje y envia el correo
-     * al destinatario.
-     */
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
             String text = textMessage.getText();
             text = text.trim();
             String parts[] = text.split(",");
-            System.out.println("Mensaje recibido: [" + text + "]");        
-            EmailUtils.sendPaymentEmail(
-            		Integer.parseInt(parts[0]),
-            		parts[1],
-            		Integer.parseInt(parts[2]),
-            		Integer.parseInt(parts[3]),
-            		parts[4],
-            		parts[5]
-        		);
+            System.out.println("Mensaje recibido: [" + text + "]");
+            MailUtils.enviarCorreo(text);
         } catch (JMSException e) {
             e.printStackTrace();
-        } catch (AddressException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
-			logger.catching(e);
-        } catch (MessagingException e) {
-			logger.error("Error al enviar correo: " + e.getMessage());
-			logger.catching(e);
-}
+        }
     }
 }
 

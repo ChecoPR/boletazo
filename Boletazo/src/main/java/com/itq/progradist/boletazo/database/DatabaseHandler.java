@@ -15,7 +15,7 @@ public class DatabaseHandler {
 	 */
 	private static final Logger logger = LogManager.getLogger(DatabaseHandler.class);
 	
-	private static final String HOST = "192.168.1.3";
+	private static final String HOST = "localhost";
 	
 	private static final String PORT = "3306";
 	

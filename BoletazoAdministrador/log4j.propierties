@@ -1,4 +1,21 @@
+<<<<<<< HEAD
 log4j.rootLogger=DEBUG, consoleAppender, fileAppender
+=======
+# Set root logger level to DEBUG and its only appender to A1.
+log4j.rootLogger=DEBUG, A1
+
+# Direct log messages to a log file
+log4j.appender.A1=org.apache.log4j.RollingFileAppender
+
+#log4j.appender.A1.File=C://Users/arman/Documents/uni/7mo-Semestre/PROGRAMACION/boletazo/BoletazoTrapAgent/agent.log
+log4j.appender.A1.File=E://Documentos/Semestre\ 7/Programación\ distribuida/boletazo/BoletazoAdministrador/agent.log
+# A1 uses PatternLayout.
+log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+log4j.appender.A1.layout.ConversionPattern=%d %-5p [%t] %C{2} (%F:%L) - %m%n
+
+# Root logger
+log4j.rootLogger=INFO, console
+>>>>>>> efd841dd89d1ad4a974659f997f2b6c85c46604f
  
 log4j.appender.consoleAppender=org.apache.log4j.ConsoleAppender
 log4j.appender.consoleAppender.layout=org.apache.log4j.PatternLayout
