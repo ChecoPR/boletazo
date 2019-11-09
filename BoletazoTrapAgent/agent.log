@@ -1,24 +1,880 @@
-2019-11-06 15:52:19,195 INFO  [Trap.0] administrador.Receiver (Receiver.java:77) - ===== NEW SNMP 2/3 TRAP RECEIVED FROM 127.0.0.1/60077 ====
-2019-11-06 15:52:19,195 INFO  [Trap.1] administrador.Receiver (Receiver.java:77) - ===== NEW SNMP 2/3 TRAP RECEIVED FROM 127.0.0.1/60078 ====
-2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:79) - errorStatus 0
-2019-11-06 15:52:19,199 INFO  [Trap.1] administrador.Receiver (Receiver.java:79) - errorStatus 0
-2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:80) - errorIndex 0
-2019-11-06 15:52:19,199 INFO  [Trap.1] administrador.Receiver (Receiver.java:80) - errorIndex 0
-2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:81) - requestID 123
-2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:82) - pduType -89
-2019-11-06 15:52:19,199 INFO  [Trap.0] administrador.Receiver (Receiver.java:81) - requestID 123
-2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:83) - communityString snmpServer
-2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:82) - pduType -89
-2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:90) - -----------
-2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:83) - communityString snmpServer
-2019-11-06 15:52:19,203 INFO  [Trap.0] administrador.Receiver (Receiver.java:90) - -----------
-2019-11-06 15:52:19,203 INFO  [Trap.1] administrador.Receiver (Receiver.java:95) - OID: 1.3.6.1.6.3.1.1.4.1.0
-2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:95) - OID: 1.3.6.1.6.3.1.1.4.1.1
-2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:103) - Porcentaje de Disco: 48.08644532905025
-2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:99) - Porcentaje de Memoria: 49.52308190952447
-2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:104) - syntaxstring: OCTET STRING
-2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:100) - syntaxstring: OCTET STRING
-2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:105) - syntax: 4
-2019-11-06 15:52:19,207 INFO  [Trap.1] administrador.Receiver (Receiver.java:107) - -----------
-2019-11-06 15:52:19,207 INFO  [Trap.0] administrador.Receiver (Receiver.java:101) - syntax: 4
-2019-11-06 15:52:19,211 INFO  [Trap.0] administrador.Receiver (Receiver.java:107) - -----------
+2019-11-09 07:22:03,320 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:22:04,436 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:22:04,438 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 62027.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:22:04,438 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:22:04,438 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 47.729965987964974
+2019-11-09 07:22:04,439 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6331144E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:22:04,440 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:22:04,440 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.17378580173675
+2019-11-09 07:22:04,443 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.2:162
+2019-11-09 07:22:04,444 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.2:162
+2019-11-09 07:45:57,882 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:45:58,830 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:45:58,837 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:45:58,837 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:45:58,837 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:45:58,838 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:45:58,838 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:45:58,838 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:45:58,838 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:45:58,838 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:07,888 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:07,891 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:07,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:07,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:07,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:07,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:07,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:07,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:07,906 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:07,906 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:17,890 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:17,893 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:17,893 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:17,893 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:17,893 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:17,893 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:17,908 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:17,908 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:17,908 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:17,908 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:27,892 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:27,895 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:27,895 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:27,895 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:27,895 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:27,895 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:27,895 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:27,910 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:27,910 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:27,910 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:37,894 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:37,898 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:37,898 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:37,898 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:37,913 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:37,913 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:37,913 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:37,913 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:37,913 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:37,913 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:47,897 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:47,900 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:47,900 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:47,915 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:47,915 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:57,899 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:46:57,902 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:46:57,902 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:46:57,902 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:46:57,918 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:47:07,901 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:47:07,905 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:47:07,905 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:47:07,905 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:47:07,920 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:47:17,904 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 07:47:17,906 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 58646.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 45.12827615925635
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6313813E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 07:47:17,906 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.15896451776407
+2019-11-09 07:47:17,906 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 07:47:17,906 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:19,752 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:07:20,887 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:07:20,889 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:07:20,889 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:07:20,890 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:07:20,890 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:07:20,890 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:07:20,891 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:07:20,892 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:20,893 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:29,753 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:07:29,758 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:07:29,758 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:07:29,759 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:07:29,760 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:07:29,760 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:07:29,761 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:07:29,762 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:07:29,763 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:29,765 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:39,753 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:07:39,761 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:07:39,762 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:07:39,763 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:07:39,763 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:07:39,764 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:07:39,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:07:39,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:07:39,767 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:39,768 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:49,753 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:07:49,765 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:07:49,767 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:07:49,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:07:49,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:07:49,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:07:49,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:07:49,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:07:49,783 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:49,785 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:59,754 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:07:59,771 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:07:59,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:07:59,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:07:59,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:07:59,779 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:07:59,780 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:07:59,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:07:59,783 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:07:59,785 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:09,755 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:09,766 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:09,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:09,769 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:09,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:09,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:09,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:09,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:09,777 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:09,782 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:19,755 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:19,766 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:19,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:19,769 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:19,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:19,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:19,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:19,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:19,775 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:19,778 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:29,755 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:29,764 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:29,764 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:29,764 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:29,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:29,766 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:29,766 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:29,766 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:29,768 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:29,769 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:39,756 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:39,769 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:39,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:39,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:39,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:39,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:39,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:39,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:39,777 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:39,780 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:49,757 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:49,769 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:49,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:49,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:49,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:49,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:49,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:49,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:49,779 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:49,783 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:59,757 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:08:59,773 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:08:59,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:08:59,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:08:59,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:08:59,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:08:59,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:08:59,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:08:59,781 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:08:59,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:09,758 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:09,769 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:09,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:09,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:09,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:09:09,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:09,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:09,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:09:09,777 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:09,781 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:19,759 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:19,764 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:19,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 76470.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:19,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:19,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 58.84389861027748
+2019-11-09 08:09:19,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6318881E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:19,765 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:19,766 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16329861661431
+2019-11-09 08:09:19,767 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:19,768 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:29,760 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:29,770 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:29,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:29,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:29,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:09:29,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:29,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:29,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:09:29,779 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:29,782 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:39,760 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:39,770 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:39,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:39,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:39,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:09:39,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:39,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:39,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:09:39,778 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:39,781 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:49,761 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:49,774 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:49,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:49,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:49,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:09:49,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:49,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:49,779 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:09:49,781 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:49,783 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:59,761 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:09:59,769 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:09:59,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:09:59,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:09:59,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:09:59,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:09:59,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:09:59,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:09:59,772 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:09:59,773 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:09,762 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:09,774 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:09,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:09,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:09,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:09,796 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:09,796 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:09,797 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:09,798 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:09,799 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:19,763 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:19,773 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:19,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:19,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:19,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:19,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:19,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:19,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:19,780 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:19,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:29,763 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:29,772 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:29,773 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:29,774 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:29,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:29,775 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:29,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:29,779 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:29,782 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:29,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:39,763 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:39,767 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:39,767 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:39,767 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:39,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:39,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:39,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:39,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:39,769 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:39,770 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:49,763 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:49,769 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:49,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:49,770 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:49,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:49,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:49,771 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:49,772 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:49,773 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:49,774 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:59,764 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:10:59,768 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:10:59,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:10:59,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:10:59,768 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:10:59,769 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:10:59,769 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:10:59,769 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:10:59,770 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:10:59,770 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:09,765 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:11:09,780 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:11:09,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:11:09,782 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:11:09,783 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:11:09,783 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:11:09,784 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:11:09,785 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:11:09,787 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:09,790 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:19,765 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:11:19,775 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:11:19,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77546.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:11:19,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:11:19,776 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.671883897379075
+2019-11-09 08:11:19,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319954E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:11:19,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:11:19,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16421623462266
+2019-11-09 08:11:19,780 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:19,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:29,766 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:11:29,776 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:11:29,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77881.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:11:29,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:11:29,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.929667420779666
+2019-11-09 08:11:29,780 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319991E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:11:29,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:11:29,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16424787662295
+2019-11-09 08:11:29,782 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:29,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:39,766 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:11:39,780 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:11:39,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77881.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:11:39,782 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:11:39,783 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.929667420779666
+2019-11-09 08:11:39,783 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319991E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:11:39,784 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:11:39,784 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16424787662295
+2019-11-09 08:11:39,786 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:39,788 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:49,767 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:11:49,776 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:11:49,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77881.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:11:49,777 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:11:49,778 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.929667420779666
+2019-11-09 08:11:49,779 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6319991E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:11:49,780 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:11:49,781 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16424787662295
+2019-11-09 08:11:49,784 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:11:49,786 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:13:42,293 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:13:43,511 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:13:43,513 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77559.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:13:43,514 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:13:43,514 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.68188743709313
+2019-11-09 08:13:43,514 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.632008E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:13:43,515 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:13:43,515 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164323988461476
+2019-11-09 08:13:43,517 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:13:43,518 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:13:52,294 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:13:52,306 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:13:52,308 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77559.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:13:52,310 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:13:52,311 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.68188743709313
+2019-11-09 08:13:52,312 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.632008E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:13:52,314 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:13:52,315 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164323988461476
+2019-11-09 08:13:52,319 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:13:52,323 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:14:02,294 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:14:02,310 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:14:02,312 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77559.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:14:02,313 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:14:02,315 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.68188743709313
+2019-11-09 08:14:02,316 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.632008E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:14:02,318 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:14:02,320 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164323988461476
+2019-11-09 08:14:02,323 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:14:02,325 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:14:12,295 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:14:12,309 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:14:12,311 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 77559.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:14:12,312 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:14:12,313 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 59.68188743709313
+2019-11-09 08:14:12,314 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.632008E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:14:12,314 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:14:12,315 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164323988461476
+2019-11-09 08:14:12,319 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:14:12,321 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:01,093 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:02,266 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:02,268 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:02,269 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:02,269 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:02,269 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:02,270 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:02,270 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:02,272 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:02,273 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:11,094 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:11,110 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:11,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:11,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:11,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:11,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:11,117 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:11,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:11,122 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:11,126 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:21,094 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:21,100 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:21,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:21,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:21,102 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:21,102 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:21,103 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:21,103 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:21,105 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:21,106 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:31,094 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:31,107 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:31,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:31,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:31,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:31,117 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:31,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:31,121 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:31,124 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:31,126 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:41,095 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:41,111 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:41,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:41,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:41,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:41,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:41,117 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:41,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:41,120 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:41,121 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:51,095 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:21:51,107 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:21:51,108 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:21:51,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:21:51,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:21:51,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:21:51,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:21:51,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:21:51,120 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:21:51,125 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:01,095 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:01,108 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:01,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:01,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:01,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:01,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:01,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:01,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:01,117 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:01,120 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:11,096 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:11,108 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:11,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:11,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:11,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:11,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:11,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:11,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:11,115 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:11,117 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:21,096 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:21,109 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:21,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:21,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:21,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:21,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:21,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:21,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:21,119 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:21,121 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:31,096 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:31,100 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:31,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:31,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:31,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:31,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:31,101 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:31,102 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:31,102 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:31,104 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:41,096 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:41,109 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:41,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:41,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:41,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:41,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:41,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:41,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:41,117 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:41,119 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:51,097 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:22:51,108 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:22:51,109 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:22:51,110 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:22:51,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:22:51,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:22:51,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:22:51,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:22:51,118 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:22:51,122 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:01,098 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:01,110 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:01,111 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80720.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:01,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:01,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 62.11428659371778
+2019-11-09 08:23:01,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320714E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:01,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:01,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16486617841236
+2019-11-09 08:23:01,118 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:01,120 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:11,098 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:11,113 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:11,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:11,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:11,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:23:11,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:11,117 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:11,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:23:11,120 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:11,122 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:21,099 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:21,111 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:21,112 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:21,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:21,113 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:23:21,114 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:21,115 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:21,116 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:23:21,119 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:21,121 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:31,103 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:31,115 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:31,119 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:31,119 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:31,119 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:23:31,123 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:31,123 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:31,123 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:23:31,127 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:31,131 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:41,105 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:41,136 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:41,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:41,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:41,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:23:41,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:41,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:41,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:23:41,144 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:41,152 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:51,108 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:23:51,118 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:23:51,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:23:51,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:23:51,122 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:23:51,146 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:23:51,146 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:23:51,146 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:23:51,146 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:23:51,150 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:01,108 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:01,114 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:01,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:01,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:01,118 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:01,122 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:01,122 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:01,122 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:01,126 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:01,126 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:11,112 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:11,122 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:11,126 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:11,126 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:11,126 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:11,126 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:11,126 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:11,130 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:11,130 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:11,134 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:21,113 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:21,121 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:21,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:21,129 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:21,133 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:31,115 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:31,131 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:31,131 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:31,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:31,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:31,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:31,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:31,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:31,139 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:31,139 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:41,118 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:41,129 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:41,129 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:41,129 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:41,129 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:41,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:41,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:41,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:41,137 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:41,137 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:51,119 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:24:51,125 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:24:51,125 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:24:51,125 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:24:51,129 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:01,119 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:01,134 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:01,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80141.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:01,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:01,137 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.66874432491497
+2019-11-09 08:25:01,137 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320005E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:01,138 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:01,138 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16425984927171
+2019-11-09 08:25:01,140 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:01,143 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:11,120 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:11,134 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:11,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:11,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:11,137 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:25:11,138 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:11,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:11,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:25:11,143 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:11,146 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:21,122 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:21,132 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:21,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:21,134 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:21,135 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:25:21,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:21,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:21,141 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:25:21,143 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:21,146 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:31,123 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:31,133 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:31,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:31,136 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:31,138 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:25:31,139 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:31,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:31,141 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:25:31,143 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:31,145 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:41,123 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:41,140 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:41,141 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:41,142 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:41,143 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:25:41,144 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:41,144 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:41,145 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:25:41,147 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:41,150 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:51,124 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:25:51,137 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:25:51,138 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:25:51,139 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:25:51,139 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:25:51,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:25:51,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:25:51,141 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:25:51,143 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:25:51,146 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:01,124 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:01,129 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:01,130 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:01,131 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:01,131 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:01,131 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:01,131 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:01,132 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:01,133 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:01,134 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:11,125 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:11,138 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:11,140 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:11,141 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:11,142 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:11,143 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:11,145 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:11,146 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:11,149 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:11,152 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:21,126 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:21,131 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:21,132 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:21,132 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:21,132 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:21,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:21,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:21,133 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:21,134 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:21,135 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:31,162 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:31,195 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:31,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:31,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:31,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:31,198 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:31,198 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:31,198 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:31,199 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:31,200 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:41,162 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:41,174 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:41,175 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:41,176 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:41,176 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:41,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:41,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:41,179 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:41,182 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:41,187 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:51,163 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:26:51,175 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:26:51,176 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:26:51,177 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:26:51,177 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:26:51,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:26:51,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:26:51,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:26:51,180 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:26:51,182 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:01,163 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:01,173 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:01,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 83867.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:01,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:01,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 64.53591270757344
+2019-11-09 08:27:01,175 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320483E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:01,175 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:01,176 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.164668629707855
+2019-11-09 08:27:01,178 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:01,180 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:11,164 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:11,182 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:11,184 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:11,184 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:11,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:27:11,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:11,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:11,186 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:27:11,187 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:11,191 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:21,165 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:21,177 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:21,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:21,178 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:21,179 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:27:21,180 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:21,180 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:21,181 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:27:21,183 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:21,185 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:31,165 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:31,182 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:31,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:31,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:31,184 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:27:31,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:31,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:31,186 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:27:31,188 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:31,191 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:41,166 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:41,182 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:41,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:41,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:41,184 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:27:41,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:41,185 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:41,186 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:27:41,189 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:41,194 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:51,167 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:27:51,173 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:27:51,173 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:27:51,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:27:51,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:27:51,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:27:51,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:27:51,174 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:27:51,175 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:27:51,176 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:01,168 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:28:01,178 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:28:01,180 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:28:01,181 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:28:01,182 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:28:01,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:28:01,183 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:28:01,184 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:28:01,187 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:01,190 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:11,169 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:28:11,195 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:28:11,196 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:28:11,196 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:28:11,196 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:28:11,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:28:11,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:28:11,197 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:28:11,199 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:11,201 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:21,169 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:28:21,178 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:28:21,179 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:28:21,180 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:28:21,180 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:28:21,181 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:28:21,182 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:28:21,182 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:28:21,185 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:21,187 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:31,170 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:42) - Enviando PDU con los OIDs a localhost:161
+2019-11-09 08:28:31,187 INFO  [Timer-0] agent.TrapGeneratorTimerTask (TrapGeneratorTimerTask.java:46) - Se recibió respuesta de localhost:161
+2019-11-09 08:28:31,190 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:140) - RAM usado: 80187.0, OID: 1.3.6.1.2.1.25.2.3.1.6.3
+2019-11-09 08:28:31,190 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:141) - RAM tamanio: 129954.0, OID: 1.3.6.1.2.1.25.2.3.1.5.3
+2019-11-09 08:28:31,191 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:145) - Porcentaje: 61.70414146544162
+2019-11-09 08:28:31,192 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:110) - Disco usado: 5.6320962E7, OID: 1.3.6.1.2.1.25.2.3.1.6.1
+2019-11-09 08:28:31,192 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:111) - Disco tamanio: 1.16933189E8, OID: 1.3.6.1.2.1.25.2.3.1.5.1
+2019-11-09 08:28:31,193 DEBUG [Timer-0] agent.TrapGenerator (TrapGenerator.java:115) - Porcentaje: 48.16507826533321
+2019-11-09 08:28:31,195 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162
+2019-11-09 08:28:31,196 INFO  [Timer-0] agent.TrapGenerator (TrapGenerator.java:84) - Sent Trap to (IP:Port)=> 192.168.1.3:162

@@ -44,12 +44,12 @@ public class InformesTimerTask extends TimerTask {
 	/*
 	 * Dirección IP del servidor boletazo
 	 */
-	static final String HOST = "localhost";
+	static final String BOLETAZO_ADDRESS = "localhost";
 	
 	/*
 	 * Puerto del servidor boletazo
 	 */
-	static final int PORT = 5000;
+	static final int PORT_ADDRESS = 5000;
 	
 	// private static final int DELAY = 10000;
 	
@@ -161,7 +161,7 @@ public class InformesTimerTask extends TimerTask {
 		Socket clientSocket;
 		String input = "";
 		try {
-			clientSocket = new Socket(HOST, PORT);
+			clientSocket = new Socket(BOLETAZO_ADDRESS, PORT_ADDRESS);
 			
 			OutputStream outputStream = clientSocket.getOutputStream();
 			

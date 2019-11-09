@@ -39,19 +39,19 @@ public class TrapGeneratorTimerTask extends TimerTask {
 	 */
 	@Override
 	public void run() {
-		logger.info("Enviando PDU con los OIDs a " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Enviando PDU con los OIDs a " + Config.LOCAL_ADDRESS + ":" + Config.LOCAL_PORT);
 		
 		PDU response = TrapGenerator.searchOids(Config.OIDS).getResponse();
 		
-		logger.info("Se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+		logger.info("Se recibió respuesta de " + Config.LOCAL_ADDRESS + ":" + Config.LOCAL_PORT);
 		
 		if (response == null) {
-			logger.error("No se recibió respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT);
+			logger.error("No se recibió respuesta de " + Config.LOCAL_ADDRESS + ":" + Config.LOCAL_PORT);
 			return;
 		}
 		
 		if (response.getErrorStatus() != PDU.noError) {
-			logger.error("Error en la respuesta de " + Config.DESTINATION_ADDRESS + ":" + Config.DESTINATION_PORT + ", Respuesta: " + response.getErrorStatusText() + ", Error: " + response.getErrorStatus());
+			logger.error("Error en la respuesta de " + Config.LOCAL_ADDRESS + ":" + Config.LOCAL_PORT + ", Respuesta: " + response.getErrorStatusText() + ", Error: " + response.getErrorStatus());
 			return;
 		}
 		

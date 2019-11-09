@@ -40,7 +40,6 @@ public class Receiver implements CommandResponder {
 	MailUtils correo = new MailUtils();
 	
 	public static void main(String[] args) {
-		
 		String log4jConfPath = Config.LOG4J_PROPIERTIES;
 		PropertyConfigurator.configure(log4jConfPath);
 		new Receiver().run();

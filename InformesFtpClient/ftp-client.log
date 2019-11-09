@@ -16,3 +16,49 @@ java.net.ConnectException: Connection refused: connect
 	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:67) [main/:?]
 	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
 	at java.util.TimerThread.run(Timer.java:506) [?:?]
+2019-11-09 07:21:42,923 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:159) - Inicia la ejecución del cliente.
+2019-11-09 07:21:44,938 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:185) - Error solicitando información de ventas: Connection refused: connect
+2019-11-09 07:21:44,939 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:186) - Catching
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.connect0(Native Method) ~[?:?]
+	at java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:101) ~[?:?]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:399) ~[?:?]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:242) ~[?:?]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:224) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:403) ~[?:?]
+	at java.net.Socket.connect(Socket.java:591) ~[?:?]
+	at java.net.Socket.connect(Socket.java:540) ~[?:?]
+	at java.net.Socket.<init>(Socket.java:436) ~[?:?]
+	at java.net.Socket.<init>(Socket.java:213) ~[?:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.getData(InformesTimerTask.java:164) [main/:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:67) [main/:?]
+	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
+	at java.util.TimerThread.run(Timer.java:506) [?:?]
+2019-11-09 07:43:42,268 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:159) - Inicia la ejecución del cliente.
+2019-11-09 07:44:09,820 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:185) - Error solicitando información de ventas: Connection reset
+2019-11-09 07:44:09,821 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:186) - Catching
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:186) ~[?:?]
+	at java.net.SocketInputStream.read(SocketInputStream.java:140) ~[?:?]
+	at java.net.SocketInputStream.read(SocketInputStream.java:200) ~[?:?]
+	at java.io.DataInputStream.readUnsignedShort(DataInputStream.java:342) ~[?:?]
+	at java.io.DataInputStream.readUTF(DataInputStream.java:594) ~[?:?]
+	at java.io.DataInputStream.readUTF(DataInputStream.java:569) ~[?:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.getData(InformesTimerTask.java:176) [main/:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:67) [main/:?]
+	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
+	at java.util.TimerThread.run(Timer.java:506) [?:?]
+2019-11-09 07:47:56,758 INFO  [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:159) - Inicia la ejecución del cliente.
+2019-11-09 07:48:01,860 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:185) - Error solicitando información de ventas: Connection reset
+2019-11-09 07:48:01,860 ERROR [Timer-0] ftp.InformesTimerTask (InformesTimerTask.java:186) - Catching
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:186) ~[?:?]
+	at java.net.SocketInputStream.read(SocketInputStream.java:140) ~[?:?]
+	at java.net.SocketInputStream.read(SocketInputStream.java:200) ~[?:?]
+	at java.io.DataInputStream.readUnsignedShort(DataInputStream.java:342) ~[?:?]
+	at java.io.DataInputStream.readUTF(DataInputStream.java:594) ~[?:?]
+	at java.io.DataInputStream.readUTF(DataInputStream.java:569) ~[?:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.getData(InformesTimerTask.java:176) [main/:?]
+	at com.itq.progradist.boletazo.ftp.InformesTimerTask.run(InformesTimerTask.java:67) [main/:?]
+	at java.util.TimerThread.mainLoop(Timer.java:556) [?:?]
+	at java.util.TimerThread.run(Timer.java:506) [?:?]
